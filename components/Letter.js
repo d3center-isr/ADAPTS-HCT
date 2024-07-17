@@ -1,0 +1,123 @@
+// A Letter component is the component containing a single letter/character.
+// Letter components are used to render Unsolved and Partially solved words. 
+// (completed words are rendered using plain text, not the Letter component).
+
+import { Text,View } from "react-native";
+import { StyleSheet } from "react-native";
+import { Dimensions } from "react-native";
+import { render } from "react-native-web";
+
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
+// Normal: Letter rendered through input by the player.
+// Hint: Letter rendered as part of a hint. 
+// Empty: Blank letter rendered as part of an empty, unassigned word.
+// Active: This letter is the letter that will be written to on the next keypress.
+export const LetterState = {Normal: 0, Hint: 1, Empty: 2, Active: 3}
+
+// letter dimensions (these are proportions of the window dimensions, 
+// eg. "0.1" is "1/10th of the window width")
+const letterWidth = 0.1;
+export const letterSize=letterWidth*100*2;
+//const letterHeight = 0.075;
+
+export default function Letter({char, state}) {
+    // get the style of the word based on the state
+    // for some reason I couldn't get the switch statement to go into
+    // the variable assignment, so here it is.
+    let textStyle;
+    let containerStyle;
+    switch(state) {
+        case LetterState.Normal: 
+            containerStyle = styles.letterNormalContainer;
+            textStyle = styles.letterNormal;
+            break;
+        case LetterState.Hint: 
+            containerStyle = styles.letterNormalContainer;
+            textStyle = styles.letterHint;
+            break;
+        case LetterState.Empty:
+            containerStyle = styles.letterNormalContainer;
+            textStyle = styles.letterNormal;
+            break;
+        case LetterState.Active:
+            containerStyle = styles.letterActiveContainer;
+            textStyle = styles.letterNormal;
+            break;
+        default: 
+            containerStyle = styles.letterNormalContainer;
+            textStyle = styles.letterError;
+            break;
+    }
+
+    // if this is normal text, add some spaces so that the underline is more visible.
+    let renderText = textStyle===styles.letterNormal? " " + char + " " : char; 
+
+    
+    return (
+        <View style={[containerStyle,
+            {
+                width: letterWidth*windowWidth,
+                height: state === LetterState.Active ? letterWidth*windowWidth*1.25: letterWidth*windowWidth,
+            }
+        ]}>
+            <Text style={textStyle}>{renderText}</Text>
+        </View>
+    );
+}
+
+
+const styles = StyleSheet.create({
+    letterNormalContainer: {
+        alignSelf:'baseline',
+        justifyContent:'center',
+        margin:0.5,
+    },
+
+    letterActiveContainer: {
+        borderColor: "#333",
+        backgroundColor: "#fff",
+        borderWidth:1,
+        alignSelf:'baseline',
+        justifyContent:'center',
+        margin:1,
+    },
+    
+    letterNormal: {
+        color:"#000",
+        fontSize: letterSize,
+        textAlign:'center',
+        textAlignVertical:'top',
+        fontWeight:'bold',
+        padding: 0,
+        textDecorationLine: 'underline',
+    },
+
+    letterHint: {
+        color:"#008",
+        fontSize: letterSize,
+        textAlign:'center',
+        textAlignVertical:'top',
+        fontWeight:'bold',
+        padding: 0,
+    },
+
+    letterError: {
+        color:"#fcc",
+        fontSize: letterSize,
+        textAlign:'center',
+        textAlignVertical:'top',
+        fontWeight:'bold',
+        padding: 0,
+    },
+
+    letterEmpty: {
+        color:"#000",
+        fontSize: letterSize,
+        textAlign:'center',
+        textAlignVertical:'top',
+        fontWeight:'bold',
+        padding: 0,
+    },
+});
