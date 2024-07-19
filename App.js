@@ -22,10 +22,13 @@ export default function App() {
 
   const maxKeyboardOutputLength = getBlankCount(puzzle.split(" ")[playerWord]);
 
-  // splices input into word and returns result. Characters from input replace "*" characters in word.
-  // Example: getSplicedWord("a*b*c*", "123") = a1b2c3, getSplicedWord("***", "abc") = "abc".
-  // Since this is only called when making a guess, we are assuming that 
-  // input.length >= number of "*" characters in word.
+  /**
+   * splices input into word and returns result. Characters from input replace "*" characters in word.
+   * Example: getSplicedWord("a*b*c*", "123") = a1b2c3, getSplicedWord("***", "abc") = "abc".
+   * 
+   * Since this is only called when making a guess, we are assuming that 
+   * input.length >= number of "*" characters in word.
+  */
   function getSplicedWord(word, input) {
     let j = 0;
     let toReturn = "";
@@ -41,6 +44,11 @@ export default function App() {
     return toReturn;
   }
 
+  /** 
+   * Handles the logic for processing a submitted answer.
+   * 
+   * @note You This function is only called when the keyboard input is "full".
+  */
   function handleSubmit() {
     // we only want to submit our answer when the input field is completely filled up.
     // Also, if the input field is larger than it should be for some reason it would be nice
@@ -72,7 +80,6 @@ export default function App() {
   }
 
   // gets the number of blank spaces in a given word.
-
   function getBlankCount(word) {
     let count = 0;
     // funny js typecasting hack -- int + bool = int + 1 (if true) or 0 (if false)
