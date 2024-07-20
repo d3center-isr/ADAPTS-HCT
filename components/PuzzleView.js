@@ -13,7 +13,7 @@ import { WordState } from "./Word";
  * @param {number} param0 - the index of the word currently assigned to the other user.
  * @returns Game View components
  */
-export default function GameView({puzzle, input, playerWord, otherWord}) {
+export default function PuzzleView({puzzle, input, playerWord, otherWord}) {
 
     let words = puzzle.split(" ");
 
@@ -31,8 +31,6 @@ export default function GameView({puzzle, input, playerWord, otherWord}) {
         }
         
         content[i] = <Word wordData={wordData} wordState={wordState} input={input} key={i}/>;
-        //console.log(i + " " + wordData);
-        console.log(i + " " + wordState);
     }
 
     return (

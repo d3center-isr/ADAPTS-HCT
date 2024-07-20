@@ -22,7 +22,6 @@ export default function Keyboard({output, setOutput, maxOutputLength, onSubmit})
     // code to handle a single keypress. 
     const handleKeypress = (keyText)=>{
         let newOutput = output;
-        console.log(keyText + " key pressed.");
         // submit answer using ENTER
         if(keyText==="ENTER") onSubmit();
         // ERASE serves as the backspace key

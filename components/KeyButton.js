@@ -26,11 +26,12 @@ const styles = StyleSheet.create({
     keyButton: {
         backgroundColor: "#3a4466",
         borderColor: "#262b44",
-        borderRadius: 7,
-        borderWidth:7,
+        borderRadius: 4,
+        borderWidth:4,
         flex: 100,
         justifyContent:'center',
         margin:1,
+        padding: 2,
     },
     
     keyButtontext: {
