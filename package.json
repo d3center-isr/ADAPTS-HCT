@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@expo/metro-runtime": "~3.2.1",
+    "@react-navigation/native": "^6.1.18",
     "expo": "~51.0.20",
     "expo-status-bar": "~1.12.1",
     "jsdoc": "^4.0.3",
