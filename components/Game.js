@@ -5,6 +5,11 @@ import { useState } from 'react';
 // component imports
 import Keyboard from './Keyboard';
 import PuzzleView from './PuzzleView';
+import { WordState } from './Word';
+
+let stateToReturn = {
+
+}
 
 export default function Game() {
   // constants for keyboard input.
@@ -52,29 +57,55 @@ export default function Game() {
     // Also, if the input field is larger than it should be for some reason it would be nice
     // to catch that.
     if(keyboardOutput.length != maxKeyboardOutputLength) {
-      console.log("Invalid submission attempt -- input either too long or too small.")
+      console.log("Invalid submission attempt -- input either too long or too small.");
+      return;
     }
     console.log("submitting...");
-    let toCheck = getSplicedWord(puzzle.split(" ")[playerWord], keyboardOutput);
+    
+    let assignedWord = puzzle.split(" ")[playerWord];
+    let toCheck = getSplicedWord(assignedWord, keyboardOutput);
     let answer = puzzleKey.split(" ")[playerWord];
+    let updatedWord;
+    let wasGuessCorrect;
     // let's make sure we're not being case sensitive when checking answers...
     if(toCheck.toLowerCase() == answer.toLowerCase()) {
       console.log("Correctly guessed word!");
-      // now we need to update puzzle. Since we are not modifying strings, we will 
-      // split puzzle and copy the words into a new string. When copying over the word we guessed, 
-      // we will instead copy over the word from the answer key.
-      let wordsToCopy = puzzle.split(" ");
-      let newPuzzle = "";
-      for(let i = 0; i < wordsToCopy.length; i++) {
-        let toCopy = i===playerWord ? answer: wordsToCopy[i];
-        // only add a space at the end if this is not the final word.
-        // if we did not do this string.split() would contain an extra empty string.
-        if(i < wordsToCopy.length - 1) toCopy += " ";
-        newPuzzle += toCopy;
-      }
-      setPuzzle(newPuzzle);
+      wasGuessCorrect = true;
+      updatedWord = puzzleKey.split(" ")[playerWord];
     }
-    else console.log(toCheck.toLowerCase() + " != " + answer);
+    else {
+        console.log("You guessed the wrong word.");
+        wasGuessCorrect = false;
+        // we need to choose which blank to reveal.
+        // here we get a list of blank space incdices in the word.
+        let blankSpaces = [];
+        for(let i = 0; i < assignedWord.length; i++) {
+            if(assignedWord[i] === "*") blankSpaces.push(i);
+        }
+        // pick a random blank space to reveal:
+        let charToReplace = blankSpaces[Math.floor(Math.random() * blankSpaces.length)];
+        // now stitch the word together.
+        updatedWord = assignedWord.split("");
+        updatedWord[charToReplace] = answer[charToReplace];
+        updatedWord = updatedWord.join("");
+    }
+
+    // now we need to update puzzle. Since we are not modifying strings, we will 
+    // split puzzle and copy the words into a new string. When copying over the word we guessed, 
+    // we will instead copy over the word from the answer key.
+    let wordsToCopy = puzzle.split(" ");
+    wordsToCopy[playerWord] = updatedWord;
+    let newPuzzle = wordsToCopy.join(" ");
+    // update game state to return and set everything we need
+    stateToReturn = {
+        oldPuzzle: puzzle,
+        newPuzzle: newPuzzle,
+        lastSubmitTime: Date.now,
+        lastGuessCorrent: wasGuessCorrect,
+    }
+    // finally reset what we need and update the screen
+    setKeyboardOutput("");
+    setPuzzle(newPuzzle);
   }
 
   // gets the number of blank spaces in a given word.

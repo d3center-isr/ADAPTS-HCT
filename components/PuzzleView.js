@@ -8,9 +8,9 @@ import { WordState } from "./Word";
 /**
  * 
  * @param {string} puzzle - The current state of the puzzle
- * @param {string} param0 - the current user input
- * @param {number} param0 - the index of the word currently assigned to the player
- * @param {number} param0 - the index of the word currently assigned to the other user.
+ * @param {string} input - the current user input
+ * @param {number} playerWord - the index of the word currently assigned to the player
+ * @param {number} otherWord - the index of the word currently assigned to the other user.
  * @returns Game View components
  */
 export default function PuzzleView({puzzle, input, playerWord, otherWord}) {

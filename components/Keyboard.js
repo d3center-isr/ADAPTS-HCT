@@ -10,7 +10,7 @@ import KeyButton from './KeyButton';
 // - maxOutputLength. Not modified by this component. Maximum size for the keyboard output.
 /**
  * 
- * @param {string} output - keyboard output
+ * @param {string} output - keyboard output (this is a state)
  * @param {CallableFunction} setOutput - output "setter" function
  * @param {string} maxOutputLength - Maximum length of the keyboard output.
  * @param {CallableFunction} onSubmit - function to call once the ENTER button is pressed.
@@ -84,4 +84,4 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
       margin:5,
     },
-  });
+});

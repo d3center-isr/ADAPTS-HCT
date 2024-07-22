@@ -28,6 +28,12 @@ const letterWidth = 0.1;
 export const letterSize=letterWidth*100*2;
 //const letterHeight = 0.075;
 
+/**
+ * 
+ * @param {string} char - a length 1 string for the letter to display
+ * @param {LetterState} state - the state of the letter.
+ * @returns - letter component
+ */
 export default function Letter({char, state}) {
     // get the style of the word based on the state
     // for some reason I couldn't get the switch statement to go into

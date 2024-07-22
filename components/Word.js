@@ -7,6 +7,8 @@ import { LetterState, letterSize } from "./Letter";
 
 
 /**
+ * Pretty much just an enumerator.
+ * 
  * @ Solved: The word has been solved.
  * 
  * @ UserSolving: This is the word that has been assigned to the user.
