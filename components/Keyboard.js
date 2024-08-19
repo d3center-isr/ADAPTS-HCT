@@ -23,7 +23,10 @@ export default function Keyboard({output, setOutput, maxOutputLength, onSubmit})
     const handleKeypress = (keyText)=>{
         let newOutput = output;
         // submit answer using ENTER
-        if(keyText==="ENTER") onSubmit();
+        if(keyText==="ENTER") {
+            onSubmit();
+            return;
+        }
         // ERASE serves as the backspace key
         // this code will not run if there is nothing in the keyboard output.
         else if(keyText==="ERASE") {

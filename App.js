@@ -21,6 +21,7 @@ export default function App() {
           name="Game" 
           component={Game} 
           options={{title: "Today's Puzzle"}}
+          initialParams={null}
         />
         <Stack.Screen 
           name="Title" 

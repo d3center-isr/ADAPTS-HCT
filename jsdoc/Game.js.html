@@ -1,40 +1,58 @@
-import { StatusBar } from 'expo-status-bar';
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: Game.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: Game.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { useState } from 'react';
-import { useEffect } from 'react';
-
+  
 // component imports
 import Keyboard from './Keyboard';
 import PuzzleView from './PuzzleView';
 import { WordState } from './Word';
 
+let stateToReturn = {
 
+}
 
-export default function Game({route, navigation}) {
-  
+export default function Game() {
   // constants for keyboard input.
   // - digital keyboard output is stored in the keyboardOutput variable. It is a state modified by the keyboard, 
   // and should not be modified in this program except to clear its contents.
   // - maxKeyboardOutPutLength is the length limit for the keyboardOutput. 
   const [keyboardOutput, setKeyboardOutput] = useState("");
   // this is the answer key
-  const [puzzleKey,setPuzzleKey] = useState("");
-  const [puzzle, setPuzzle] = useState("");
-  const [playerWord, setPlayerWord] = useState(0);
-  const [otherWord, setOtherWord] = useState(0);
+  const [puzzleKey,setPuzzleKey] = useState("I love to eat pancakes");
+  const [puzzle, setPuzzle] = useState("I **** to *** **n**k**");
+  const playerWord = 4;
+  const otherWord = 1;
 
-  // This is where we are loading the initial gamestate. 
-  // When connecting the front end to the back end game logic, this is 
-  // where the game state parameters should be loaded.
-  useEffect(() => {
-    const gameState =  route.params;
-    setPuzzle(gameState.puzzle);
-    setPuzzleKey(gameState.puzzleKey);
-    setPlayerWord(gameState.playerWord);
-    setOtherWord(gameState.otherWord);
-  }, []);
-  
   const maxKeyboardOutputLength = getBlankCount(puzzle.split(" ")[playerWord]);
+
   /**
    * splices input into word and returns result. Characters from input replace "*" characters in word.
    * Example: getSplicedWord("a*b*c*", "123") = a1b2c3, getSplicedWord("***", "abc") = "abc".
@@ -45,7 +63,7 @@ export default function Game({route, navigation}) {
   function getSplicedWord(word, input) {
     let j = 0;
     let toReturn = "";
-    for(let i = 0; i < word.length; i++) {
+    for(let i = 0; i &lt; word.length; i++) {
       let letterToAdd;
       if(word[i] === "*") {
         letterToAdd = input[j];
@@ -71,7 +89,7 @@ export default function Game({route, navigation}) {
       return;
     }
     console.log("submitting...");
-
+    
     let assignedWord = puzzle.split(" ")[playerWord];
     let toCheck = getSplicedWord(assignedWord, keyboardOutput);
     let answer = puzzleKey.split(" ")[playerWord];
@@ -89,7 +107,7 @@ export default function Game({route, navigation}) {
         // we need to choose which blank to reveal.
         // here we get a list of blank space incdices in the word.
         let blankSpaces = [];
-        for(let i = 0; i < assignedWord.length; i++) {
+        for(let i = 0; i &lt; assignedWord.length; i++) {
             if(assignedWord[i] === "*") blankSpaces.push(i);
         }
         // pick a random blank space to reveal:
@@ -114,24 +132,23 @@ export default function Game({route, navigation}) {
         lastGuessCorrent: wasGuessCorrect,
     }
     // finally reset what we need and update the screen
-    
-    setPuzzle(newPuzzle);
     setKeyboardOutput("");
+    setPuzzle(newPuzzle);
   }
 
   // gets the number of blank spaces in a given word.
   function getBlankCount(word) {
     let count = 0;
     // funny js typecasting hack -- int + bool = int + 1 (if true) or 0 (if false)
-    for(let i = 0; i < word.length; i++) count+=(word[i]==="*");
+    for(let i = 0; i &lt; word.length; i++) count+=(word[i]==="*");
     return count;
   }
 
   return (
-    <View style={styles.container}>
-      <PuzzleView text={keyboardOutput} puzzle={puzzle} playerWord={playerWord} otherWord={otherWord} input={keyboardOutput}/>
-      <Keyboard output = {keyboardOutput} onSubmit={handleSubmit} setOutput={setKeyboardOutput} maxOutputLength={maxKeyboardOutputLength}/>
-    </View>
+    &lt;View style={styles.container}>
+      &lt;PuzzleView text={keyboardOutput} puzzle={puzzle} playerWord={playerWord} otherWord={otherWord} input={keyboardOutput}/>
+      &lt;Keyboard output = {keyboardOutput} onSubmit={handleSubmit} setOutput={setKeyboardOutput} maxOutputLength={maxKeyboardOutputLength}/>
+    &lt;/View>
   );
 }
 
@@ -142,3 +159,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
 });
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#LetterState">LetterState</a></li><li><a href="global.html#WordState">WordState</a></li><li><a href="global.html#isBlank">isBlank</a></li><li><a href="global.html#isSolved">isSolved</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.3</a> on Mon Jul 22 2024 15:14:26 GMT-0400 (Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
