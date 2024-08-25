@@ -18,9 +18,12 @@ const windowHeight = Dimensions.get('window').height;
  * 
  * Empty: Blank letter rendered as part of an empty, unassigned word.
  * 
- * Active: This letter is the letter that will be written to on the next keypress.
+ * Active: Represents "cursor"; This letter is the letter that will be written to on the next keypress.
+ * 
+ * Incorrect: Used to represent an inputted letter that does not correspond to the hint at its position.
+ * (eg, if the hint is "**t", and the input is "ear", the third letter would be Incorrect)
  */
-export const LetterState = {Normal: 0, Hint: 1, Empty: 2, Active: 3}
+export const LetterState = {Normal: 0, Hint: 1, Empty: 2, Active: 3, Incorrect: 4}
 
 // letter dimensions (these are proportions of the window dimensions, 
 // eg. "0.1" is "1/10th of the window width")
@@ -34,7 +37,7 @@ export const letterSize=letterWidth*100*2;
  * @param {LetterState} state - the state of the letter.
  * @returns - letter component
  */
-export default function Letter({char, state}) {
+export default function Letter({char, state, hintChar}) {
     // get the style of the word based on the state
     // for some reason I couldn't get the switch statement to go into
     // the variable assignment, so here it is.
@@ -57,6 +60,10 @@ export default function Letter({char, state}) {
             containerStyle = styles.letterActiveContainer;
             textStyle = styles.letterNormal;
             break;
+        case LetterState.Incorrect:
+            containerStyle = styles.letterIncorrectContainer;
+            textStyle = styles.letterNormal;
+            break;
         default: 
             containerStyle = styles.letterNormalContainer;
             textStyle = styles.letterError;
@@ -71,7 +78,7 @@ export default function Letter({char, state}) {
         <View style={[containerStyle,
             {
                 width: letterWidth*windowWidth,
-                height: state === LetterState.Active ? letterWidth*windowWidth*1.25: letterWidth*windowWidth,
+                height: letterWidth*windowWidth
             }
         ]}>
             <Text style={textStyle}>{renderText}</Text>
@@ -84,14 +91,23 @@ const styles = StyleSheet.create({
     letterNormalContainer: {
         alignSelf:'baseline',
         justifyContent:'center',
-        margin:0.5,
+        margin:1,
     },
 
     letterActiveContainer: {
         borderColor: "#333",
         backgroundColor: "#fff",
         borderWidth:1,
-        alignSelf:'baseline',
+        alignSelf:'center',
+        justifyContent:'center',
+        margin:1,
+    },
+
+    letterIncorrectContainer: {
+        borderColor: "#843",
+        backgroundColor: "#ffe0dd",
+        borderWidth:1,
+        alignSelf:'center',
         justifyContent:'center',
         margin:1,
     },
@@ -100,7 +116,7 @@ const styles = StyleSheet.create({
         color:"#000",
         fontSize: letterSize,
         textAlign:'center',
-        textAlignVertical:'top',
+        textAlignVertical:'center',
         fontWeight:'bold',
         padding: 0,
         textDecorationLine: 'underline',

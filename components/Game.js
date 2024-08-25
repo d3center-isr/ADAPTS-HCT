@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
@@ -7,6 +7,8 @@ import { useEffect } from 'react';
 import Keyboard from './Keyboard';
 import PuzzleView from './PuzzleView';
 import { WordState } from './Word';
+import Popup from './GuessWarningPopup';
+import GuessWarningPopup from './GuessWarningPopup';
 
 
 
@@ -23,6 +25,8 @@ export default function Game({route, navigation}) {
   const [playerWord, setPlayerWord] = useState(0);
   const [otherWord, setOtherWord] = useState(0);
 
+  // popup management
+  const [wordWarningPopupVisible, setWordWarningPopupVisible] = useState(false);
   // This is where we are loading the initial gamestate. 
   // When connecting the front end to the back end game logic, this is 
   // where the game state parameters should be loaded.
@@ -34,32 +38,11 @@ export default function Game({route, navigation}) {
     setOtherWord(gameState.otherWord);
   }, []);
   
-  const maxKeyboardOutputLength = getBlankCount(puzzle.split(" ")[playerWord]);
-  /**
-   * splices input into word and returns result. Characters from input replace "*" characters in word.
-   * Example: getSplicedWord("a*b*c*", "123") = a1b2c3, getSplicedWord("***", "abc") = "abc".
-   * 
-   * Since this is only called when making a guess, we are assuming that 
-   * input.length >= number of "*" characters in word.
-  */
-  function getSplicedWord(word, input) {
-    let j = 0;
-    let toReturn = "";
-    for(let i = 0; i < word.length; i++) {
-      let letterToAdd;
-      if(word[i] === "*") {
-        letterToAdd = input[j];
-        j++;
-      }
-      else letterToAdd = word[i];
-      toReturn = toReturn.slice() + letterToAdd;
-    }
-    return toReturn;
-  }
+  const maxKeyboardOutputLength = puzzle.split(" ")[playerWord].length;
 
   /** 
    * Handles the logic for processing a submitted answer.
-   * 
+   * If input does not match given hints, does not process answer and instead brings up warning popup.
    * @note This function is only called when the keyboard input is "full".
   */
   function handleSubmit() {
@@ -67,22 +50,40 @@ export default function Game({route, navigation}) {
     // Also, if the input field is larger than it should be for some reason it would be nice
     // to catch that.
     if(keyboardOutput.length != maxKeyboardOutputLength) {
-      console.log("Invalid submission attempt -- input either too long or too small.");
+      setWordWarningPopupVisible(true);
+      console.log("input either too long or too small -- showing warning popup");
       return;
     }
     console.log("submitting...");
 
+    console.log(puzzle.split(" ")[playerWord] + " " + keyboardOutput);
+
+    for(let i = 0; i < puzzle.split(" ")[playerWord].length; i++) {
+      console.log(puzzle.split(" ")[playerWord][i]);
+      if(puzzle.split(" ")[playerWord][i] != "*" &&
+      puzzle.split(" ")[playerWord][i].toLowerCase() != keyboardOutput[i].toLowerCase()) {
+        setWordWarningPopupVisible(true);
+        console.log("hint does not match input -- showing warning popup");
+        return;
+      }
+    }
+    CheckGuessAndUpdatePuzzle();
+  }
+
+  function CheckGuessAndUpdatePuzzle() {
+    
     let assignedWord = puzzle.split(" ")[playerWord];
-    let toCheck = getSplicedWord(assignedWord, keyboardOutput);
+    let toCheck = keyboardOutput;
     let answer = puzzleKey.split(" ")[playerWord];
     let updatedWord;
     let wasGuessCorrect;
-    // let's make sure we're not being case sensitive when checking answers...
-    if(toCheck.toLowerCase() == answer.toLowerCase()) {
+    // correct guess handling
+    if(toCheck.length === answer.length && toCheck.toLowerCase() == answer.toLowerCase()) {
       console.log("Correctly guessed word!");
       wasGuessCorrect = true;
       updatedWord = puzzleKey.split(" ")[playerWord];
     }
+    // Incorrect guess handling
     else {
         console.log("You guessed the wrong word.");
         wasGuessCorrect = false;
@@ -129,11 +130,23 @@ export default function Game({route, navigation}) {
 
   return (
     <View style={styles.container}>
+      <GuessWarningPopup visible={wordWarningPopupVisible} hintData={puzzle.split(" ")[playerWord]} input={keyboardOutput}
+        onYesPress={()=>{
+          setWordWarningPopupVisible(false);
+          console.log("Yes pressed");
+          CheckGuessAndUpdatePuzzle();
+        }}
+        onNoPress={()=>{
+          console.log("No pressed");
+          setWordWarningPopupVisible(false);
+        }}
+      />
       <PuzzleView text={keyboardOutput} puzzle={puzzle} playerWord={playerWord} otherWord={otherWord} input={keyboardOutput}/>
       <Keyboard output = {keyboardOutput} onSubmit={handleSubmit} setOutput={setKeyboardOutput} maxOutputLength={maxKeyboardOutputLength}/>
     </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -141,4 +154,11 @@ const styles = StyleSheet.create({
     alignItems: 'center', 
     justifyContent: 'center'
   },
+  
+  popupButton: {
+    borderRadius: 10,
+    padding: 5,
+    margin: 10,
+    marginBottom: 0,
+}
 });

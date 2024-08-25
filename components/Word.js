@@ -16,12 +16,14 @@ import { LetterState, letterSize } from "./Letter";
  * @ OtherSolving: This is the word that has been assigned to the other user.
  * 
  * @ Unsolved: This word is completely blank. It has neither been solved nor is being solved by anyone.
+ *
+ * @ WarningDiagram: word displayed in the diagram within the warning pop up in game.
  * 
  * @ Note: we are assuming that since the only hints being given are for the word being solved by the user,
  * 
  * the only words with hint letters are those in WordState 1 or 2.
 */
-export const WordState = {Solved: 0, UserSolving: 1, OtherSolving: 2, Unsolved: 3};
+export const WordState = {Solved: 0, UserSolving: 1, OtherSolving: 2, Unsolved: 3, WarningDiagram: 4};
 
 
 /**
@@ -51,16 +53,31 @@ export default function Word({wordData, wordState, input}) {
             key={i} 
             state={e != "*" ? LetterState.Hint: LetterState.Normal}/>);
         // if we are solving this, that means we need to fill in additional letters according to user input.
-        if(wordState === WordState.UserSolving) {
-            // iterate through the word and fill in blank spaces with our keyboard input as we go.
-            let j = 0;
+        if(wordState === WordState.UserSolving || wordState === WordState.WarningDiagram) {
             for(let i = 0; i < wordData.length; i++) {
-                if(wordData[i] == "*") {
-                    // we need to also get where our "cursor is" to indicate where we are typing.
-                    if(j===input.length)content[i] = <Letter char={" "} key={i} state={LetterState.Active}/>;
-                    else if (j<input.length)content[i] = <Letter char={input[j]} key={i} state={LetterState.Normal}/>;
-                    j++;
+                // how does our user letter look?
+                let userLetter;
+                let userLetterState = LetterState.Normal;
+                
+                // determine if the letter is where the cursor is
+                // note we do not show the cursor in the WarningDiagram version.
+                if(i===input.length && wordState === WordState.UserSolving) userLetter = <Letter char={" "} key={i} state={LetterState.Active}/>;
+                else {
+                    // make the letter red if it does not line up with our hints
+                    if(i < input.length && wordData[i] != "*" && wordData[i].toLowerCase() !== input[i].toLowerCase()) userLetterState = LetterState.Incorrect;
+                    // in the warning popup we want unfilled characters to be highlighted in red, too.
+                    if(i >= input.length && wordState === WordState.WarningDiagram) userLetterState = LetterState.Incorrect;
+                    // create the object
+                    userLetter = <Letter char={i < input.length ? input[i]: " "} key={i} state={userLetterState}/>;
                 }
+                
+                let hintLetter = <Letter char={wordData[i] != "*" ? wordData[i] : "?"} key={i+0.5} state={LetterState.Hint}/>
+
+                content[i] = <View flexDirection="col" key={i}>
+                    {hintLetter}
+                    {userLetter}
+                    <Text style={styles.wordIncorrectText}>{userLetterState === LetterState.Incorrect ? "X": ""}</Text>
+                </View>
             }
         }
         
@@ -83,8 +100,11 @@ export default function Word({wordData, wordState, input}) {
         case WordState.Unsolved:
             style = styles.wordNormalContainer;
             break;
+        case WordState.WarningDiagram:
+            style = styles.wordNormalContainer;
+            break;
         default: 
-            style = styles.wordErrorContainer;
+            style = styles.wordWarningDiagramContainer;
             break;
     }
 
@@ -126,9 +146,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         marginRight: 20,
         marginBottom: 50,
-        
     },
-
     wordOtherSolvingContainer: {
         backgroundColor:'#fee',
         borderColor: '#a34',
@@ -142,7 +160,19 @@ const styles = StyleSheet.create({
         marginRight: 20,
         marginBottom: 50,
     },
-
+    wordWarningDiagramContainer: {
+        backgroundColor:'#eee',
+        borderColor: '#aaa',
+        borderWidth: 2,
+        borderRadius: 1,
+        flexDirection:'row',
+        alignItems: 'center',
+        alignSelf: 'baseline',
+        flexWrap:'wrap',
+        justifyContent: 'center',
+        marginRight: 20,
+        marginBottom: 50,  
+    },
     wordErrorContainer: {
         backgroundColor:'#f00',
         flexDirection:'row',
@@ -153,4 +183,13 @@ const styles = StyleSheet.create({
         marginRight: 20,
         marginBottom: 50,
     },
+    wordIncorrectText: {
+        color: '#830',
+        textAlign:'center',
+        textAlignVertical: 'top',
+        fontSize: 10,
+        fontWeight: 'bold',
+        marginBottom: 0,
+        //backgroundColor: '#000'
+    }
 });
