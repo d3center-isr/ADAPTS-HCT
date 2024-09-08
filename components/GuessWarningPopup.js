@@ -64,13 +64,13 @@ let styles = StyleSheet.create({
         padding: 10,
         flexDirection: "col",
         alignItems: 'center',
-        shadowColor: '#000',
-        shadowOffset: {
+        boxShadowColor: '#000',
+        boxShadowOffset: {
           width: 0,
           height: 2,
         },
-        shadowOpacity: 0.25,
-        shadowRadius: 4,
+        boxShadowOpacity: 0.25,
+        boxShadowRadius: 4,
         elevation: 5,
     },
     buttonView: {

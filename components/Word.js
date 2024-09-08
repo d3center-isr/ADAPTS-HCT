@@ -89,7 +89,7 @@ export default function Word({wordData, wordState, input}) {
     let style;
     switch(wordState) {
         case WordState.Solved:
-            style = styles.wordNormalContainer;
+            style = null;
             break;
         case WordState.UserSolving:
             style = styles.wordUserSolvingContainer;
@@ -109,7 +109,7 @@ export default function Word({wordData, wordState, input}) {
     }
 
     return (
-        <View style={style}>{content}</View>
+        <View style={[styles.wordNormalContainer, style]}>{content}</View>
     );
 }
 
@@ -129,7 +129,6 @@ const styles = StyleSheet.create({
         flexDirection:'row',
         alignItems: 'flex-start',
         alignSelf: 'baseline',
-        flexWrap:'wrap',
         justifyContent: 'center',
         marginRight: 20,
         marginBottom: 50,
@@ -139,26 +138,12 @@ const styles = StyleSheet.create({
         borderColor: '#34a',
         borderWidth: 2,
         borderRadius: 1,
-        flexDirection:'row',
-        alignItems: 'flex-start',
-        alignSelf: 'baseline',
-        flexWrap:'wrap',
-        justifyContent: 'center',
-        marginRight: 20,
-        marginBottom: 50,
     },
     wordOtherSolvingContainer: {
         backgroundColor:'#fee',
         borderColor: '#a34',
         borderWidth: 2,
         borderRadius: 1,
-        flexDirection:'row',
-        alignItems: 'flex-start',
-        alignSelf: 'baseline',
-        flexWrap:'wrap',
-        justifyContent: 'center',
-        marginRight: 20,
-        marginBottom: 50,
     },
     wordWarningDiagramContainer: {
         backgroundColor:'#eee',
@@ -166,22 +151,9 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderRadius: 1,
         flexDirection:'row',
-        alignItems: 'center',
-        alignSelf: 'baseline',
-        flexWrap:'wrap',
-        justifyContent: 'center',
-        marginRight: 20,
-        marginBottom: 50,  
     },
     wordErrorContainer: {
         backgroundColor:'#f00',
-        flexDirection:'row',
-        alignItems: 'flex-start',
-        alignSelf: 'baseline',
-        flexWrap:'wrap',
-        justifyContent: 'center',
-        marginRight: 20,
-        marginBottom: 50,
     },
     wordIncorrectText: {
         color: '#830',
