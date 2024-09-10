@@ -2,7 +2,6 @@ import { Pressable, View } from "react-native";
 import { Text } from "react-native";
 import { StyleSheet } from "react-native-web";
 import { Modal } from "react-native";
-import { Children } from "react";
 import Word from "./Word";
 import { WordState } from "./Word";
 

@@ -1,8 +1,6 @@
 /**
  * Individual Keyboard button logic.
  */
-
-import { useState } from "react";
 import { Pressable, View, Text } from "react-native";
 import { StyleSheet } from "react-native";
 

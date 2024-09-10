@@ -1,5 +1,4 @@
 import { View,StyleSheet, Text } from "react-native";
-import Letter from "./Letter";
 import Word from "./Word";
 import { WordState } from "./Word";
 

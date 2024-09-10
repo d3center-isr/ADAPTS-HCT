@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useState } from 'react';
 import { useEffect } from 'react';
@@ -6,8 +5,6 @@ import { useEffect } from 'react';
 // component imports
 import Keyboard from './Keyboard';
 import PuzzleView from './PuzzleView';
-import { WordState } from './Word';
-import Popup from './GuessWarningPopup';
 import GuessWarningPopup from './GuessWarningPopup';
 
 
@@ -118,14 +115,6 @@ export default function Game({route, navigation}) {
     
     setPuzzle(newPuzzle);
     setKeyboardOutput("");
-  }
-
-  // gets the number of blank spaces in a given word.
-  function getBlankCount(word) {
-    let count = 0;
-    // funny js typecasting hack -- int + bool = int + 1 (if true) or 0 (if false)
-    for(let i = 0; i < word.length; i++) count+=(word[i]==="*");
-    return count;
   }
 
   return (

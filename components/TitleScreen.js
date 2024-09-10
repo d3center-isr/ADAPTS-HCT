@@ -1,6 +1,5 @@
 import { Pressable, Text, View } from "react-native";
 import { StyleSheet } from "react-native-web";
-import Game from "./Game";
 
 function GameState(newName, newPuzzle, newPuzzleKey, newPlayerWord, newOtherWord) {
   return {
