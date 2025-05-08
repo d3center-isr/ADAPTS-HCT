@@ -18,14 +18,13 @@ export default function GuessWarningPopup({visible, hintData, onYesPress, onNoPr
         >
             <View style={styles.centeredView}>
                 <View style={styles.modalView}>
-                    <Text marginBottom={25}>Heads up: your answer didn't match the hints you were given, and is guaranteed to be incorrect.</Text>
+                    <Text style={styles.popupInfoText}>Heads up: your answer didn't match the hints you were given, and is guaranteed to be incorrect.</Text>
                     <Word wordData={hintData} input={input} wordState={WordState.WarningDiagram}></Word>
                     <Text>Would you like to submit your answer anyway?</Text>
                     <View style={styles.buttonView}>
-                        <Pressable style={styles.button} onPress={onNoPress} onborderColor="#843" backgroundColor="#fdc"><Text>No</Text></Pressable>
-                        <Pressable style={styles.button} onPress={onYesPress} onborderColor="#384" backgroundColor="#cfd"><Text>Yes</Text></Pressable>
+                        <Pressable style={[styles.button, {borderColor: "#843", backgroundColor: "#fdc"}]} onPress={onNoPress}><Text>No</Text></Pressable>
+                        <Pressable style={[styles.button, {borderColor: "#384", backgroundColor: "#cfd"}]} onPress={onYesPress}><Text>Yes</Text></Pressable>
                     </View>
-                    
                 </View>
             </View>
         </Modal>
@@ -33,6 +32,9 @@ export default function GuessWarningPopup({visible, hintData, onYesPress, onNoPr
 }
 
 let styles = StyleSheet.create({
+    popupInfoText: {
+        marginBottom: 25,
+    },
     popup: {
         backgroundColor: "#ff6666",
         borderColor: "#ff0000",
@@ -41,6 +43,7 @@ let styles = StyleSheet.create({
     },
     centeredView: {
         flex: 1,
+        flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 0,
@@ -50,6 +53,7 @@ let styles = StyleSheet.create({
         paddingBottom: 5,
         paddingLeft: 50,
         paddingRight: 50,
+        borderWidth: 2,
         borderRadius: 10,
         marginLeft:25,
         marginRight:25,

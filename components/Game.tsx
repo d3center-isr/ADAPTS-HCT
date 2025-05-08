@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { useState } from 'react';
 import { useEffect } from 'react';
 
@@ -7,9 +7,8 @@ import Keyboard from './Keyboard';
 import PuzzleView from './PuzzleView';
 import GuessWarningPopup from './GuessWarningPopup';
 
-
-
-export default function Game({route, navigation}) {
+// TODO: Figure out what types are used for React Navigation and use those to create an interface here.
+export default function Game({route}) {
   
   // constants for keyboard input.
   // - digital keyboard output is stored in the keyboardOutput variable. It is a state modified by the keyboard, 
@@ -105,7 +104,7 @@ export default function Game({route, navigation}) {
     wordsToCopy[playerWord] = updatedWord;
     let newPuzzle = wordsToCopy.join(" ");
     // update game state to return and set everything we need
-    stateToReturn = {
+    let stateToReturn = {
         oldPuzzle: puzzle,
         newPuzzle: newPuzzle,
         lastSubmitTime: Date.now,
@@ -130,8 +129,9 @@ export default function Game({route, navigation}) {
           setWordWarningPopupVisible(false);
         }}
       />
-      <PuzzleView text={keyboardOutput} puzzle={puzzle} playerWord={playerWord} otherWord={otherWord} input={keyboardOutput}/>
+      <PuzzleView puzzle={puzzle} playerWord={playerWord} otherWord={otherWord} input={keyboardOutput}/>
       <Keyboard output = {keyboardOutput} onSubmit={handleSubmit} setOutput={setKeyboardOutput} maxOutputLength={maxKeyboardOutputLength}/>
+      <View style={{flex: 0.05}}></View>
     </View>
   );
 }
@@ -143,7 +143,12 @@ const styles = StyleSheet.create({
     alignItems: 'center', 
     justifyContent: 'center'
   },
-  
+  paddingContainer: {
+    flex: 1, 
+    flexDirection: 'row',
+    alignItems: 'center', 
+    justifyContent: 'center'
+  },
   popupButton: {
     borderRadius: 10,
     padding: 5,

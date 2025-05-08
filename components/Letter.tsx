@@ -41,6 +41,8 @@ export default function Letter({char, state, hintChar}) {
     // get the style of the word based on the state
     // for some reason I couldn't get the switch statement to go into
     // the variable assignment, so here it is.
+
+    // TODO: Find a better way to do this, this code is gross.
     let textStyle;
     let containerStyle;
     switch(state) {
