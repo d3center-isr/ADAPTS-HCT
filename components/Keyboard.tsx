@@ -81,7 +81,7 @@ export default function Keyboard({output, setOutput, maxOutputLength, onSubmit})
 const styles = StyleSheet.create({
     container: {
       flex: 0.3,
-      flexDirection:'col',
+      flexDirection:'column',
       backgroundColor: '#fff',
       alignItems: 'center',
       justifyContent: 'center',

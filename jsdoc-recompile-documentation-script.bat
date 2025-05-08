@@ -1,1 +1,0 @@
-start npx jsdoc components -d ./jsdoc

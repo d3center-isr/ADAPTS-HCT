@@ -73,7 +73,7 @@ export default function Word({wordData, wordState, input}) {
                 
                 let hintLetter = <Letter char={wordData[i] != "*" ? wordData[i] : "?"} key={i+0.5} state={LetterState.Hint}/>
 
-                content[i] = <View flexDirection="col" key={i}>
+                content[i] = <View style={{flexDirection:"column"}} key={i}>
                     {hintLetter}
                     {userLetter}
                     <Text style={styles.wordIncorrectText}>{userLetterState === LetterState.Incorrect ? "X": ""}</Text>

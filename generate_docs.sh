@@ -1,0 +1,3 @@
+echo Generating TypeScript documentation for all files in ./components using TypeDoc...
+npx typedoc --entryPointStrategy Expand ./components
+echo Documentation can be found in ./docs. Run the index.html file within to view. 

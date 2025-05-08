@@ -37,7 +37,7 @@ export const letterSize=letterWidth*100*2;
  * @param {LetterState} state - the state of the letter.
  * @returns - letter component
  */
-export default function Letter({char, state, hintChar}) {
+export default function Letter({char, state}) {
     // get the style of the word based on the state
     // for some reason I couldn't get the switch statement to go into
     // the variable assignment, so here it is.
