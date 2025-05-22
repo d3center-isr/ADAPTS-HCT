@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Coop-Word-Solver-js",
+    "name": "Coop-Word-Solver-ts",
     "slug": "Coop-Word-Solver-js",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -19,7 +19,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.ofekashaniumich.CoopWordSolverjs"
+      "package": "com.ofekashaniumich.CoopWordSolverts"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -28,6 +28,14 @@
       "eas": {
         "projectId": "a107b1c8-5a17-4ab8-b42f-43bf39c5eeb3"
       }
-    }
+    },
+    "plugins": [
+      [
+        "expo-dev-client",
+        {
+          "launchMode": "most-recent"
+        }
+      ]
+    ]
   }
 }
