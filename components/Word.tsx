@@ -4,51 +4,59 @@
 import { View, Text, StyleSheet } from "react-native";
 import Letter from "./Letter";
 import { LetterState, letterSize } from "./Letter";
+import React, { ReactNode } from "react";
 
 
-/**
- * Pretty much just an enumerator.
+/** 
+ * Solved: The word has been solved.
  * 
- * @ Solved: The word has been solved.
+ * UserSolving: This is the word that has been assigned to the user.
  * 
- * @ UserSolving: This is the word that has been assigned to the user.
+ * OtherSolving: This is the word that has been assigned to the other user.
  * 
- * @ OtherSolving: This is the word that has been assigned to the other user.
- * 
- * @ Unsolved: This word is completely blank. It has neither been solved nor is being solved by anyone.
+ * Unsolved: This word is completely blank. It has neither been solved nor is being solved by anyone.
  *
- * @ WarningDiagram: word displayed in the diagram within the warning pop up in game.
+ * WarningDiagram: word displayed by the "your word does not meet the given hints" warning popup. 
+ * Identical to UserSolving, except that the input cursor is not rendered. 
  * 
- * @ Note: we are assuming that since the only hints being given are for the word being solved by the user,
- * 
- * the only words with hint letters are those in WordState 1 or 2.
+ * Note: we are assuming that since the only hints being given are for the word being solved by the user,
+ * the only words with hint letters are those in WordState 1 or 2 (UserSolving or OtherSolving, respectively).
+ * @enum
 */
 export const WordState = {Solved: 0, UserSolving: 1, OtherSolving: 2, Unsolved: 3, WarningDiagram: 4};
 
+// TODO: Add more info here on types -- copy from func signature?
+interface WordProps {
+    wordData: string,
+    wordState: number,
+    input: string
+}
 
 /**
  * 
  * @param {string} wordData - Word to render (with all blanks ("*") included).
- * @param {WordState} wordState - WordState representing the word's "state". Determines how it renders.
- * @param {string} input - string used to fill in blank spaces. Leave empty if wordState != UserSolving.
+ * @param {WordState} wordState - WordState representing the word's "state" (solved, unsolved, etc). Determines how it renders.
+ * @param {string} input - If word is partially solved, input string is used to fill in blank spaces. Leave empty if wordState != UserSolving.
  */
-export default function Word({wordData, wordState, input}) {
-    let content;
-
-    // If the word has been solved, simply render it as text.
+export default function Word({wordData, wordState, input}: WordProps) {
+    // the "stuff" rendered by the word. Changes depending on the WordState. 
+    // If wordState is Solved, content consists of 1 text element. Otherwise it is a series of Letter elements
+    // in a stylized container (the content of the letters and the container style varies based on wordState)
+    let content: ReactNode[];
+    // If the word has been solved, render it as text.
     if(wordState === WordState.Solved) {
-        content = <Text style={styles.wordTextSolved}>{wordData}</Text>;
+        content[0] = <Text style={styles.wordTextSolved}>{wordData}</Text>;
     }
-    // If the word is unsolved, simply render it as a bunch of blank letters.
+    // If the word is unsolved, render it as a series of blank letters.
     else if(wordState === WordState.Unsolved) {
         content = Array(wordData.length);
-        for(let i = 0; i < content.length; i++) content[i]=<Letter key={i} char=' ' state={LetterState.Empty}/>;
+        for(let i = 0; i < wordData.length; i++) content[i]=<Letter key={i} char=' ' state={LetterState.Empty}/>;
     }
-    // OK, so this word is partially solved, meaning it is either being solved by other  or this user.
+    // If this code is reached, the word is partially solved (assigned to user or other user)
     else {
         // map the word data to an array of letters. Characters indicating blanks ("*") are rendered as spaces.
         // at this point, if a letter is filled in, it's becuase it is a hint.
-        content = Array.from(wordData).map((e,i)=><Letter 
+        content = Array.from(wordData).map((e: string,i: number) => <Letter 
             char={e!= "*" ? e: " "} 
             key={i} 
             state={e != "*" ? LetterState.Hint: LetterState.Normal}/>);

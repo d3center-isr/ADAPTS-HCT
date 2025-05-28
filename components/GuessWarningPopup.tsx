@@ -6,10 +6,15 @@ import Word from "./Word";
 import { WordState } from "./Word";
 
 
-/**
- * 
- */
-export default function GuessWarningPopup({visible, hintData, onYesPress, onNoPress, input}) {
+interface GuessWarningPopupProps {
+    visible: boolean,
+    hintData: string,
+    onYesPress: ()=> any,
+    onNoPress: ()=> any,
+    input: string,
+}
+
+export default function GuessWarningPopup({visible, hintData, onYesPress, onNoPress, input}: GuessWarningPopupProps) {
     return (
         <Modal
             animationType="slide"

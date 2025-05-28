@@ -4,7 +4,12 @@
 import { Pressable, View, Text } from "react-native";
 import { StyleSheet } from "react-native";
 
-export default function KeyButton({keyText, onPress}) {
+interface KeyButtonProps {
+    keyText: string,
+    onPress: (keyText: string) => void
+}
+
+export default function KeyButton({keyText, onPress}: KeyButtonProps) {
     return (
         <Pressable 
         onPressIn={()=>{onPress(keyText)}} 

@@ -1,7 +1,19 @@
+import { ReactNode } from "react";
 import { Pressable, Text, View } from "react-native";
 import { StyleSheet } from "react-native-web";
 
-function GameState(newName, newPuzzle, newPuzzleKey, newPlayerWord, newOtherWord) {
+type GameState = {
+  name: string,
+  puzzle: string,
+  puzzleKey: string,
+  playerWord: number,
+  otherWord: number
+}
+
+/**
+ * Creates a new instance of the GameState struct -- I need to make this into an actual type
+ */
+function NewGameState(newName: string, newPuzzle: string, newPuzzleKey: string, newPlayerWord: number, newOtherWord: number): GameState {
   return {
     name: newName,
     puzzle: newPuzzle,
@@ -11,20 +23,21 @@ function GameState(newName, newPuzzle, newPuzzleKey, newPlayerWord, newOtherWord
   };
 }
 
-const gameStates = [
-  GameState("#1: Pastry puzzle: Part 1", "I **** to *** **n**k**", "I love to eat pancakes", 4, 1),
-  GameState("#2: Pastry puzzle: Part 2", "I **** to *** pancakes", "I love to eat pancakes", 3, 1),
-  GameState("#3: An old internet joke: Part 1", "All **** **** are ****** to us", "All your base are belong to us", 4, 1),
-  GameState("#4: An old internet joke: Part 2", "All y*** **** are ****** to us", "All your base are belong to us", 2, 1),
+const gameStates: GameState[] = [
+  NewGameState("#1: Pastry puzzle: Part 1", "I **** to *** **n**k**", "I love to eat pancakes", 4, 1),
+  NewGameState("#2: Pastry puzzle: Part 2", "I **** to *** pancakes", "I love to eat pancakes", 3, 1),
+  NewGameState("#3: An old internet joke: Part 1", "All **** **** are ****** to us", "All your base are belong to us", 4, 1),
+  NewGameState("#4: An old internet joke: Part 2", "All y*** **** are ****** to us", "All your base are belong to us", 2, 1),
 ]
 
+// TODO: Add typedoc info on the type of "navigation" -- seriously what is it?
 export default function TitleScreen({navigation}) {
 
-  function loadGame(state) {
+  function loadGame(state: GameState): void {
     navigation.navigate('Game', state);
   }
 
-  const infoText = `This is a demo of the game functionality of the medicine taking companion app.
+  const infoText: string = `This is a demo of the game functionality of the medicine taking companion app.
   
   In this game, you must use the keyboard to guess the word highlighted in blue. You only have 1 guess per day.
   
@@ -33,7 +46,7 @@ export default function TitleScreen({navigation}) {
   Press one of the buttons below to enter a puzzle.
   `
 
-  let content = [];
+  let content: ReactNode[] = [];
   for(let i = 0; i < gameStates.length; i++) {
     content[i] = (
       <Pressable key={i} style={styles.navigationButton} onPress={()=>loadGame(gameStates[i])}>

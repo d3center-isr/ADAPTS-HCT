@@ -2,7 +2,8 @@
 // Letter components are used to render Unsolved and Partially solved words. 
 // (completed words are rendered using plain text, not the Letter component).
 
-import { Text,View } from "react-native";
+import React from "react";
+import { Text,TextStyle,View, ViewStyle } from "react-native";
 import { StyleSheet } from "react-native";
 import { Dimensions } from "react-native";
 
@@ -25,11 +26,18 @@ const windowHeight = Dimensions.get('window').height;
  */
 export const LetterState = {Normal: 0, Hint: 1, Empty: 2, Active: 3, Incorrect: 4}
 
+
+
 // letter dimensions (these are proportions of the window dimensions, 
 // eg. "0.1" is "1/10th of the window width")
 const letterWidth = 0.1;
 export const letterSize=letterWidth*100*2;
 //const letterHeight = 0.075;
+
+interface LetterProps {
+    char: string,
+    state: number // technically an enum
+}
 
 /**
  * 
@@ -37,14 +45,14 @@ export const letterSize=letterWidth*100*2;
  * @param {LetterState} state - the state of the letter.
  * @returns - letter component
  */
-export default function Letter({char, state}) {
+export default function Letter({char, state}: LetterProps) {
     // get the style of the word based on the state
     // for some reason I couldn't get the switch statement to go into
     // the variable assignment, so here it is.
 
     // TODO: Find a better way to do this, this code is gross.
-    let textStyle;
-    let containerStyle;
+    let textStyle: TextStyle;
+    let containerStyle: ViewStyle;
     switch(state) {
         case LetterState.Normal: 
             containerStyle = styles.letterNormalContainer;
@@ -87,7 +95,6 @@ export default function Letter({char, state}) {
         </View>
     );
 }
-
 
 const styles = StyleSheet.create({
     letterNormalContainer: {

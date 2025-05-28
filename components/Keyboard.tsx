@@ -2,6 +2,12 @@ import {View} from 'react-native';
 import { StyleSheet } from 'react-native';
 import KeyButton from './KeyButton';
 
+interface KeyboardProps {
+    output: string,
+    setOutput: (toSet: string) => void,
+    maxOutputLength: number,
+    onSubmit: () => void
+}
 
 // Parameters:
 // - output is a string-type React State. It is the keyboard's current output.
@@ -16,11 +22,11 @@ import KeyButton from './KeyButton';
  * @param {CallableFunction} onSubmit - function to call once the ENTER button is pressed.
  * @returns keyboard object composed of 3 keyboard rows.
  */
-export default function Keyboard({output, setOutput, maxOutputLength, onSubmit}) {
+export default function Keyboard({output, setOutput, maxOutputLength, onSubmit}: KeyboardProps) {
 
     // keyboard pressing logic. This is passed down to each keyButton.
     // code to handle a single keypress. 
-    const handleKeypress = (keyText)=>{
+    const handleKeypress = (keyText: string) => {
         let newOutput = output;
         // submit answer using ENTER
         if(keyText==="ENTER") {
