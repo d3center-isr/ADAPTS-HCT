@@ -85,7 +85,7 @@ export default function Game({route}) {
         wasGuessCorrect = false;
         // we need to choose which blank to reveal.
         // here we get a list of blank space incdices in the word.
-        let blankSpaces = [];
+        let blankSpaces: number[] = [];
         for(let i = 0; i < assignedWord.length; i++) {
             if(assignedWord[i] === "*") blankSpaces.push(i);
         }
