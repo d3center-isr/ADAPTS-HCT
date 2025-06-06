@@ -4,8 +4,8 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
   
 // component imports
-import Game from './components/Game';
-import TitleScreen from './components/TitleScreen';
+import Game from './components/screens/Game';
+import TitleScreen from './components/screens/TitleScreen';
 
 
 const Stack = createNativeStackNavigator();
