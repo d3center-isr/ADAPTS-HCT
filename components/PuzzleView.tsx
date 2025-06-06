@@ -52,7 +52,7 @@ export default function PuzzleView({puzzle, input, playerWord, otherWord}: Puzzl
  * @param {string} word 
  * @returns true if word only contains blank chars ("*"), false if otherwise.
  */
-function isBlank(word) {
+function isBlank(word: string) {
     Array.from(word).forEach((e)=>{
         if(e !== "*") return false;
     });
@@ -64,7 +64,7 @@ function isBlank(word) {
  * @param {string} word 
  * @returns true if word contains no blank characters ("*"), false if otherwise.
  */
-function isSolved(word) {
+function isSolved(word: string) {
     for(let i = 0; i < word.length; i++) if(word[i] === "*") return false;
     return true;
 }

@@ -1,6 +1,6 @@
 import { Pressable, View } from "react-native";
 import { Text } from "react-native";
-import { StyleSheet } from "react-native-web";
+import { StyleSheet } from "react-native";
 import { Modal } from "react-native";
 import Word from "./Word";
 import { WordState } from "./Word";
@@ -44,7 +44,7 @@ let styles = StyleSheet.create({
         backgroundColor: "#ff6666",
         borderColor: "#ff0000",
         margin: 0,
-        boxShadowOpacity:1,
+        shadowOpacity:1,
     },
     centeredView: {
         flex: 1,
@@ -70,15 +70,15 @@ let styles = StyleSheet.create({
         borderWidth: 5,
         borderRadius: 20,
         padding: 10,
-        flexDirection: "col",
+        flexDirection: "column",
         alignItems: 'center',
-        boxShadowColor: '#000',
-        boxShadowOffset: {
+        shadowColor: '#000',
+        shadowOffset: {
           width: 0,
           height: 2,
         },
-        boxShadowOpacity: 0.25,
-        boxShadowRadius: 4,
+        shadowOpacity: 0.25,
+        shadowRadius: 4,
         elevation: 5,
     },
     buttonView: {

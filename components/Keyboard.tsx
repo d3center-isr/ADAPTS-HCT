@@ -45,6 +45,9 @@ export default function Keyboard({output, setOutput, maxOutputLength, onSubmit}:
         setOutput(newOutput);
     }
 
+    interface KeyboardRowProps {
+        rowKeyTexts: string[]
+    }
 
     /**
      * a keyboard row is a container for all of the keys on the row
@@ -53,7 +56,7 @@ export default function Keyboard({output, setOutput, maxOutputLength, onSubmit}:
      * @param {Array(string)} rowKeyTexts - array of strings to convert into keys.
      * @returns array of KeyButton's in the order of rowKeyTexts
      */
-    function KeyboardRow({rowKeyTexts}) {
+    function KeyboardRow({rowKeyTexts}: KeyboardRowProps) {
         let keys = [];
         // map each element in the inputted array to a KeyButton element.
         // for some reason I could not get .map() to work in this case. Still no clue why.

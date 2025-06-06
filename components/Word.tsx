@@ -42,14 +42,13 @@ export default function Word({wordData, wordState, input}: WordProps) {
     // the "stuff" rendered by the word. Changes depending on the WordState. 
     // If wordState is Solved, content consists of 1 text element. Otherwise it is a series of Letter elements
     // in a stylized container (the content of the letters and the container style varies based on wordState)
-    let content: ReactNode;
+    let content: ReactNode[] = [];
     // If the word has been solved, render it as text.
     if(wordState === WordState.Solved) {
-        content = <Text style={styles.wordTextSolved}>{wordData}</Text>;
+        content[0] = <Text key={0} style={styles.wordTextSolved}>{wordData}</Text>;
     }
     // If the word is unsolved, render it as a series of blank letters.
     else if(wordState === WordState.Unsolved) {
-        content = Array(wordData.length);
         for(let i = 0; i < wordData.length; i++) content[i]=<Letter key={i} char=' ' state={LetterState.Empty}/>;
     }
     // If this code is reached, the word is partially solved (assigned to user or other user)
