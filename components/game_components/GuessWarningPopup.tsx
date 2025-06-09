@@ -4,7 +4,7 @@ import { StyleSheet } from "react-native";
 import { Modal } from "react-native";
 import Word from "./Word";
 import { WordState } from "./Word";
-import GenericPopup from "../popup";
+import GenericPopup from "../GenericPopup";
 
 
 interface GuessWarningPopupProps {
@@ -17,12 +17,8 @@ interface GuessWarningPopupProps {
 
 export default function GuessWarningPopup({visible, hintData, onYesPress, onNoPress, input}: GuessWarningPopupProps) {
     return (
-        <Modal
-            animationType="slide"
-            visible={visible}
-            transparent={true}
-        >
-            <GenericPopup visible = {visible}>
+        <GenericPopup visible = {visible} horizontalMargins={0.04}>
+                <View style = {{alignItems: "center"}}>
                     <Text style={styles.popupInfoText}>Heads up: your answer didn't match the hints you were given, and is guaranteed to be incorrect.</Text>
                     <Word wordData={hintData} input={input} wordState={WordState.WarningDiagram}></Word>
                     <Text>Would you like to submit your answer anyway?</Text>
@@ -30,8 +26,8 @@ export default function GuessWarningPopup({visible, hintData, onYesPress, onNoPr
                         <Pressable style={[styles.button, {borderColor: "#843", backgroundColor: "#fdc"}]} onPress={onNoPress}><Text>No</Text></Pressable>
                         <Pressable style={[styles.button, {borderColor: "#384", backgroundColor: "#cfd"}]} onPress={onYesPress}><Text>Yes</Text></Pressable>
                     </View>
-            </GenericPopup>
-        </Modal>
+                </View>
+        </GenericPopup>
     );
 }
 
@@ -54,6 +50,4 @@ let styles = StyleSheet.create({
         backgroundColor: "#fff",
         marginTop: 10,
     },
-
-
 });

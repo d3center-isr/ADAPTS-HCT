@@ -8,29 +8,38 @@ import { Modal } from "react-native";
 interface GenericPopup {
     children: ReactNode,
     visible: boolean,
+    horizontalMargins: number,
 }
 
-export default function GenericPopup({children, visible}: GenericPopup) {
+/**
+ * A pop-up container with predefined style and animations -- meant to make the app interface look more consistent.
+ * @param {ReactNode} children - content to place inside of the container. Place content in between the > and the <, like 
+ * in any other container (ie View, Text, etc.)
+ * @param {boolean} visible - determines whether the popup is shown or not. This should be a state. Changing this during runtime 
+ * will cause an animation to play as it appears/disappears.
+ * @param {number} horizontalMargins - Set between 0 and 0.5. Controls the margin width to the left and right of the modal.
+ * A value of 0 causes no margins (popup stretches from horizontal border to horizontal border), and 0.5 makes popup width 0.
+ */
+export default function GenericPopup({children, visible, horizontalMargins}: GenericPopup) {
     return (
         <Modal
             animationType="slide"
             visible={visible}
             transparent={true}
+            style = {styles.modalView}
         >
             <View style={styles.centeredView}>
-                <View style={styles.modalView}>
-                    <Text>This is a popup.</Text>
+                <View style = {{flex: horizontalMargins}}></View>
+                <View style={[styles.modalView, {flex: 1-2*horizontalMargins}]}>
                     {children}
                 </View>
+                <View style = {{flex: 0.05}}></View>
             </View>
         </Modal>
     );
 }
 
 let styles = StyleSheet.create({
-    popupInfoText: {
-        marginBottom: 25,
-    },
     popup: {
         backgroundColor: "#ff6666",
         borderColor: "#ff0000",
@@ -43,16 +52,6 @@ let styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 0,
-    },
-    button: {
-        paddingTop: 5,
-        paddingBottom: 5,
-        paddingLeft: 50,
-        paddingRight: 50,
-        borderWidth: 2,
-        borderRadius: 10,
-        marginLeft:25,
-        marginRight:25,
     },
     modalView: {
         margin: 0,
@@ -72,11 +71,4 @@ let styles = StyleSheet.create({
         shadowRadius: 4,
         elevation: 5,
     },
-    buttonView: {
-        flexDirection: "row",
-        backgroundColor: "#fff",
-        marginTop: 10,
-    },
-
-
 });
