@@ -1,6 +1,8 @@
 import { ReactNode } from "react";
 import { Pressable, Text, View } from "react-native";
 import { StyleSheet } from "react-native-web";
+import MultipleChoiceWidget from "../MultipleChoiceWidget";
+import { MultipleChoiceButtonData } from "../MultipleChoiceWidget";
 
 type GameState = {
   name: string,
@@ -54,10 +56,33 @@ export default function TitleScreen({navigation}) {
       </Pressable>
     );
   }
+
+  let buttonData: MultipleChoiceButtonData[] = [
+    {
+      textToDisplay: "Option 1",
+      color: "#eee",
+    },
+    {
+      textToDisplay: "Option 2",
+      color: "#ddd",
+    },
+    {
+      textToDisplay: "Option 3",
+      color: "#ccc",
+    },
+    {
+      textToDisplay: "Option 4",
+      color: "#bbb",
+    },
+  ];
+
+  console.log("Num options: " + buttonData.length);
+
   return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>{infoText}</Text>
         {content}
+        <MultipleChoiceWidget buttonData={buttonData}/>
       </View>
   );
 }
