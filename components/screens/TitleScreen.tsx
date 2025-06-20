@@ -59,10 +59,15 @@ export default function TitleScreen({navigation}) {
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>{infoText}</Text>
         {content}
-        <Pressable onPress={()=>setShowTestPopup(true)}><Text>Debug: Press to show Med Log Popup</Text></Pressable>
+        <View style={{flex: 0.1}}/>
+        <Pressable style={styles.navigationButton} onPress={()=>setShowTestPopup(true)}>
+          <Text style={styles.navigationText}>Debug: Press to show Med Log Popup</Text>
+        </Pressable>
         <GenericPopup visible={showTestPopup} horizontalMargins={0.04}>
           <Text>Medication Reporting Widget</Text>
-          <Pressable style={{backgroundColor:"#cff"}} onPress={()=>setShowTestPopup(false)}><Text>Close Widget</Text></Pressable>
+          <Pressable style={styles.navigationButton} onPress={()=>setShowTestPopup(false)}>
+            <Text style={styles.navigationText}>Close Widget</Text>
+          </Pressable>
         </GenericPopup>
       </View>
   );
@@ -87,7 +92,6 @@ const styles = StyleSheet.create({
     },
     navigationText: {
         color: '#dde',
-
     }
 });
   

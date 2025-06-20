@@ -33,13 +33,13 @@ export default function GenericPopup({children, visible, horizontalMargins}: Gen
                 <View style={[styles.modalView, {flex: 1-2*horizontalMargins}]}>
                     {children}
                 </View>
-                <View style = {{flex: 0.05}}></View>
+                <View style = {{flex: horizontalMargins}}></View>
             </View>
         </Modal>
     );
 }
 
-let styles = StyleSheet.create({
+const styles = StyleSheet.create({
     popup: {
         backgroundColor: "#ff6666",
         borderColor: "#ff0000",
