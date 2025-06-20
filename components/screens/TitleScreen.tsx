@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { Pressable, Text, View } from "react-native";
 import { StyleSheet } from "react-native-web";
 import MultipleChoiceWidget from "../MultipleChoiceWidget";
@@ -57,6 +57,23 @@ export default function TitleScreen({navigation}) {
     );
   }
 
+
+  return (
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <Text>{infoText}</Text>
+        {content}
+        <MultipleChoiceDemo/>
+      </View>
+  );
+}
+
+/**
+ * Example Demo of usage of a MultipleChoicePanel
+ * Contains a set of 4 panels in a horizontal row. The "active" state corresponds to the index of 
+ * the currently active panel (and -1 if none have been pressed)
+ * Only for demonstration purposes.
+ */
+function MultipleChoiceDemo() {
   let buttonData: MultipleChoiceButtonData[] = [
     {
       textToDisplay: "Option 1",
@@ -75,16 +92,9 @@ export default function TitleScreen({navigation}) {
       color: "#bbb",
     },
   ];
-
   console.log("Num options: " + buttonData.length);
-
-  return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <Text>{infoText}</Text>
-        {content}
-        <MultipleChoiceWidget buttonData={buttonData}/>
-      </View>
-  );
+  const [mcActive, setMCActive] = useState(-1);
+  return <MultipleChoiceWidget buttonData={buttonData} active={mcActive} setActive={setMCActive}/>
 }
 
 const styles = StyleSheet.create({
