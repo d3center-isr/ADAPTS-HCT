@@ -63,6 +63,10 @@ export default function TitleScreen({navigation}) {
         <Pressable style={styles.navigationButton} onPress={()=>setShowTestPopup(true)}>
           <Text style={styles.navigationText}>Debug: Press to show Med Log Popup</Text>
         </Pressable>
+        <Pressable style={styles.navigationButton} onPress={()=> navigation.navigate('CalendarDemo')}>
+          <Text style={styles.navigationText}>Navigate to Calendar Test Screen</Text>
+        </Pressable>
+
         <GenericPopup visible={showTestPopup} horizontalMargins={0.04}>
           <Text>Medication Reporting Widget</Text>
           <Pressable style={styles.navigationButton} onPress={()=>setShowTestPopup(false)}>
