@@ -31,7 +31,7 @@ export default function GuessWarningPopup({visible, hintData, onYesPress, onNoPr
     );
 }
 
-let styles = StyleSheet.create({
+const styles = StyleSheet.create({
     popupInfoText: {
         marginBottom: 25,
     },
