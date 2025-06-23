@@ -3,6 +3,7 @@ import { Pressable, Text, View } from "react-native";
 import { StyleSheet } from "react-native-web";
 import MultipleChoiceWidget from "../MultipleChoiceWidget";
 import { MultipleChoiceButtonData } from "../MultipleChoiceWidget";
+import GenericPopup from "../GenericPopup";
 
 type GameState = {
   name: string,
@@ -34,7 +35,7 @@ const gameStates: GameState[] = [
 
 // TODO: Add typedoc info on the type of "navigation" -- seriously what is it?
 export default function TitleScreen({navigation}) {
-
+  const [showTestPopup, setShowTestPopup] = useState(false);
   function loadGame(state: GameState): void {
     navigation.navigate('Game', state);
   }
@@ -63,6 +64,16 @@ export default function TitleScreen({navigation}) {
         <Text>{infoText}</Text>
         {content}
         <MultipleChoiceDemo/>
+        <View style={{flex: 0.1}}/>
+        <Pressable style={styles.navigationButton} onPress={()=>setShowTestPopup(true)}>
+          <Text style={styles.navigationText}>Debug: Press to show Med Log Popup</Text>
+        </Pressable>
+        <GenericPopup visible={showTestPopup} horizontalMargins={0.04}>
+          <Text>Medication Reporting Widget</Text>
+          <Pressable style={styles.navigationButton} onPress={()=>setShowTestPopup(false)}>
+            <Text style={styles.navigationText}>Close Widget</Text>
+          </Pressable>
+        </GenericPopup>
       </View>
   );
 }
@@ -116,7 +127,6 @@ const styles = StyleSheet.create({
     },
     navigationText: {
         color: '#dde',
-
     }
 });
   
