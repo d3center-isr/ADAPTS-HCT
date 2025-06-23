@@ -3,9 +3,9 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 // component imports
-import Keyboard from '../Keyboard';
-import PuzzleView from '../PuzzleView';
-import GuessWarningPopup from '../GuessWarningPopup';
+import Keyboard from '../game_components/Keyboard';
+import PuzzleView from '../game_components/PuzzleView';
+import GuessWarningPopup from '../game_components/GuessWarningPopup';
 
 // TODO: Figure out what types are used for React Navigation and use those to create an interface here.
 export default function Game({route}) {
