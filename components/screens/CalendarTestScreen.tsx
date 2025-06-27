@@ -3,6 +3,27 @@ import { useState } from "react";
 import { Text } from "react-native";
 import CalendarContainer from "../CalendarContainer";
 
+/**
+ * This is a test object that simply changes color to 1 of 3 values depending on which 
+ */
+function CalendarCell({state}: {state: number}) {
+    let color: string;
+    switch(state%3) {
+        case 0: 
+            color = "#fdd";
+            break;
+        case 1: 
+            color = "#dfd";
+            break;
+        default: 
+            color = "#ddf";
+            break;
+    }
+    return (
+        <View style = {{borderWidth: 3, backgroundColor: color}}><Text>{state}</Text></View>
+    );    
+}
+
 export default function CalendarTestScreen({navigation}) {
     // This screen is for testing the CalendarContainer component.
     // It will display a calendar for the current month and year.
@@ -10,12 +31,14 @@ export default function CalendarTestScreen({navigation}) {
     const [displayMonth, setDisplayMonth] = useState(today.getMonth());
     const [displayYear, setDisplayYear] = useState(today.getFullYear());
     
+    const testData: number[] = [0, 1, 1, 2, 3, 5, 7, 8, 10, 12, 14, 17, 30, 40, 50, 20];
+
     return (
         <View style={{ flex: 1, flexDirection: 'row'}}>
             <View style={{flex: 0.1}}/>
             <View style={{ flex: 1, justifyContent: 'center', backgroundColor: '#fff'}}>
                 <Text>Calendar Test Screen</Text>
-                <View style={{flex: 0.1}}/>
+                <View style={{flex: 0.5}}/>
                 <CalendarContainer 
                     month={displayMonth} 
                     year={displayYear} 
@@ -24,9 +47,12 @@ export default function CalendarTestScreen({navigation}) {
                             <Text>{day}</Text>
                             {/* Below is a demonstration of content that you can put inside of a cell.
                                 This content can be based on the date the cell holds.
+                              * In this case we create a test object that can show one of 3 states, then create an array
+                                containing data which we use to determine which state to use. Which data point is used is dependent
+                              * on the fed in day variable.
                             */}
-                            <Text>{day%2==0? "% by 2": ""}</Text>
-                            <Text>{day%3==0? "% by 3": ""}</Text>
+                            <CalendarCell state = {testData[day%testData.length]}/>
+                            <CalendarCell state = {testData[day*2%testData.length]}/>
                         </View>
                     )}
                 /> 
