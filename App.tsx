@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { ImageSourcePropType, StyleSheet, Text, View } from 'react-native';
 // React Navigation Imports
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -9,14 +9,16 @@ import GameScreen from './components/screens/GameScreen';
 import TitleScreen from './components/screens/TitleScreen';
 import HomeScreen from './components/screens/HomeScreen';
 
-type RootStackParamList = {
-  Title: undefined;
-};
-
-const Stack = createNativeStackNavigator<RootStackParamList>();
-
 const Tab = createBottomTabNavigator();
 
+/**
+ * A list of all possible route names. When using a route name in this file, 
+ * refer to the variables in this object, NOT the raw string.
+ * When adding new screens, add their route names to this object. 
+ * 
+ * The point of this structure is to act as a shorthand and avoid instances in which we refer to a 
+ * route as one thing in one place and another thing in a different place.
+ */
 const ROUTE_NAMES = {
   Home: "Home",
   Messages: "Messages",
@@ -25,62 +27,57 @@ const ROUTE_NAMES = {
   Debug: "Debug"
 }
 
-const iconMap: Record<string, any> = {
-  home: require("./assets/navigation-tab-icons/menu-icon-home.png"),
-  messages: require("./assets/navigation-tab-icons/menu-icon-messages.png"),
-  insights: require("./assets/navigation-tab-icons/menu-icon-insights.png"),
-  game: require("./assets/navigation-tab-icons/menu-icon-game.png"),
-  debug: require("./assets/navigation-tab-icons/menu-icon-debug.png"),
-  error: require("./assets/navigation-tab-icons/menu-icon-error.png"),
+/**
+ * A map between route name and the navigation icon used to represent that route. 
+ * @param {routeName}: the name of the Route you want to get the icon of. 
+ * 
+ * In the case that the provided routeName does not match any of the existing icons, 
+ * the error icon ./assets/navigation-tab-icons/menu-icon-error.png will be used.
+ */
+const getIcon = (routeName: string): ImageSourcePropType => {
+  switch (routeName) {
+    case ROUTE_NAMES.Home:
+      return require("./assets/navigation-tab-icons/menu-icon-home.png");
+    case ROUTE_NAMES.Messages:
+      return require("./assets/navigation-tab-icons/menu-icon-messages.png");
+    case ROUTE_NAMES.Insights:
+      return require("./assets/navigation-tab-icons/menu-icon-insights.png");
+    case ROUTE_NAMES.Game:
+      return require("./assets/navigation-tab-icons/menu-icon-game.png");
+    case ROUTE_NAMES.Debug:
+      return require("./assets/navigation-tab-icons/menu-icon-debug.png");
+    default:
+      return require("./assets/navigation-tab-icons/menu-icon-error.png");
+  }
 };
 
-const TAB_ICON_ACTIVE_TINT_COLOR = 'blue';
-const TAB_ICON_INACTIVE_TINT_COLOR = 'black';
-
+/**
+ * Tab Navigator structure. Creates the "bottom tabs" system at the bottom of the screen.
+ * Used to navigate between the "main tabs"
+ */
 function MyTabs() {
   return (
     <Tab.Navigator
+      id={undefined}
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ focused, color, size }) => {
-          let iconName: string;
-          switch(route.name) {
-            case ROUTE_NAMES.Home:
-              iconName = "home";
-              break;
-            case ROUTE_NAMES.Messages:
-              iconName = "messages";
-              break;
-            case ROUTE_NAMES.Insights:
-              iconName = "insights";
-              break;
-            case ROUTE_NAMES.Game:
-              iconName = "game";
-              break;
-            case ROUTE_NAMES.Debug:
-              iconName = "debug";
-              break;
-            default:
-              iconName = "error";
-              break;
-          }
-
-          // You can return any component that you like here!
+        tabBarIcon: ({color, size}) => {
           return <Image 
-            style={[styles.image, {tintColor: (focused ? TAB_ICON_ACTIVE_TINT_COLOR: TAB_ICON_INACTIVE_TINT_COLOR)}]} 
-            source={iconMap[iconName]} 
+            style={{tintColor: color, width: size, height: size}} 
+            source={getIcon(route.name)} 
           />;
         },
-        tabBarActiveTintColor: TAB_ICON_ACTIVE_TINT_COLOR,
-        tabBarInactiveTintColor: TAB_ICON_INACTIVE_TINT_COLOR,
+        tabBarActiveTintColor: 'blue',
+        tabBarInactiveTintColor: 'black',
       })}
     >
-      <Tab.Screen name="Home" component={HomeScreen} />
-      <Tab.Screen name="Game" component={GameScreen} />
-      <Tab.Screen name="Debug" component={TitleScreen} />
+      <Tab.Screen name={ROUTE_NAMES.Home} component={HomeScreen} />
+      <Tab.Screen name={ROUTE_NAMES.Messages} component={HomeScreen} />
+      <Tab.Screen name={ROUTE_NAMES.Insights} component={HomeScreen} />
+      <Tab.Screen name={ROUTE_NAMES.Game} component={GameScreen} />
+      <Tab.Screen name={ROUTE_NAMES.Debug} component={TitleScreen} />
     </Tab.Navigator>
   );
 }
-
 
 export default function App() {
   return (
@@ -99,9 +96,5 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  image: {
-    width: 30,
-    height: 30,
   }
 });
