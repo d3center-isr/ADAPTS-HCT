@@ -66,6 +66,7 @@ const CalendarContainer: React.FC<CalendarContainerProps> = ({
 
     return (
         <View style={styles.container}>
+            <Text style={{textAlign: "center", fontWeight: 'bold'}}>{monthToString(displayMonth) + " " + displayYear}</Text>
             {/* Weekday headers */}
             <View style={[styles.row, {flex: 0}]}>
                 {weekDays.map((day) => (
@@ -90,6 +91,15 @@ const CalendarContainer: React.FC<CalendarContainerProps> = ({
     );
 };
 
+function monthToString(month: number, abbreviate: boolean = false) {
+    const months: string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    let toReturn: string = months[month];
+    if(abbreviate) {
+        toReturn = toReturn.substring(0, 3) + ".";
+    }
+    return toReturn;
+}
+
 // Description of how things work with Flex...
 // overall calendar is a container style, which contains the row styled elements.
 // rows are full of cells.
@@ -107,7 +117,6 @@ const styles = StyleSheet.create({
         flex: 0.5,
         textAlign: 'center',
         justifyContent: 'center',
-        backgroundColor: '#f0f0f0',
     },
     cell: {
         flex: 1,

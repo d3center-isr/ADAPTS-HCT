@@ -31,7 +31,8 @@ export default function CalendarTestScreen({navigation}) {
     const [displayMonth, setDisplayMonth] = useState(today.getMonth());
     const [displayYear, setDisplayYear] = useState(today.getFullYear());
     
-    const testData: number[] = [0, 1, 1, 2, 3, 5, 7, 8, 10, 12, 14, 17, 30, 40, 50, 20];
+    const testData: [number, number][] = Array.from({ length: 31 }, () => [Math.floor(Math.random() * 3), Math.floor(Math.random() * 3)]);
+
 
     return (
         <View style={{ flex: 1, flexDirection: 'row'}}>
@@ -51,8 +52,8 @@ export default function CalendarTestScreen({navigation}) {
                                 containing data which we use to determine which state to use. Which data point is used is dependent
                               * on the fed in day variable.
                             */}
-                            <CalendarCell state = {testData[day%testData.length]}/>
-                            <CalendarCell state = {testData[day*2%testData.length]}/>
+                            <CalendarCell state = {testData[day][0]}/>
+                            <CalendarCell state = {testData[day][1]}/>
                         </View>
                     )}
                 /> 
