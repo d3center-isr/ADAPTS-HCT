@@ -1,14 +1,54 @@
 import { StyleSheet, View } from 'react-native';
 import { useState } from 'react';
-import { useEffect } from 'react';
-
+import { useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 // component imports
-import Keyboard from '../game_components/Keyboard';
-import PuzzleView from '../game_components/PuzzleView';
-import GuessWarningPopup from '../game_components/GuessWarningPopup';
+import Keyboard from './Keyboard';
+import PuzzleView from './PuzzleView';
+import GuessWarningPopup from './GuessWarningPopup';
+
+
+/**
+ * State of a game session.
+ */
+export type GameState = {
+  /** The name of the puzzle. Used purely for reference by Debug Menus. */
+  name: string;
+  /** Puzzle string to be solved, contains '*'s denoting unsolved characters. */
+  puzzle: string;
+  /** Answer key for the puzzle without any * characters. */
+  puzzleKey: string;
+  /** Index of this player's active word. */
+  playerWord: number;
+  /** Index of the other player's active word. */
+  otherWord: number;
+};
+
+
+
+/**
+ * Creates a new GameState object with the provided values.
+ *
+ * @param newName - The name of the puzzle. Used purely for reference by Debug Menus.
+ * @param newPuzzle - Puzzle string to be solved, contains '*'s denoting unsolved characters.
+ * @param newPuzzleKey - Answer key for the puzzle without any * characters.
+ * @param newPlayerWord - The index of the word currently being solved by the player.
+ * @param newOtherWord - Index of the other player's active word.
+ * @returns A fully constructed GameState.
+ */
+export function NewGameState(newName: string, newPuzzle: string, newPuzzleKey: string, newPlayerWord: number, newOtherWord: number): GameState {
+  return {
+    name: newName,
+    puzzle: newPuzzle,
+    puzzleKey: newPuzzleKey,
+    playerWord: newPlayerWord,
+    otherWord: newOtherWord,
+  };
+}
+
 
 // TODO: Figure out what types are used for React Navigation and use those to create an interface here.
-export default function Game({route}) {
+export default function Game({gameState}: {gameState: GameState}) {
   
   // constants for keyboard input.
   // - digital keyboard output is stored in the keyboardOutput variable. It is a state modified by the keyboard, 
@@ -26,13 +66,18 @@ export default function Game({route}) {
   // This is where we are loading the initial gamestate. 
   // When connecting the front end to the back end game logic, this is 
   // where the game state parameters should be loaded.
-  useEffect(() => {
-    const gameState =  route.params;
-    setPuzzle(gameState.puzzle);
-    setPuzzleKey(gameState.puzzleKey);
-    setPlayerWord(gameState.playerWord);
-    setOtherWord(gameState.otherWord);
-  }, []);
+  useFocusEffect(
+  useCallback(() => {
+    let initialized = false;
+    if (!initialized) {
+      setPuzzle(gameState.puzzle);
+      setPuzzleKey(gameState.puzzleKey);
+      setPlayerWord(gameState.playerWord);
+      setOtherWord(gameState.otherWord);
+      initialized = true;
+    }
+  }, [gameState])
+);
   
   const maxKeyboardOutputLength = puzzle.split(" ")[playerWord].length;
 
