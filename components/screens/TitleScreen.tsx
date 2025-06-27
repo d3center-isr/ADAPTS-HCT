@@ -105,7 +105,7 @@ function MultipleChoiceDemo() {
   ];
   console.log("Num options: " + buttonData.length);
   const [mcActive, setMCActive] = useState(-1);
-  return <MultipleChoiceWidget buttonData={buttonData} active={mcActive} setActive={setMCActive}/>
+  return <MultipleChoiceWidget buttonData={buttonData} activeButtonId={mcActive} setActiveButtonId={setMCActive}/>
 }
 
 const styles = StyleSheet.create({

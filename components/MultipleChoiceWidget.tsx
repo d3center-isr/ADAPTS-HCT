@@ -13,28 +13,28 @@ export type MultipleChoiceButtonData = {
 
 interface MultipleChoiceWidgetProps {
     buttonData: MultipleChoiceButtonData[],
-    active: number,
-    setActive: React.Dispatch<React.SetStateAction<number>>,
+    activeButtonId: number,
+    setActiveButtonId: React.Dispatch<React.SetStateAction<number>>,
 }
 
 interface MultipleChoiceButtonProps {
     data: MultipleChoiceButtonData,
-    active: boolean,
-    id: number,
+    isActive: boolean,
+    buttonId: number,
     onPress: (GestureResponderEvent) => void
 }
 
 /**
  * A single button in the MC Panel. 
  * @param {MultipleChoiceButtonData} data: is used to determine button color and text of the button
- * @param {boolean} active: whether the button has been selected or not. Determined in MultipleChoicePanel
+ * @param {boolean} isActive: whether the button has been selected or not. Determined in MultipleChoicePanel
  * by comparing the "active" state var to the id's of all buttons.
- * @param {id} a numeric id of the button, corresponding to the index of the button within the buttonData
+ * @param {number} buttonId: a numeric id of the button, corresponding to the index of the button within the buttonData
  * array used to populate the panel. 
  * @param {(GestureResponderEvent) => void} a state setter fed in by MCPanel to update the active state.
  *  
  */
-function MultipleChoiceButton({data, active, id, onPress}: MultipleChoiceButtonProps) {
+function MultipleChoiceButton({data, isActive: active, buttonId: id, onPress}: MultipleChoiceButtonProps) {
     return (
         <Pressable
             style={[styles.button, {borderColor: active ? "#fff": "#000", backgroundColor: data.color}]} 
@@ -51,28 +51,27 @@ function MultipleChoiceButton({data, active, id, onPress}: MultipleChoiceButtonP
  * 
  * @param {MultipleChoiceButtonData[]} buttonData: A list of data for buttons.
  * The number of entries in this list corresponds to the number of buttons generated.
- * @param {number} active: React State. The index of the currently active button. -1 if no button is active.
- * @param {React.Dispatch<React.SetStateAction<number>>} setActive: The React method for updating the state of "active".
+ * @param {number} activeButtonId: React State. The index of the currently active button. -1 if no button is active.
+ * @param {React.Dispatch<React.SetStateAction<number>>} setActiveButtonId: The React method for updating the state of "activeButtonId".
  * 
  * Make sure that active and setActive are the [var, setVar] pair of a react useState.
  */
-export default function MultipleChoiceWidget({buttonData, active, setActive}: MultipleChoiceWidgetProps) {
+export default function MultipleChoiceWidget({buttonData, activeButtonId: activeId, setActiveButtonId: setActiveId}: MultipleChoiceWidgetProps) {
 
     function mcButtonHandler(key: number) {
-        setActive(key);
+        setActiveId(key);
     }
 
-    let content: ReactNode[] = buttonData.map((e,i) => {
-        return <MultipleChoiceButton key={i} id={i} data={e} active={i==active} onPress={mcButtonHandler}/>;
+    const content: ReactNode[] = buttonData.map((e,i) => {
+        return <MultipleChoiceButton key={i} buttonId={i} data={e} isActive={i==activeId} onPress={mcButtonHandler}/>;
     });
 
-    content.length = buttonData.length;
     return (
         <View style={styles.buttonView}>{content}</View>
     );
 }
 
-let styles = StyleSheet.create({
+const styles = StyleSheet.create({
     centeredView: {
         flex: 1,
         flexDirection: 'row',
