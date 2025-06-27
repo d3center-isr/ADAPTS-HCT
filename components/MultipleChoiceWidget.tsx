@@ -56,14 +56,14 @@ function MultipleChoiceButton({data, isActive: active, buttonId: id, onPress}: M
  * 
  * Make sure that active and setActive are the [var, setVar] pair of a react useState.
  */
-export default function MultipleChoiceWidget({buttonData, activeButtonId: activeId, setActiveButtonId: setActiveId}: MultipleChoiceWidgetProps) {
+export default function MultipleChoiceWidget({buttonData, activeButtonId, setActiveButtonId}: MultipleChoiceWidgetProps) {
 
     function mcButtonHandler(key: number) {
-        setActiveId(key);
+        setActiveButtonId(key);
     }
 
     const content: ReactNode[] = buttonData.map((e,i) => {
-        return <MultipleChoiceButton key={i} buttonId={i} data={e} isActive={i==activeId} onPress={mcButtonHandler}/>;
+        return <MultipleChoiceButton key={i} buttonId={i} data={e} isActive={i==activeButtonId} onPress={mcButtonHandler}/>;
     });
 
     return (
