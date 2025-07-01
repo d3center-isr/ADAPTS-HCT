@@ -2,6 +2,7 @@ import { ReactNode, useState } from "react";
 import { Pressable, Text, View } from "react-native";
 import { StyleSheet } from "react-native-web";
 import GenericPopup from "../GenericPopup";
+import CountdownTimer from "../CountdownTimer";
 
 type GameState = {
   name: string,
@@ -63,6 +64,11 @@ export default function TitleScreen({navigation}) {
         <Pressable style={styles.navigationButton} onPress={()=>setShowTestPopup(true)}>
           <Text style={styles.navigationText}>Debug: Press to show Med Log Popup</Text>
         </Pressable>
+
+        <CountdownTimer countdownTarget={{day: 2, month: 7, year: 2025}}/>
+        <CountdownTimer countdownTarget={{day: 2, month: 6, year: 2025}} showTarget={true}/>
+        <CountdownTimer countdownTarget={{day: 31, month: 7, year: 2025}}/>
+
         <GenericPopup visible={showTestPopup} horizontalMargins={0.04}>
           <Text>Medication Reporting Widget</Text>
           <Pressable style={styles.navigationButton} onPress={()=>setShowTestPopup(false)}>
