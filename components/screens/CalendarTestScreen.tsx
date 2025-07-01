@@ -31,8 +31,10 @@ export default function CalendarTestScreen({navigation}) {
     const [displayMonth, setDisplayMonth] = useState(today.getMonth());
     const [displayYear, setDisplayYear] = useState(today.getFullYear());
     
-    const testData: [number, number][] = Array.from({ length: 31 }, () => [Math.floor(Math.random() * 3), Math.floor(Math.random() * 3)]);
-
+    // demo array of randomized values to use to determine cell states.
+    // this technically only needs a length of 32 (since we access elements at indexes 1-31 in the worst case) by I'm adding extra for peace of mind.
+    const testData: [number, number][] = Array.from({ length: 40 }, () => [Math.floor(Math.random() * 3), Math.floor(Math.random() * 3)]);
+    
 
     return (
         <View style={{ flex: 1, flexDirection: 'row'}}>
