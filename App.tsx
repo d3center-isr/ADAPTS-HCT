@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image } from 'react-native';
 // component imports
 import GameScreen from './components/screens/GameScreen';
-import TitleScreen from './components/screens/TitleScreen';
+import TitleScreen from './components/screens/DebugScreen';
 import HomeScreen from './components/screens/HomeScreen';
 
 const Tab = createBottomTabNavigator();
