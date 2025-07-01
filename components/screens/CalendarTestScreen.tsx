@@ -32,8 +32,7 @@ export default function CalendarTestScreen({navigation}) {
     const [displayYear, setDisplayYear] = useState(today.getFullYear());
     
     // demo array of randomized values to use to determine cell states.
-    // this technically only needs a length of 32 (since we access elements at indexes 1-31 in the worst case) by I'm adding extra for peace of mind.
-    const testData: [number, number][] = Array.from({ length: 40 }, () => [Math.floor(Math.random() * 3), Math.floor(Math.random() * 3)]);
+    const testData: [number, number][] = Array.from({ length: 31 }, () => [Math.floor(Math.random() * 3), Math.floor(Math.random() * 3)]);
     
 
     return (
@@ -54,8 +53,8 @@ export default function CalendarTestScreen({navigation}) {
                                 containing data which we use to determine which state to use. Which data point is used is dependent
                               * on the fed in day variable.
                             */}
-                            <CalendarCell state = {testData[day][0]}/>
-                            <CalendarCell state = {testData[day][1]}/>
+                            <CalendarCell state = {testData[day-1][0]}/>
+                            <CalendarCell state = {testData[day-1][1]}/>
                         </View>
                     )}
                 /> 
