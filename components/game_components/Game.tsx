@@ -98,9 +98,9 @@ export default function Game({gameState}: {gameState: GameState}) {
     console.log("submitting...");
 
     console.log(puzzle.split(" ")[playerWord] + " " + keyboardOutput);
-
+    // iterate over the submission for the player word -- if the player's input conflicts with the given answer, show a warning popup.
     for(let i = 0; i < puzzle.split(" ")[playerWord].length; i++) {
-      console.log(puzzle.split(" ")[playerWord][i]);
+      // console.log(puzzle.split(" ")[playerWord][i]);
       if(puzzle.split(" ")[playerWord][i] != "*" &&
       puzzle.split(" ")[playerWord][i].toLowerCase() != keyboardOutput[i].toLowerCase()) {
         setWordWarningPopupVisible(true);

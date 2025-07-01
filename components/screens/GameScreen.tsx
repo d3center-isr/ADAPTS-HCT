@@ -5,6 +5,7 @@ import { GameState, NewGameState } from '../game_components/Game';
 
 
 const GameScreen = ({ navigation}) => {
+    // This is a set of puzzles for testing purposes. 
     const gameStates: GameState[] = [
         NewGameState("#1: Pastry puzzle: Part 1", "I **** to *** **n**k**", "I love to eat pancakes", 4, 1),
         NewGameState("#2: Pastry puzzle: Part 2", "I **** to *** pancakes", "I love to eat pancakes", 3, 1),
@@ -13,7 +14,7 @@ const GameScreen = ({ navigation}) => {
         NewGameState("Placeholder Game State", "This puzzle is g***ric", "This puzzle is generic", 3, 1),
     ]
 
-    const state: GameState = gameStates[4];
+    const state: GameState = gameStates[4]; // change the number here to pick which puzzle to use.
     console.log("AAAA" + state.puzzle);
 
     return (
