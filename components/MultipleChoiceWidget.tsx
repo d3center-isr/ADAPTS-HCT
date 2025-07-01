@@ -34,11 +34,11 @@ interface MultipleChoiceButtonProps {
  * @param {(GestureResponderEvent) => void} a state setter fed in by MCPanel to update the active state.
  *  
  */
-function MultipleChoiceButton({data, isActive: active, buttonId: id, onPress}: MultipleChoiceButtonProps) {
+function MultipleChoiceButton({data, isActive, buttonId, onPress}: MultipleChoiceButtonProps) {
     return (
         <Pressable
-            style={[styles.button, {borderColor: active ? "#fff": "#000", backgroundColor: data.color}]} 
-            onPress={()=>{onPress(id)}}
+            style={[styles.button, {borderColor: isActive ? "#fff": "#000", backgroundColor: data.color}]} 
+            onPress={()=>{onPress(buttonId)}}
         >
             <Text>{data.textToDisplay}</Text>
         </Pressable>
