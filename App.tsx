@@ -6,6 +6,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 // component imports
 import Game from './components/screens/Game';
 import TitleScreen from './components/screens/TitleScreen';
+import CalendarTestScreen from './components/screens/CalendarTestScreen';
 
 
 const Stack = createNativeStackNavigator();
@@ -17,6 +18,12 @@ export default function App() {
         <Stack.Screen 
           name="Game" 
           component={Game} 
+          options={{title: "Today's Puzzle"}}
+          initialParams={null}
+        />
+        <Stack.Screen 
+          name="CalendarDemo" 
+          component={CalendarTestScreen} 
           options={{title: "Today's Puzzle"}}
           initialParams={null}
         />
