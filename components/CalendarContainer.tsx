@@ -3,7 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 
 /**
  * Props for CalendarContainer.
- * @property renderDay - Function to render the content of each calendar cell, given day, month, year.
+ * @property renderDay - Function to render the content of each calendar cell, given day, 0-indexed month, year.
  * @property month - The month to display (0-indexed, e.g., January = 0). Defaults to current month.
  * @property year - The year to display. Defaults to current year.
  */
