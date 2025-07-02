@@ -65,9 +65,10 @@ export default function TitleScreen({navigation}) {
           <Text style={styles.navigationText}>Debug: Press to show Med Log Popup</Text>
         </Pressable>
 
-        <CountdownTimer countdownTarget={{day: 2, month: 7, year: 2025}}/>
-        <CountdownTimer countdownTarget={{day: 2, month: 6, year: 2025}} showTarget={true}/>
-        <CountdownTimer countdownTarget={{day: 31, month: 7, year: 2025}}/>
+        <CountdownTimer countdownTarget={new Date(2025, 6, 3)} countdownReference={new Date(2024, 6, 2)}/>
+        <CountdownTimer countdownTarget={new Date(2024, 6, 3)} countdownReference={new Date(2025, 6, 2)}/>
+        <CountdownTimer countdownTarget={new Date(2025, 8, 2)} showTarget={true}/>
+        <CountdownTimer countdownTarget={new Date(2026, 7, 31)}/>
 
         <GenericPopup visible={showTestPopup} horizontalMargins={0.04}>
           <Text>Medication Reporting Widget</Text>
