@@ -31,7 +31,7 @@ const CalendarContainer: React.FC<CalendarContainerProps> = ({
     const displayMonth = month ?? today.getMonth();
     const displayYear = year ?? today.getFullYear();
 
-    // Names of the days of the week, starting with Sunday
+    // Weekday names used to populate the header row of the calendar
     const weekDays = ['Sun.', 'Mon.', 'Tues.', 'Wed.', 'Thurs.', 'Fri.', 'Sat.'];
 
     // First day of the month (0 = Sunday, 6 = Saturday)
