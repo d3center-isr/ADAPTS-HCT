@@ -8,9 +8,11 @@ import { Image } from 'react-native';
 import GameScreen from './components/screens/GameScreen';
 import DebugScreen from './components/screens/DebugScreen';
 import PlaceholderScreen from './components/screens/PlaceholderScreen';
+import CalendarTestScreen from './components/screens/CalendarTestScreen';
+
 
 const Tab = createBottomTabNavigator();
-
+const Stack = createNativeStackNavigator();
 /**
  * A list of all possible route names. When using a route name in this file, 
  * refer to the variables in this object, NOT the raw string.
@@ -51,6 +53,25 @@ const getIcon = (routeName: string): ImageSourcePropType => {
   }
 };
 
+function DebugStackNavigator() {
+  return (
+    <Stack.Navigator id={undefined} initialRouteName='DebugMenu'>
+      <Stack.Screen 
+        name="DebugMenu" 
+        component={DebugScreen} 
+        options={{title: "Debug Menu"}}
+        initialParams={null}
+      />
+      <Stack.Screen 
+        name="CalendarDemo" 
+        component={CalendarTestScreen} 
+        options={{title: "Calendar Demo Screen"}}
+        initialParams={null}
+      />
+    </Stack.Navigator>
+  );
+}
+
 /**
  * Tab Navigator structure. Creates the "bottom tabs" system at the bottom of the screen.
  * Used to navigate between the "main tabs"
@@ -74,7 +95,7 @@ function MyTabs() {
       <Tab.Screen name={ROUTE_NAMES.Messages} component={PlaceholderScreen} />
       <Tab.Screen name={ROUTE_NAMES.Insights} component={PlaceholderScreen} />
       <Tab.Screen name={ROUTE_NAMES.Game} component={GameScreen} />
-      <Tab.Screen name={ROUTE_NAMES.Debug} component={DebugScreen} />
+      <Tab.Screen name={ROUTE_NAMES.Debug} component={DebugStackNavigator} />
     </Tab.Navigator>
   );
 }
