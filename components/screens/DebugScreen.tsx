@@ -1,5 +1,5 @@
 import { ReactNode, useState } from "react";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, Text, View, Image } from "react-native";
 import { StyleSheet } from "react-native-web";
 import MultipleChoiceWidget from "../MultipleChoiceWidget";
 import { MultipleChoiceButtonData } from "../MultipleChoiceWidget";
@@ -11,25 +11,32 @@ export default function TitleScreen({navigation}) {
   const [showTestPopup, setShowTestPopup] = useState(false);
 
   return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        {/* Multiple Choice Demo Component */}
-        <MultipleChoiceDemo/>
-        <View style={{flex: 0.1}}/>
-        {/* GenericPopup Testing */}
-        <Pressable style={styles.navigationButton} onPress={()=>setShowTestPopup(true)}>
-          <Text style={styles.navigationText}>Debug: Press to show Med Log Popup</Text>
-        </Pressable>
-        {/* Calendar Testing */}
-        <Pressable style={styles.navigationButton} onPress={()=> navigation.navigate('CalendarDemo')}>
-          <Text style={styles.navigationText}>Navigate to Calendar Test Screen</Text>
-        </Pressable>
-
-        <GenericPopup visible={showTestPopup} horizontalMargins={0.04}>
-          <Text>Medication Reporting Widget</Text>
-          <Pressable style={styles.navigationButton} onPress={()=>setShowTestPopup(false)}>
-            <Text style={styles.navigationText}>Close Widget</Text>
+      <View style={{ flex: 1, alignItems: 'center'}}>
+        <View style={{flexDirection: 'row', margin:5}}>
+          <Image style={{flex: 0.25, aspectRatio: 1}}source={require("../../assets/placeholders/debug-penguin-helmet.png")}/>
+          <Text style={{flex: 0.5}}>Welcome to the Testing zone! This is a Developer Menu meant for feature testing.</Text>
+          <Image style={{flex: 0.25, aspectRatio: 1, transform: [{ scaleX: -1 }]}}source={require("../../assets/placeholders/debug-penguin-helmet.png")}/>
+        </View>
+        <View>
+          {/* Multiple Choice Demo Component */}
+          <MultipleChoiceDemo/>
+          <View style={{flex: 0.1}}/>
+          {/* GenericPopup Testing */}
+          <Pressable style={styles.navigationButton} onPress={()=>setShowTestPopup(true)}>
+            <Text style={styles.navigationText}>Debug: Press to show Med Log Popup</Text>
           </Pressable>
-        </GenericPopup>
+          {/* Calendar Testing */}
+          <Pressable style={styles.navigationButton} onPress={()=> navigation.navigate('CalendarDemo')}>
+            <Text style={styles.navigationText}>Navigate to Calendar Test Screen</Text>
+          </Pressable>
+
+          <GenericPopup visible={showTestPopup} horizontalMargins={0.04}>
+            <Text>Medication Reporting Widget</Text>
+            <Pressable style={styles.navigationButton} onPress={()=>setShowTestPopup(false)}>
+              <Text style={styles.navigationText}>Close Widget</Text>
+            </Pressable>
+          </GenericPopup>
+        </View>
       </View>
   );
 }

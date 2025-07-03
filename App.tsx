@@ -53,20 +53,16 @@ const getIcon = (routeName: string): ImageSourcePropType => {
   }
 };
 
-function DebugStackNavigator() {
+function MainStackNavigator() {
   return (
-    <Stack.Navigator id={undefined} initialRouteName='DebugMenu'>
+    <Stack.Navigator id={undefined} initialRouteName='MainTabs'>
       <Stack.Screen 
-        name="DebugMenu" 
-        component={DebugScreen} 
-        options={{title: "Debug Menu"}}
-        initialParams={null}
+        name="MainTabs" 
+        component={MainTabNavigator} 
       />
       <Stack.Screen 
         name="CalendarDemo" 
         component={CalendarTestScreen} 
-        options={{title: "Calendar Demo Screen"}}
-        initialParams={null}
       />
     </Stack.Navigator>
   );
@@ -76,7 +72,7 @@ function DebugStackNavigator() {
  * Tab Navigator structure. Creates the "bottom tabs" system at the bottom of the screen.
  * Used to navigate between the "main tabs"
  */
-function MyTabs() {
+function MainTabNavigator() {
   return (
     <Tab.Navigator
       id={undefined}
@@ -95,7 +91,7 @@ function MyTabs() {
       <Tab.Screen name={ROUTE_NAMES.Messages} component={PlaceholderScreen} />
       <Tab.Screen name={ROUTE_NAMES.Insights} component={PlaceholderScreen} />
       <Tab.Screen name={ROUTE_NAMES.Game} component={GameScreen} />
-      <Tab.Screen name={ROUTE_NAMES.Debug} component={DebugStackNavigator} />
+      <Tab.Screen name={ROUTE_NAMES.Debug} component={DebugScreen} />
     </Tab.Navigator>
   );
 }
@@ -103,7 +99,7 @@ function MyTabs() {
 export default function App() {
   return (
     <NavigationContainer>
-      <MyTabs />
+      <MainStackNavigator/>
     </NavigationContainer>
   );
 }
