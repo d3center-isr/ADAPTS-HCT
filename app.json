@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Coop-Word-Solver-ts",
-    "slug": "Coop-Word-Solver-js",
+    "name": "ADAPTS-HCT",
+    "slug": "ADAPTS-HCT",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -19,14 +19,14 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.ofekashaniumich.CoopWordSolverts"
+      "package": "com.ofekashaniumich.ADAPTSHCT"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "a107b1c8-5a17-4ab8-b42f-43bf39c5eeb3"
+        
       }
     },
     "plugins": [
