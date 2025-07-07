@@ -19,7 +19,7 @@ interface CountdownTimerProps {
  */
 export default function CountdownTimer({countdownTarget, countdownReference, showTarget}: CountdownTimerProps): ReactNode {
     // first, extract the Date object from the params so that we're working with ONLY JS Dates
-    let targetDate = countdownTarget;
+    const targetDate = countdownTarget;
     const [referenceDate, setReferenceDate] = useState(countdownReference ?? new Date());
     // also handle the showTarget input -- if it's undefined assume false.
     showTarget = showTarget ?? false;
