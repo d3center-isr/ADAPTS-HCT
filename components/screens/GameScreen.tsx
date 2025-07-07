@@ -3,7 +3,6 @@ import { View, StyleSheet } from 'react-native';
 import Game from '../game_components/Game'; // Adjust the import path if needed
 import { GameState, NewGameState } from '../game_components/Game';
 
-
 const GameScreen = ({ navigation}) => {
     // This is a set of puzzles for testing purposes. 
     const gameStates: GameState[] = [

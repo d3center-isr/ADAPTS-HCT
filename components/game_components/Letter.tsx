@@ -26,13 +26,10 @@ const windowHeight = Dimensions.get('window').height;
  */
 export const LetterState = {Normal: 0, Hint: 1, Empty: 2, Active: 3, Incorrect: 4}
 
-
-
 // letter dimensions (these are proportions of the window dimensions, 
 // eg. "0.1" is "1/10th of the window width")
 const letterWidth = 0.1;
 export const letterSize=letterWidth*100*2;
-//const letterHeight = 0.075;
 
 interface LetterProps {
     char: string,
@@ -81,7 +78,7 @@ export default function Letter({char, state}: LetterProps) {
     }
 
     // if this is normal text, add some spaces so that the underline is more visible.
-    let renderText = textStyle===styles.letterNormal? " " + char + " " : char; 
+    const renderText = textStyle===styles.letterNormal? " " + char + " " : char; 
 
     
     return (

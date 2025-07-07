@@ -1,8 +1,6 @@
 import { StyleSheet } from "react-native"
 import { Text, View, Image } from "react-native"
 
-
-
 export default function PlaceholderScreen() {
     return (
         <View style={{alignItems: 'center'}}>
@@ -12,7 +10,6 @@ export default function PlaceholderScreen() {
         </View>
     );
 }
-
 
 const styles = StyleSheet.create({
   container: {

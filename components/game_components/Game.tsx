@@ -7,7 +7,6 @@ import Keyboard from './Keyboard';
 import PuzzleView from './PuzzleView';
 import GuessWarningPopup from './GuessWarningPopup';
 
-
 /**
  * State of a game session.
  */
@@ -23,8 +22,6 @@ export type GameState = {
   /** Index of the other player's active word. */
   otherWord: number;
 };
-
-
 
 /**
  * Creates a new GameState object with the provided values.
@@ -46,7 +43,6 @@ export function NewGameState(newName: string, newPuzzle: string, newPuzzleKey: s
   };
 }
 
-
 // TODO: Figure out what types are used for React Navigation and use those to create an interface here.
 export default function Game({gameState}: {gameState: GameState}) {
   
@@ -67,17 +63,17 @@ export default function Game({gameState}: {gameState: GameState}) {
   // When connecting the front end to the back end game logic, this is 
   // where the game state parameters should be loaded.
   useFocusEffect(
-  useCallback(() => {
-    let initialized = false;
-    if (!initialized) {
-      setPuzzle(gameState.puzzle);
-      setPuzzleKey(gameState.puzzleKey);
-      setPlayerWord(gameState.playerWord);
-      setOtherWord(gameState.otherWord);
-      initialized = true;
-    }
-  }, [gameState])
-);
+    useCallback(() => {
+      let initialized = false;
+      if (!initialized) {
+        setPuzzle(gameState.puzzle);
+        setPuzzleKey(gameState.puzzleKey);
+        setPlayerWord(gameState.playerWord);
+        setOtherWord(gameState.otherWord);
+        initialized = true;
+      }
+    }, [gameState])
+  );
   
   const maxKeyboardOutputLength = puzzle.split(" ")[playerWord].length;
 
@@ -113,9 +109,9 @@ export default function Game({gameState}: {gameState: GameState}) {
 
   function CheckGuessAndUpdatePuzzle() {
     
-    let assignedWord = puzzle.split(" ")[playerWord];
-    let toCheck = keyboardOutput;
-    let answer = puzzleKey.split(" ")[playerWord];
+    const assignedWord = puzzle.split(" ")[playerWord];
+    const toCheck = keyboardOutput;
+    const answer = puzzleKey.split(" ")[playerWord];
     let updatedWord;
     let wasGuessCorrect;
     // correct guess handling
@@ -145,11 +141,12 @@ export default function Game({gameState}: {gameState: GameState}) {
     // now we need to update puzzle. Since we are not modifying strings, we will 
     // split puzzle and copy the words into a new string. When copying over the word we guessed, 
     // we will instead copy over the word from the answer key.
-    let wordsToCopy = puzzle.split(" ");
+    const wordsToCopy = puzzle.split(" ");
     wordsToCopy[playerWord] = updatedWord;
-    let newPuzzle = wordsToCopy.join(" ");
+    const newPuzzle = wordsToCopy.join(" ");
     // update game state to return and set everything we need
-    let stateToReturn = {
+    // This object is for when we integrate the backend -- it is unused for now.
+    const stateToReturn = {
         oldPuzzle: puzzle,
         newPuzzle: newPuzzle,
         lastSubmitTime: Date.now,
@@ -159,6 +156,7 @@ export default function Game({gameState}: {gameState: GameState}) {
     
     setPuzzle(newPuzzle);
     setKeyboardOutput("");
+    
   }
 
   return (
