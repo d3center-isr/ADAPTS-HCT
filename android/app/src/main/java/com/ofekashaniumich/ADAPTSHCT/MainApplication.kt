@@ -1,4 +1,4 @@
-package com.ofekashaniumich.CoopWordSolverts
+package com.ofekashaniumich.ADAPTSHCT
 
 import android.app.Application
 import android.content.res.Configuration

@@ -87,9 +87,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace 'com.ofekashaniumich.CoopWordSolverts'
+    namespace 'com.ofekashaniumich.ADAPTSHCT'
     defaultConfig {
-        applicationId 'com.ofekashaniumich.CoopWordSolverts'
+        applicationId 'com.ofekashaniumich.ADAPTSHCT'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
