@@ -32,21 +32,8 @@ export default function CountdownTimer({countdownTarget, countdownReference, sho
 
     
 
-    // Below is the code which gets the difference in #days between the two dates (target - reference)
-    let daysRemaining = targetDate.getDate() - referenceDate.getDate(); // start with the difference in month dates.
-    // now we need to add in all the days as a result of the months...
-    for(let i = referenceDate.getMonth(); i < targetDate.getMonth(); i++) {
-        // we use a little hack: a "day" parameter of 0 loops around to the largest possible date for that month,
-        // so by making a new Date using some year, the month we want, and 0 for the day, getDate() will return the
-        // number of days in that month. 
-        daysRemaining += new Date(2000, i, 0).getDate();
-    }
-    // This helps to handle when the reference date is on a month after that of the target date (the target date has already passed).
-    for(let i = targetDate.getMonth(); i < referenceDate.getMonth(); i++) {
-        daysRemaining -= new Date(2000, i, 0).getDate();
-    }       
-    daysRemaining += 365*(targetDate.getFullYear() - referenceDate.getFullYear()); // account for year diff
-    //console.log(daysRemaining + "target: " + targetDate.toDateString() + ", ref: " + referenceDate.toDateString());
+    let timeRemaining = targetDate.getTime() - referenceDate.getTime();
+    let daysRemaining = Math.floor(timeRemaining/(1000 * 60 * 60 * 24));
     return (
         <Text style={styles.countdownText}>
             {((daysRemaining > 0) ? daysRemaining + (daysRemaining > 1 ? " Days": " Day") + " to go!": "Date already passed.")
