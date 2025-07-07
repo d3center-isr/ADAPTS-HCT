@@ -32,8 +32,8 @@ export default function CountdownTimer({countdownTarget, countdownReference, sho
 
     
 
-    let timeRemaining = targetDate.getTime() - referenceDate.getTime();
-    let daysRemaining = Math.floor(timeRemaining/(1000 * 60 * 60 * 24));
+    const timeRemaining = targetDate.getTime() - referenceDate.getTime();
+    const daysRemaining = Math.floor(timeRemaining/(1000 * 60 * 60 * 24));
     return (
         <Text style={styles.countdownText}>
             {((daysRemaining > 0) ? daysRemaining + (daysRemaining > 1 ? " Days": " Day") + " to go!": "Date already passed.")
