@@ -1,14 +1,50 @@
 import { StyleSheet, View } from 'react-native';
 import { useState } from 'react';
-import { useEffect } from 'react';
-
+import { useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 // component imports
-import Keyboard from '../game_components/Keyboard';
-import PuzzleView from '../game_components/PuzzleView';
-import GuessWarningPopup from '../game_components/GuessWarningPopup';
+import Keyboard from './Keyboard';
+import PuzzleView from './PuzzleView';
+import GuessWarningPopup from './GuessWarningPopup';
+
+/**
+ * State of a game session.
+ */
+export type GameState = {
+  /** The name of the puzzle. Used purely for reference by Debug Menus. */
+  name: string;
+  /** Puzzle string to be solved, contains '*'s denoting unsolved characters. */
+  puzzle: string;
+  /** Answer key for the puzzle without any * characters. */
+  puzzleKey: string;
+  /** Index of this player's active word. */
+  playerWord: number;
+  /** Index of the other player's active word. */
+  otherWord: number;
+};
+
+/**
+ * Creates a new GameState object with the provided values.
+ *
+ * @param newName - The name of the puzzle. Used purely for reference by Debug Menus.
+ * @param newPuzzle - Puzzle string to be solved, contains '*'s denoting unsolved characters.
+ * @param newPuzzleKey - Answer key for the puzzle without any * characters.
+ * @param newPlayerWord - The index of the word currently being solved by the player.
+ * @param newOtherWord - Index of the other player's active word.
+ * @returns A fully constructed GameState.
+ */
+export function NewGameState(newName: string, newPuzzle: string, newPuzzleKey: string, newPlayerWord: number, newOtherWord: number): GameState {
+  return {
+    name: newName,
+    puzzle: newPuzzle,
+    puzzleKey: newPuzzleKey,
+    playerWord: newPlayerWord,
+    otherWord: newOtherWord,
+  };
+}
 
 // TODO: Figure out what types are used for React Navigation and use those to create an interface here.
-export default function Game({route}) {
+export default function Game({gameState}: {gameState: GameState}) {
   
   // constants for keyboard input.
   // - digital keyboard output is stored in the keyboardOutput variable. It is a state modified by the keyboard, 
@@ -26,13 +62,18 @@ export default function Game({route}) {
   // This is where we are loading the initial gamestate. 
   // When connecting the front end to the back end game logic, this is 
   // where the game state parameters should be loaded.
-  useEffect(() => {
-    const gameState =  route.params;
-    setPuzzle(gameState.puzzle);
-    setPuzzleKey(gameState.puzzleKey);
-    setPlayerWord(gameState.playerWord);
-    setOtherWord(gameState.otherWord);
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      let initialized = false;
+      if (!initialized) {
+        setPuzzle(gameState.puzzle);
+        setPuzzleKey(gameState.puzzleKey);
+        setPlayerWord(gameState.playerWord);
+        setOtherWord(gameState.otherWord);
+        initialized = true;
+      }
+    }, [gameState])
+  );
   
   const maxKeyboardOutputLength = puzzle.split(" ")[playerWord].length;
 
@@ -53,9 +94,9 @@ export default function Game({route}) {
     console.log("submitting...");
 
     console.log(puzzle.split(" ")[playerWord] + " " + keyboardOutput);
-
+    // iterate over the submission for the player word -- if the player's input conflicts with the given answer, show a warning popup.
     for(let i = 0; i < puzzle.split(" ")[playerWord].length; i++) {
-      console.log(puzzle.split(" ")[playerWord][i]);
+      // console.log(puzzle.split(" ")[playerWord][i]);
       if(puzzle.split(" ")[playerWord][i] != "*" &&
       puzzle.split(" ")[playerWord][i].toLowerCase() != keyboardOutput[i].toLowerCase()) {
         setWordWarningPopupVisible(true);
@@ -68,9 +109,9 @@ export default function Game({route}) {
 
   function CheckGuessAndUpdatePuzzle() {
     
-    let assignedWord = puzzle.split(" ")[playerWord];
-    let toCheck = keyboardOutput;
-    let answer = puzzleKey.split(" ")[playerWord];
+    const assignedWord = puzzle.split(" ")[playerWord];
+    const toCheck = keyboardOutput;
+    const answer = puzzleKey.split(" ")[playerWord];
     let updatedWord;
     let wasGuessCorrect;
     // correct guess handling
@@ -100,11 +141,12 @@ export default function Game({route}) {
     // now we need to update puzzle. Since we are not modifying strings, we will 
     // split puzzle and copy the words into a new string. When copying over the word we guessed, 
     // we will instead copy over the word from the answer key.
-    let wordsToCopy = puzzle.split(" ");
+    const wordsToCopy = puzzle.split(" ");
     wordsToCopy[playerWord] = updatedWord;
-    let newPuzzle = wordsToCopy.join(" ");
+    const newPuzzle = wordsToCopy.join(" ");
     // update game state to return and set everything we need
-    let stateToReturn = {
+    // This object is for when we integrate the backend -- it is unused for now.
+    const stateToReturn = {
         oldPuzzle: puzzle,
         newPuzzle: newPuzzle,
         lastSubmitTime: Date.now,
@@ -114,6 +156,7 @@ export default function Game({route}) {
     
     setPuzzle(newPuzzle);
     setKeyboardOutput("");
+    
   }
 
   return (
