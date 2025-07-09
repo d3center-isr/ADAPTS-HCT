@@ -40,7 +40,6 @@ export default function CalendarTestScreen({navigation}) {
             <View style={{flex: 0.1}}/>
             <View style={{ flex: 1, justifyContent: 'center', backgroundColor: '#fff'}}>
                 <Text>Calendar Test Screen</Text>
-                <View style={{flex: 0.5}}/>
                 <CalendarContainer 
                     month={displayMonth} 
                     year={displayYear} 
