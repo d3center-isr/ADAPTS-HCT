@@ -78,7 +78,7 @@ export default function Word({wordData, wordState, input}: WordProps) {
                     userLetter = <Letter char={i < input.length ? input[i]: " "} key={i} state={userLetterState}/>;
                 }
                 
-                let hintLetter = <Letter char={wordData[i] != "*" ? wordData[i] : "?"} key={i+0.5} state={LetterState.Hint}/>
+                const hintLetter = <Letter char={wordData[i] != "*" ? wordData[i] : "?"} key={i+0.5} state={LetterState.Hint}/>
 
                 content[i] = <View style={{flexDirection:"column"}} key={i}>
                     {hintLetter}

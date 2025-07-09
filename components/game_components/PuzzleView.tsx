@@ -22,13 +22,13 @@ interface PuzzleViewProps {
  */
 export default function PuzzleView({puzzle, input, playerWord, otherWord}: PuzzleViewProps) {
 
-    let words: string[] = puzzle.split(" ");
+    const words: string[] = puzzle.split(" ");
 
     let content: ReactNode[] = Array(words.length);
     // manually mapping each word from the puzzle (with blanks) to a Word Component
     // we could do a map function here, but it just couldn't work for some reason.
     for(let i = 0; i < words.length; i++) {
-        let wordData: string = words[i];
+        const wordData: string = words[i];
         let wordState: number = WordState.Unsolved; // TODO: Make WordState an actual type?
         if(isSolved(words[i])) wordState = WordState.Solved;
         else if(i===playerWord) {

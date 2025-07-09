@@ -4,6 +4,7 @@ import { StyleSheet } from "react-native-web";
 import MultipleChoiceWidget from "../MultipleChoiceWidget";
 import { MultipleChoiceButtonData } from "../MultipleChoiceWidget";
 import GenericPopup from "../GenericPopup";
+import CountdownTimer from "../CountdownTimer";
 
 type GameState = {
   name: string,
@@ -68,6 +69,11 @@ export default function TitleScreen({navigation}) {
         <Pressable style={styles.navigationButton} onPress={()=>setShowTestPopup(true)}>
           <Text style={styles.navigationText}>Debug: Press to show Med Log Popup</Text>
         </Pressable>
+        <CountdownTimer countdownTarget={new Date(2025, 6, 3)} countdownReference={new Date(2024, 6, 2)}/>
+        <CountdownTimer countdownTarget={new Date(2024, 6, 3)} countdownReference={new Date(2025, 6, 2)}/>
+        <CountdownTimer countdownTarget={new Date(2025, 8, 2)} showTarget={true}/>
+        <CountdownTimer countdownTarget={new Date(2026, 7, 31)}/>
+
         <Pressable style={styles.navigationButton} onPress={()=> navigation.navigate('CalendarDemo')}>
           <Text style={styles.navigationText}>Navigate to Calendar Test Screen</Text>
         </Pressable>
