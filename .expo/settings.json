@@ -1,0 +1,5 @@
+{
+  // this field CANNOT contain an underscore -- if it does, then any android Custom Dev Client
+  // will be unable to load the app.
+  "urlRandomness": "GFM-DrI"
+}
