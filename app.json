@@ -13,14 +13,14 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.ofekashaniumich.ADAPTSHCT"
+      "bundleIdentifier": "edu.umich.d3c.adaptshct"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.ofekashaniumich.ADAPTSHCT"
+      "package": "edu.umich.d3c.adaptshct"
     },
     "web": {
       "favicon": "./assets/favicon.png"
