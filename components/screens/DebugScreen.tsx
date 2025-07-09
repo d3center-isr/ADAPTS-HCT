@@ -56,7 +56,7 @@ export default function TitleScreen({navigation}) {
  * Only for demonstration purposes.
  */
 function MultipleChoiceDemo() {
-  let buttonData: MultipleChoiceButtonData[] = [
+  const buttonData: MultipleChoiceButtonData[] = [
     {
       textToDisplay: "Option 1",
       color: "#eee",

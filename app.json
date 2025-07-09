@@ -35,7 +35,8 @@
         {
           "launchMode": "most-recent"
         }
-      ]
+      ],
+      "expo-asset"
     ]
   }
 }
