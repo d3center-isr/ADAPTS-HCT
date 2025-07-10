@@ -5,6 +5,8 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image } from 'react-native';
 // component imports
+// TODO: Find a way to simplify this -- this is a lot of seperate line imports
+import HomeScreen from './components/screens/HomeScreen';
 import GameScreen from './components/screens/GameScreen';
 import DebugScreen from './components/screens/DebugScreen';
 import PlaceholderScreen from './components/screens/PlaceholderScreen';
@@ -87,7 +89,7 @@ function MainTabNavigator() {
         tabBarInactiveTintColor: 'black',
       })}
     >
-      <Tab.Screen name={ROUTE_NAMES.Home} component={PlaceholderScreen} />
+      <Tab.Screen name={ROUTE_NAMES.Home} component={HomeScreen} />
       <Tab.Screen name={ROUTE_NAMES.Messages} component={PlaceholderScreen} />
       <Tab.Screen name={ROUTE_NAMES.Insights} component={PlaceholderScreen} />
       <Tab.Screen name={ROUTE_NAMES.Game} component={GameScreen} />
