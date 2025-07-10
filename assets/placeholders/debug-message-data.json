@@ -1,0 +1,50 @@
+[
+    {
+        "name": "debug_helloworld_text", 
+        "elementList": [
+            {
+                "type": "text",
+                "value": "Hello World! This is a Debug Text-only message!"
+            }
+        ],
+        "receivedAt": "Unknown"
+    },
+    {
+        "name": "debug_helloworld_text2", 
+        "elementList": [
+            {
+                "type": "text",
+                "value": "Hello World!"
+            },
+            {
+                "type": "text",
+                "value": "This message has 2 Text elements!"
+            }
+        ],
+        "receivedAt": "Unknown"
+    },
+    {
+        "name": "debug_penguinlink", 
+        "elementList": [
+            {
+                "type": "text",
+                "value": "LIVE PENGUIN WEBCAM LINKS!!!"
+            },
+            {
+                "type": "link",
+                "value": "https://tnaqua.org/live/penguins-rock/?gad_source=1&gad_campaignid=61745342&gclid=CjwKCAjwyb3DBhBlEiwAqZLe5Gp19iuVwIaZSh-ppauehz2rxidlkxl0Sdr4EVTVNFITejVPoQNPsRoCdQUQAvD_BwE"
+            }
+        ],
+        "receivedAt": "Unknown"
+    },
+    {
+        "name": "debug_penguinlink_no_text", 
+        "elementList": [
+            {
+                "type": "link",
+                "value": "https://tnaqua.org/live/penguins-rock/?gad_source=1&gad_campaignid=61745342&gclid=CjwKCAjwyb3DBhBlEiwAqZLe5Gp19iuVwIaZSh-ppauehz2rxidlkxl0Sdr4EVTVNFITejVPoQNPsRoCdQUQAvD_BwE"
+            }
+        ],
+        "receivedAt": "Unknown"
+    }
+]
