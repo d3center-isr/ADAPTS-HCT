@@ -5,20 +5,17 @@ import { StyleSheet } from 'react-native';
 // configs:
 const MAX_PREVIEW_CHARS = 40;
 
-/* --- Element – discriminated union -------------------------- */
+// Setting up Types for everything -- TODO: Move this to a seperate file in utils so that it can 
+// be imported by the message viewer screen, too.
 const ELEMENT_TYPES = ["text", "image", "link"];
 export type ElementType = typeof ELEMENT_TYPES[number];
 
-/* --- An ISO-8601 date encoded as a string ------------------- */
-export type ISODateString = string;                // e.g. "2023-12-31T23:59:59Z"
-
-/* --- Message ------------------------------------------------ */
 export interface Message {
   name: string;
   /** A list of elements to be displayed */
   elementList: Element[];
   /** ISO-8601 date string -- can be fed into the Date constructor for direct coversion*/
-  receivedAt: ISODateString | "Unknown";
+  receivedAt: string | "Unknown";
 }
 
 export interface Element {
@@ -36,6 +33,11 @@ export default function MessageListScreen() {
     );
 }
 
+/**
+ * Extracts the earliest instance of each type of Element in a message, and stores the index of each
+ * in a Map (which is returned). Index the map using an ELEMENT_TYPE value to get the index of the earliest 
+ * element of that type in a message. If no such Element type exists in the message, then the map contains -1.
+ */
 function getFirstInstanceOfTypes(message: Message): Map<string, number> {
     let toReturn: Map<string, number> = new Map();
     ELEMENT_TYPES.forEach((e) => {toReturn.set(e,-1)});
@@ -51,20 +53,29 @@ function getFirstInstanceOfTypes(message: Message): Map<string, number> {
     return toReturn;
 }
 
+/**
+ * Tile list item containing a "preview" of the given message
+ * @param message: {Message} - the message to preview
+ */
 function MessageListItem({message}: {message: Message}) {
     let content: string = "Empty Message";
+    // we need to determine what to put in the preview text.
+    // first, get a way to access the first instance of each element type in the message.
     let firstInstances = getFirstInstanceOfTypes(message);
-    console.log(firstInstances.get("text") + " " + message.elementList.length);
+    // now we can check to see if each element type exists, where it is in the elementsList, and set the
+    // preview accordingly. 
+    // Our process is as follows:
+    //  - We prioritize Text, then Image, then Link. if both Image and Link exist, we show both.
     if(firstInstances.get("text") != -1) {
         // extract the text content from the first Text element in the message, and display first 'n' characters.
         content = message.elementList[firstInstances.get("text")].value;
         if(content.length > MAX_PREVIEW_CHARS) content = content.substring(0, MAX_PREVIEW_CHARS) + "...";
     }
     else if(firstInstances.get("image") != -1) {
-        content = "Image";
-        if(firstInstances.get("link") != -1) content += " and hyperlink";
+        content = "contains an Image";
+        if(firstInstances.get("link") != -1) content += " and a hyperlink";
     }
-    else content = firstInstances.get("link") != -1 ? "hyperlink" : "empty message";
+    else content = firstInstances.get("link") != -1 ? "contains a hyperlink" : "empty message";
     
     if(message.elementList.length > 1) content += " (>1 elts)";
 
