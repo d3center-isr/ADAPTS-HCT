@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image } from 'react-native';
 // component imports
 import GameScreen from './components/screens/GameScreen';
+import MessageListScreen from './components/screens/MessageListScreen';
 import DebugScreen from './components/screens/DebugScreen';
 import PlaceholderScreen from './components/screens/PlaceholderScreen';
 import CalendarTestScreen from './components/screens/CalendarTestScreen';
@@ -88,7 +89,7 @@ function MainTabNavigator() {
       })}
     >
       <Tab.Screen name={ROUTE_NAMES.Home} component={PlaceholderScreen} />
-      <Tab.Screen name={ROUTE_NAMES.Messages} component={PlaceholderScreen} />
+      <Tab.Screen name={ROUTE_NAMES.Messages} component={MessageListScreen} />
       <Tab.Screen name={ROUTE_NAMES.Insights} component={PlaceholderScreen} />
       <Tab.Screen name={ROUTE_NAMES.Game} component={GameScreen} />
       <Tab.Screen name={ROUTE_NAMES.Debug} component={DebugScreen} />
