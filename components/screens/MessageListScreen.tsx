@@ -7,6 +7,7 @@ import { convertToSimpleTime } from '../../utils/TimeConverter';
 // configs:
 const MAX_PREVIEW_CHARS = 40;
 const USE_12_HOUR_TIME = true;
+const SORT_MESSAGES_BY_TIME = true;
 
 // Setting up Types for everything -- TODO: Move this to a seperate file in utils so that it can 
 // be imported by the message viewer screen, too.
@@ -30,6 +31,10 @@ const messageData = messagesJSON as Message[];
 
 export default function MessageListScreen() {
     let navigation = useNavigation();
+    if(SORT_MESSAGES_BY_TIME) messageData.sort(
+        // sort dates in DESCENDING order (b-a instead of a-b). 
+        (a,b) => {return new Date(b.receivedAt).getTime() - new Date(a.receivedAt).getTime()}
+    );
     return (
         <FlatList data={messageData} renderItem={({item}) => {
             return <MessageListItem message={item} navigation={navigation}/>
