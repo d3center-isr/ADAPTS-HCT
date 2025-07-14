@@ -7,7 +7,7 @@
                 "value": "Hello World! This is a Debug Text-only message!"
             }
         ],
-        "receivedAt": "Unknown"
+        "receivedAt": "2024-06-18T3:00:00.000Z"
     },
     {
         "name": "debug_helloworld_text2", 
@@ -21,7 +21,7 @@
                 "value": "This message has 2 Text elements!"
             }
         ],
-        "receivedAt": "Unknown"
+        "receivedAt": "2025-07-14T12:00:00.000Z"
     },
     {
         "name": "debug_imagegiftest", 
@@ -31,11 +31,15 @@
                 "value": "This message has an image!"
             },
             {
+                "type": "text",
+                "value": "... and is timestamped for 1ms after the Epochalypse!"
+            },
+            {
                 "type": "image",
                 "value": "https://miro.medium.com/v2/resize:fit:640/format:webp/1*WhnXk6x9d6AOA6Gxoud0Jw.jpeg"
             }
         ],
-        "receivedAt": "Unknown"
+        "receivedAt": "2038-01-19T03:14:07.001Z"
     },
     {
         "name": "debug_penguinlink", 
@@ -49,7 +53,7 @@
                 "value": "https://tnaqua.org/live/penguins-rock/?gad_source=1&gad_campaignid=61745342&gclid=CjwKCAjwyb3DBhBlEiwAqZLe5Gp19iuVwIaZSh-ppauehz2rxidlkxl0Sdr4EVTVNFITejVPoQNPsRoCdQUQAvD_BwE"
             }
         ],
-        "receivedAt": "Unknown"
+        "receivedAt": "1970-00-00T00:00:00.000Z"
     },
     {
         "name": "debug_giftest", 
@@ -60,9 +64,13 @@
             },
             {
                 "type": "text",
-                "value": "DUCK GIF!!!"
+                "value": "DUCK GIF FROM THE YEAR 0!!!"
+            },
+            {
+                "type": "text",
+                "value": "Yes, the year is supposed to be that weird."
             }
         ],
-        "receivedAt": "Unknown"
+        "receivedAt": "0001-00-00T00:00:00.000Z"
     }
 ]

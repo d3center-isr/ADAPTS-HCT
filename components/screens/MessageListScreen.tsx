@@ -2,9 +2,11 @@ import { useNavigation } from '@react-navigation/native';
 import messagesJSON from '../../assets/placeholders/debug-message-data.json'
 import { FlatList, Pressable, Text, View } from 'react-native'
 import { StyleSheet } from 'react-native';
+import { convertToSimpleTime } from '../../utils/TimeConverter';
 
 // configs:
 const MAX_PREVIEW_CHARS = 40;
+const USE_12_HOUR_TIME = true;
 
 // Setting up Types for everything -- TODO: Move this to a seperate file in utils so that it can 
 // be imported by the message viewer screen, too.
@@ -78,19 +80,20 @@ function MessageListItem({message, navigation}) {
         if(firstInstances.get("link") != -1) content += " and a hyperlink";
     }
     else content = firstInstances.get("link") != -1 ? "contains a hyperlink" : "empty message";
-    
+    // add an extra indicator if there is more than 1 elt.
     if(message.elementList.length > 1) content += " (>1 elts)";
 
+    // Time Handling -- we use the simplified ISO format as input (ie. 2025-7-14T12:00:00.000Z = 12pm UTC 7/14/2025)
+    const recievedDate = new Date(message.receivedAt);
+    const timeString = convertToSimpleTime(recievedDate, USE_12_HOUR_TIME);
     return (
         <View style={styles.messageTile}>
             <Pressable onPressOut={()=>{navigation.navigate('MessageView', {message: message})}}>
                 {/* Debug Information */}
                 <View style={{flexDirection: 'row'}}>
-                    <Text style={[styles.metaText, {flex: 0.5}]}>{message.name}</Text>
-                    <Text style={[styles.metaText, {flex: 0.5, textAlign: 'right'}]}>
-                        { "recieved on: " + 
-                            (message.receivedAt == "Unknown" ? "Unknown": new Date(message.receivedAt).toDateString())
-                        }
+                    <Text style={[styles.metaText, {flex: 0.4}]}>{message.name}</Text>
+                    <Text style={[styles.metaText, {flex: 0.6, textAlign: 'right'}]}>
+                        { "Recieved at " + timeString + " " + recievedDate.toDateString() }
                     </Text>
                 </View>
                 {/* Actual content */}
