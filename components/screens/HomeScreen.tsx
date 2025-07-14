@@ -5,7 +5,7 @@ import CountdownTimer from "../CountdownTimer";
 
 export default function HomeScreen() {
   
-  let currentDate = new Date();
+  const currentDate = new Date();
 
   return (
       <View style={{flexDirection:'column', flex: 1}}>
