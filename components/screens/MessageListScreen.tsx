@@ -1,5 +1,6 @@
+import { useNavigation } from '@react-navigation/native';
 import messagesJSON from '../../assets/placeholders/debug-message-data.json'
-import { FlatList, Text, View } from 'react-native'
+import { FlatList, Pressable, Text, View } from 'react-native'
 import { StyleSheet } from 'react-native';
 
 // configs:
@@ -26,9 +27,10 @@ export interface Element {
 const messageData = messagesJSON as Message[];
 
 export default function MessageListScreen() {
+    let navigation = useNavigation();
     return (
         <FlatList data={messageData} renderItem={({item}) => {
-            return <MessageListItem message={item}/>
+            return <MessageListItem message={item} navigation={navigation}/>
         }}/>
     );
 }
@@ -57,7 +59,7 @@ function getFirstInstanceOfTypes(message: Message): Map<string, number> {
  * Tile list item containing a "preview" of the given message
  * @param message: {Message} - the message to preview
  */
-function MessageListItem({message}: {message: Message}) {
+function MessageListItem({message, navigation}) {
     let content: string = "Empty Message";
     // we need to determine what to put in the preview text.
     // first, get a way to access the first instance of each element type in the message.
@@ -81,17 +83,19 @@ function MessageListItem({message}: {message: Message}) {
 
     return (
         <View style={styles.messageTile}>
-            {/* Debug Information */}
-            <View style={{flexDirection: 'row'}}>
-                <Text style={[styles.metaText, {flex: 0.5}]}>{message.name}</Text>
-                <Text style={[styles.metaText, {flex: 0.5, textAlign: 'right'}]}>
-                    { "recieved on: " + 
-                        (message.receivedAt == "Unknown" ? "Unknown": new Date(message.receivedAt).toDateString())
-                    }
-                </Text>
-            </View>
-            {/* Actual content */}
-            <Text>{content}</Text>
+            <Pressable onPressOut={()=>{navigation.navigate('MessageView', {message: message})}}>
+                {/* Debug Information */}
+                <View style={{flexDirection: 'row'}}>
+                    <Text style={[styles.metaText, {flex: 0.5}]}>{message.name}</Text>
+                    <Text style={[styles.metaText, {flex: 0.5, textAlign: 'right'}]}>
+                        { "recieved on: " + 
+                            (message.receivedAt == "Unknown" ? "Unknown": new Date(message.receivedAt).toDateString())
+                        }
+                    </Text>
+                </View>
+                {/* Actual content */}
+                <Text>{content}</Text>
+            </Pressable>
         </View>
     );
 }

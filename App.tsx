@@ -7,6 +7,7 @@ import { Image } from 'react-native';
 // component imports
 import GameScreen from './components/screens/GameScreen';
 import MessageListScreen from './components/screens/MessageListScreen';
+import MessageViewScreen from './components/screens/MessageViewScreen';
 import DebugScreen from './components/screens/DebugScreen';
 import PlaceholderScreen from './components/screens/PlaceholderScreen';
 import CalendarTestScreen from './components/screens/CalendarTestScreen';
@@ -60,6 +61,10 @@ function MainStackNavigator() {
       <Stack.Screen 
         name="MainTabs" 
         component={MainTabNavigator} 
+      />
+      <Stack.Screen 
+        name="MessageView" 
+        component={MessageViewScreen} 
       />
       <Stack.Screen 
         name="CalendarDemo" 
