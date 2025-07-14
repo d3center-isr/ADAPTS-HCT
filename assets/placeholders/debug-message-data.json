@@ -52,11 +52,15 @@
         "receivedAt": "Unknown"
     },
     {
-        "name": "debug_penguinlink_no_text", 
+        "name": "debug_giftest", 
         "elementList": [
             {
-                "type": "link",
-                "value": "https://tnaqua.org/live/penguins-rock/?gad_source=1&gad_campaignid=61745342&gclid=CjwKCAjwyb3DBhBlEiwAqZLe5Gp19iuVwIaZSh-ppauehz2rxidlkxl0Sdr4EVTVNFITejVPoQNPsRoCdQUQAvD_BwE"
+                "type": "image",
+                "value": "https://media.tenor.com/Pebex3xfFiwAAAAi/duck-spinning.gif"
+            },
+            {
+                "type": "text",
+                "value": "DUCK GIF!!!"
             }
         ],
         "receivedAt": "Unknown"
