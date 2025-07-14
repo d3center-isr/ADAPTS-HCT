@@ -28,11 +28,11 @@
         "elementList": [
             {
                 "type": "text",
-                "value": "This message has a GIF!"
+                "value": "This message has an image!"
             },
             {
                 "type": "image",
-                "value": "https://tenor.com/view/no-the-office-michael-scott-scream-gif-16929305"
+                "value": "https://miro.medium.com/v2/resize:fit:640/format:webp/1*WhnXk6x9d6AOA6Gxoud0Jw.jpeg"
             }
         ],
         "receivedAt": "Unknown"

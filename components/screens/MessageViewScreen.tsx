@@ -1,15 +1,10 @@
-import { Text, View, Image, StyleSheet, FlatList, Linking } from "react-native";
+import { Text, View, Image, StyleSheet, FlatList, Linking, Pressable} from "react-native";
 // TODO: replace image usage here with expo-image Image class (it has support for more types)
 //import { Image } from "expo-image";
 import { ReactNode } from "react";
 import { Message, Element, ElementType } from "./MessageListScreen";
-import { useNavigation } from "@react-navigation/native";
 
-export default function MessageViewScreen({navigation, route}) {
-    
-
-    console.log("passed in param length: " + route.params);
-    //const message = route.message;
+export default function MessageViewScreen({route}) {
     return (
         <View style={{margin: 10}}>
             <FlatList data={route.params.message.elementList} renderItem={({item}) => {
@@ -24,16 +19,20 @@ function MessageElement({elt}: {elt: Element}): ReactNode {
         case "text":
             return (<Text style={styles.messageText}>{elt.value}</Text>);
         case "image":
+            console.log("Image URL: " + elt.value)
             return (
                 <Image
+                    style={styles.image}
                     source={{uri: elt.value}}
                 />
             );
         case "link":
             return (
-                <Text style={[styles.messageText, styles.linkText]}>
-                    {elt.value}
-                </Text>
+                <Pressable onPress={()=>Linking.openURL(elt.value)}>
+                    <Text style={[styles.messageText, styles.linkText]}>
+                        {elt.value}
+                    </Text>
+                </Pressable>
             );
         default: 
             console.error("Unidentified ElementType: " + elt.type);
@@ -48,6 +47,10 @@ let styles = StyleSheet.create({
     linkText: {
         color: 'blue',
         textDecorationLine: 'underline',
+    },
+    image: {
+        width: 300,
+        height: 300,
     }
 
 });
