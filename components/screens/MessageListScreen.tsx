@@ -31,6 +31,7 @@ export interface Element {
     value: string,
 }
 
+// debug tool -- takes in the debug messages JSON and converts them to the Message format
 const messageData = messagesJSON as Message[];
 
 export default function MessageListScreen() {
