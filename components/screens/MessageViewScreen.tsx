@@ -9,7 +9,7 @@ export default function MessageViewScreen({navigation, route}) {
     console.log("passed in param length: " + route.params);
     //const message = route.message;
     return (
-        <View>
+        <View style={{margin: 10}}>
             <FlatList data={route.params.message.elementList} renderItem={({item}) => {
                 return (<MessageElement elt={item}/>);
             }}/>
