@@ -22,6 +22,10 @@ export interface Message {
   receivedAt: string | "Unknown";
 }
 
+/**
+ * A basic component of a Message used by the Messages Interface. contains a "value" and a type label which 
+ * allows the Viewer to correctly process it.
+ */
 export interface Element {
     type: ElementType,
     value: string,
@@ -30,7 +34,7 @@ export interface Element {
 const messageData = messagesJSON as Message[];
 
 export default function MessageListScreen() {
-    let navigation = useNavigation();
+    const navigation = useNavigation();
     if(SORT_MESSAGES_BY_TIME) messageData.sort(
         // sort dates in DESCENDING order (b-a instead of a-b). 
         (a,b) => {return new Date(b.receivedAt).getTime() - new Date(a.receivedAt).getTime()}
@@ -70,7 +74,7 @@ function MessageListItem({message, navigation}) {
     let content: string = "Empty Message";
     // we need to determine what to put in the preview text.
     // first, get a way to access the first instance of each element type in the message.
-    let firstInstances = getFirstInstanceOfTypes(message);
+    const firstInstances = getFirstInstanceOfTypes(message);
     // now we can check to see if each element type exists, where it is in the elementsList, and set the
     // preview accordingly. 
     // Our process is as follows:

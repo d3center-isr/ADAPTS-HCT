@@ -24,19 +24,19 @@
         "receivedAt": "2025-07-14T12:00:00.000Z"
     },
     {
-        "name": "debug_imagegiftest", 
+        "name": "debug_imagetest", 
         "elementList": [
             {
                 "type": "text",
                 "value": "This message has an image!"
             },
             {
-                "type": "text",
-                "value": "... and is timestamped for 1ms after the Epochalypse!"
-            },
-            {
                 "type": "image",
                 "value": "https://miro.medium.com/v2/resize:fit:640/format:webp/1*WhnXk6x9d6AOA6Gxoud0Jw.jpeg"
+            },
+            {
+                "type": "text",
+                "value": "... and is timestamped for 1ms after the Epochalypse!"
             }
         ],
         "receivedAt": "2038-01-19T03:14:07.001Z"
