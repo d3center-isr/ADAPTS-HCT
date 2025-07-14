@@ -24,6 +24,20 @@
         "receivedAt": "Unknown"
     },
     {
+        "name": "debug_imagegiftest", 
+        "elementList": [
+            {
+                "type": "text",
+                "value": "This message has a GIF!"
+            },
+            {
+                "type": "image",
+                "value": "https://tenor.com/view/no-the-office-michael-scott-scream-gif-16929305"
+            }
+        ],
+        "receivedAt": "Unknown"
+    },
+    {
         "name": "debug_penguinlink", 
         "elementList": [
             {

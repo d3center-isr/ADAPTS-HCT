@@ -1,4 +1,6 @@
-import { Text, Image, View, StyleSheet, FlatList, Linking } from "react-native";
+import { Text, View, Image, StyleSheet, FlatList, Linking } from "react-native";
+// TODO: replace image usage here with expo-image Image class (it has support for more types)
+//import { Image } from "expo-image";
 import { ReactNode } from "react";
 import { Message, Element, ElementType } from "./MessageListScreen";
 import { useNavigation } from "@react-navigation/native";
@@ -24,9 +26,7 @@ function MessageElement({elt}: {elt: Element}): ReactNode {
         case "image":
             return (
                 <Image
-                    source={{
-                        uri: elt.value
-                    }}
+                    source={{uri: elt.value}}
                 />
             );
         case "link":
