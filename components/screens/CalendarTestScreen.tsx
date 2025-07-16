@@ -36,29 +36,25 @@ export default function CalendarTestScreen({navigation}) {
     
 
     return (
-        <View style={{ flex: 1, flexDirection: 'row'}}>
-            <View style={{flex: 0.1}}/>
-            <View style={{ flex: 1, justifyContent: 'center', backgroundColor: '#fff'}}>
-                <Text>Calendar Test Screen</Text>
-                <CalendarContainer 
-                    month={displayMonth} 
-                    year={displayYear} 
-                    renderDay={(day, month, year) => (
-                        <View style={{borderWidth: 1, borderColor: '#ccc', borderRadius: 0 }}>
-                            <Text>{day}</Text>
-                            {/* Below is a demonstration of content that you can put inside of a cell.
-                                This content can be based on the date the cell holds.
-                              * In this case we create a test object that can show one of 3 states, then create an array
-                                containing data which we use to determine which state to use. Which data point is used is dependent
-                              * on the fed in day variable.
-                            */}
-                            <CalendarCell state = {testData[day-1][0]}/>
-                            <CalendarCell state = {testData[day-1][1]}/>
-                        </View>
-                    )}
-                /> 
-                <View style={{flex: 0.1}}/>
-            </View>
+        <View style={{ flex: 1, flexDirection: 'column'}}>
+            <Text>Calendar Test Screen</Text>
+            <CalendarContainer 
+                month={displayMonth} 
+                year={displayYear} 
+                renderDay={(day, month, year) => (
+                    <View style={{borderWidth: 1, borderColor: '#ccc', borderRadius: 0 }}>
+                        <Text>{day}</Text>
+                        {/* Below is a demonstration of content that you can put inside of a cell.
+                            This content can be based on the date the cell holds.
+                            * In this case we create a test object that can show one of 3 states, then create an array
+                            containing data which we use to determine which state to use. Which data point is used is dependent
+                            * on the fed in day variable.
+                        */}
+                        <CalendarCell state = {testData[day-1][0]}/>
+                        <CalendarCell state = {testData[day-1][1]}/>
+                    </View>
+                )}
+            /> 
             <View style={{flex: 0.1}}/>
         </View>
     );
