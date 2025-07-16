@@ -4,7 +4,7 @@
 node_modules/
 
 # Expo
-# .expo/ -- this is removed in order to fix in issue in which urlRandomness in .expo/settings.json
+.expo/
 # would contain an underscore, causing the custom dev client to get an android internal error
 dist/
 web-build/
