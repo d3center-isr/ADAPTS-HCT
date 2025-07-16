@@ -19,7 +19,6 @@ function MessageElement({elt}: {elt: Element}): ReactNode {
         case "text":
             return (<Text style={styles.messageText}>{elt.value}</Text>);
         case "image":
-            console.log("Image URL: " + elt.value)
             return (
                 <Image
                     style={styles.image}
@@ -40,7 +39,7 @@ function MessageElement({elt}: {elt: Element}): ReactNode {
     }
 }
 
-let styles = StyleSheet.create({
+const styles = StyleSheet.create({
     messageText: {
         fontSize: 14
     },
