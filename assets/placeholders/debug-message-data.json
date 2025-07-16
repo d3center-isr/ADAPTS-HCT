@@ -53,7 +53,7 @@
                 "value": "https://tnaqua.org/live/penguins-rock/?gad_source=1&gad_campaignid=61745342&gclid=CjwKCAjwyb3DBhBlEiwAqZLe5Gp19iuVwIaZSh-ppauehz2rxidlkxl0Sdr4EVTVNFITejVPoQNPsRoCdQUQAvD_BwE"
             }
         ],
-        "receivedAt": "1970-00-00T00:00:00.000Z"
+        "receivedAt": "1970-01-01T00:01:02.000Z"
     },
     {
         "name": "debug_giftest", 
@@ -87,6 +87,6 @@
                 "value": "Yes, the year is supposed to be that weird."
             }
         ],
-        "receivedAt": "0001-00-00T00:00:00.000Z"
+        "receivedAt": "0001-01-01T00:00:00.000Z"
     }
 ]

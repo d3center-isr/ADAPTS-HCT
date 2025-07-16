@@ -2,7 +2,7 @@ import { Text, View, StyleSheet, FlatList, Linking, Pressable} from "react-nativ
 // TODO: replace image usage here with expo-image Image class (it has support for more types)
 import { Image } from "expo-image";
 import { ReactNode } from "react";
-import { Message, Element, ElementType } from "./MessageListScreen";
+import { Message, Element, ElementType, ELEMENT_TYPES } from "../../types/message.type";
 
 export default function MessageViewScreen({route}) {
     return (
@@ -13,7 +13,7 @@ export default function MessageViewScreen({route}) {
         </View>
     );
 }
-
+    
 function MessageElement({elt}: {elt: Element}): ReactNode {
     switch(elt.type) {
         case "text":

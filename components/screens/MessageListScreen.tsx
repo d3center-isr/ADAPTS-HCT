@@ -2,34 +2,13 @@ import { useNavigation } from '@react-navigation/native';
 import messagesJSON from '../../assets/placeholders/debug-message-data.json'
 import { FlatList, Pressable, Text, View } from 'react-native'
 import { StyleSheet } from 'react-native';
-import { convertToSimpleTime } from '../../utils/TimeConverter';
-
+import { Message, Element, ElementType, ELEMENT_TYPES } from '../../types/message.type';
+import moment from 'moment';
 // configs:
 const MAX_PREVIEW_CHARS = 40;
 const USE_12_HOUR_TIME = true;
 const SORT_MESSAGES_BY_TIME = true;
 
-// Setting up Types for everything -- TODO: Move this to a seperate file in utils so that it can 
-// be imported by the message viewer screen, too.
-const ELEMENT_TYPES = ["text", "image", "link"];
-export type ElementType = typeof ELEMENT_TYPES[number];
-
-export interface Message {
-  name: string;
-  /** A list of elements to be displayed */
-  elementList: Element[];
-  /** ISO-8601 date string -- can be fed into the Date constructor for direct coversion*/
-  receivedAt: string | "Unknown";
-}
-
-/**
- * A basic component of a Message used by the Messages Interface. contains a "value" and a type label which 
- * allows the Viewer to correctly process it.
- */
-export interface Element {
-    type: ElementType,
-    value: string,
-}
 
 // debug tool -- takes in the debug messages JSON and converts them to the Message format
 const messageData = messagesJSON as Message[];
@@ -93,9 +72,6 @@ function MessageListItem({message, navigation}) {
     // add an extra indicator if there is more than 1 elt.
     if(message.elementList.length > 1) content += " (>1 elts)";
 
-    // Time Handling -- we use the simplified ISO format as input (ie. 2025-7-14T12:00:00.000Z = 12pm UTC 7/14/2025)
-    const recievedDate = new Date(message.receivedAt);
-    const timeString = convertToSimpleTime(recievedDate, USE_12_HOUR_TIME);
     return (
         <View style={styles.messageTile}>
             <Pressable onPressOut={()=>{navigation.navigate('MessageView', {message: message})}}>
@@ -103,7 +79,7 @@ function MessageListItem({message, navigation}) {
                 <View style={{flexDirection: 'row'}}>
                     <Text style={[styles.metaText, {flex: 0.4}]}>{message.name}</Text>
                     <Text style={[styles.metaText, {flex: 0.6, textAlign: 'right'}]}>
-                        { "Recieved at " + timeString + " " + recievedDate.toDateString() }
+                        { "Recieved at " + moment(message.receivedAt).format('hh:mma, MMM DD')}
                     </Text>
                 </View>
                 {/* Actual content */}
