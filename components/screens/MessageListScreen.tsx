@@ -62,15 +62,15 @@ function MessageListItem({message, navigation}) {
     if(firstInstances.get("text") != -1) {
         // extract the text content from the first Text element in the message, and display first 'n' characters.
         content = message.elementList[firstInstances.get("text")].value;
-        if(content.length > MAX_PREVIEW_CHARS) content = content.substring(0, MAX_PREVIEW_CHARS) + "...";
+        if(content.length > MAX_PREVIEW_CHARS || message.elementList.length > 1) {
+            content = content.substring(0, MAX_PREVIEW_CHARS) + "...";
+        }
     }
     else if(firstInstances.get("image") != -1) {
         content = "contains an Image";
         if(firstInstances.get("link") != -1) content += " and a hyperlink";
     }
     else content = firstInstances.get("link") != -1 ? "contains a hyperlink" : "empty message";
-    // add an extra indicator if there is more than 1 elt.
-    if(message.elementList.length > 1) content += " (>1 elts)";
 
     return (
         <View style={styles.messageTile}>
