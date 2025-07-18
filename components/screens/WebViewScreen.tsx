@@ -13,6 +13,12 @@ type WebviewScreenProps = {
     };
 };
 
+/** 
+ * A Viewer for web content. Contains a react native web viewer, as well as navigation buttons in a footer.
+ * Can also capture "back" gestures as needed to navigate.
+ * ( note that the user may deviate from this page by clicking on links within the url's content)
+ * @param url {string}: the starting URL to display content from. 
+ */
 const WebviewScreen: React.FC<WebviewScreenProps> = ({ navigation, route }) => {
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -108,14 +114,6 @@ function WebNavigationFooter({webNavigationRef, canGoForward, canGoBack}:
             {refreshButton}
             {forwardButton}
         </View>
-    );
-}
-
-export function WebviewHeaderBackButton({navigation}): ReactNode {
-    return (
-        <Pressable style={styles.navigationButton} onPress={()=> navigation.goBack()}>
-            <Text style={styles.navigationText}>Go Back</Text>
-        </Pressable>
     );
 }
 
