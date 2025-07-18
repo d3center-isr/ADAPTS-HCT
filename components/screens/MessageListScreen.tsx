@@ -3,7 +3,9 @@ import messagesJSON from '../../assets/placeholders/debug-message-data.json'
 import { FlatList, Pressable, Text, View } from 'react-native'
 import { StyleSheet } from 'react-native';
 import { Message, Element, ElementType, ELEMENT_TYPES } from '../../types/message.type';
-import moment from 'moment';
+
+const { DateTime } = require("luxon");
+
 // configs:
 const MAX_PREVIEW_CHARS = 40;
 const USE_12_HOUR_TIME = true;
@@ -79,7 +81,13 @@ function MessageListItem({message, navigation}) {
                 <View style={{flexDirection: 'row'}}>
                     <Text style={[styles.metaText, {flex: 0.4}]}>{message.name}</Text>
                     <Text style={[styles.metaText, {flex: 0.6, textAlign: 'right'}]}>
-                        { "Recieved at " + moment(message.receivedAt).format('hh:mma, MMM DD')}
+                        { "Recieved on " + DateTime.fromJSDate(new Date(message.receivedAt)).toLocaleString({
+                            year: 'numeric',
+                            month: 'short',
+                            day: 'numeric',
+                            hour: 'numeric',
+                            minute: '2-digit',
+                        })}
                     </Text>
                 </View>
                 {/* Actual content */}
