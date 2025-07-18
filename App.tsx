@@ -74,7 +74,7 @@ function MainStackNavigator() {
         component={CalendarTestScreen} 
       />
       <Stack.Screen 
-        name="Webview" 
+        name="WebView" 
         component={WebviewScreen} 
       />
     </Stack.Navigator>
