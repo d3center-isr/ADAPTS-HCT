@@ -8,8 +8,10 @@ import GenericPopup from "../GenericPopup";
 import CountdownTimer from "../CountdownTimer";
 
 
+const DEBUG_WEBVIEW_URL = "https://tnaqua.org/live/penguins-rock/";
+
 // TODO: Add typedoc info on the type of "navigation" -- seriously what is it?
-export default function TitleScreen({navigation}) {
+export default function DebugScreen({navigation}) {
   const [showTestPopup, setShowTestPopup] = useState(false);
 
   return (
@@ -28,6 +30,12 @@ export default function TitleScreen({navigation}) {
           <Pressable style={styles.navigationButton} onPress={()=>setShowTestPopup(true)}>
             <Text style={styles.navigationText}>Debug: Press to show Med Log Popup</Text>
           </Pressable>
+          <GenericPopup visible={showTestPopup} horizontalMargins={0.04}>
+            <Text>Medication Reporting Widget</Text>
+            <Pressable style={styles.navigationButton} onPress={()=>setShowTestPopup(false)}>
+              <Text style={styles.navigationText}>Close Widget</Text>
+            </Pressable>
+          </GenericPopup>
           {/* Calendar Testing */}
           <Pressable style={styles.navigationButton} onPress={()=> navigation.navigate('CalendarDemo')}>
             <Text style={styles.navigationText}>Navigate to Calendar Test Screen</Text>
@@ -37,13 +45,11 @@ export default function TitleScreen({navigation}) {
           <CountdownTimer countdownTarget={new Date(2024, 6, 3)} countdownReference={new Date(2025, 6, 2)}/>
           <CountdownTimer countdownTarget={new Date(2025, 8, 2)} showTarget={true}/>
           <CountdownTimer countdownTarget={new Date(2026, 7, 31)}/>
-
-          <GenericPopup visible={showTestPopup} horizontalMargins={0.04}>
-            <Text>Medication Reporting Widget</Text>
-            <Pressable style={styles.navigationButton} onPress={()=>setShowTestPopup(false)}>
-              <Text style={styles.navigationText}>Close Widget</Text>
-            </Pressable>
-          </GenericPopup>
+          {/* Webview Screen Testing */}
+          <Pressable style={styles.navigationButton} onPress={()=> navigation.navigate("Webview", {url: DEBUG_WEBVIEW_URL})}>
+            <Text style={styles.navigationText}>Test Webview Screen</Text>
+          </Pressable>
+          
         </View>
       </View>
   );

@@ -13,6 +13,7 @@ import MessageViewScreen from './components/screens/MessageViewScreen';
 import DebugScreen from './components/screens/DebugScreen';
 import PlaceholderScreen from './components/screens/PlaceholderScreen';
 import CalendarTestScreen from './components/screens/CalendarTestScreen';
+import WebviewScreen from './components/screens/WebviewScreen';
 
 
 const Tab = createBottomTabNavigator();
@@ -71,6 +72,10 @@ function MainStackNavigator() {
       <Stack.Screen 
         name="CalendarDemo" 
         component={CalendarTestScreen} 
+      />
+      <Stack.Screen 
+        name="Webview" 
+        component={WebviewScreen} 
       />
     </Stack.Navigator>
   );
