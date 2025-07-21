@@ -1,0 +1,92 @@
+[
+    {
+        "name": "debug_helloworld_text", 
+        "elementList": [
+            {
+                "type": "text",
+                "value": "Hello World! This is a Debug Text-only message!"
+            }
+        ],
+        "receivedAt": "2024-06-18T3:00:00.000Z"
+    },
+    {
+        "name": "debug_helloworld_text2", 
+        "elementList": [
+            {
+                "type": "text",
+                "value": "Hello World!"
+            },
+            {
+                "type": "text",
+                "value": "This message has 2 Text elements!"
+            }
+        ],
+        "receivedAt": "2025-07-14T12:00:00.000Z"
+    },
+    {
+        "name": "debug_imagetest", 
+        "elementList": [
+            {
+                "type": "text",
+                "value": "This message has an image!"
+            },
+            {
+                "type": "image",
+                "value": "https://miro.medium.com/v2/resize:fit:640/format:webp/1*WhnXk6x9d6AOA6Gxoud0Jw.jpeg"
+            },
+            {
+                "type": "text",
+                "value": "... and is timestamped for 1ms after the Epochalypse!"
+            }
+        ],
+        "receivedAt": "2038-01-19T03:14:07.001Z"
+    },
+    {
+        "name": "debug_penguinlink", 
+        "elementList": [
+            {
+                "type": "text",
+                "value": "LIVE PENGUIN WEBCAM LINKS!!!"
+            },
+            {
+                "type": "link",
+                "value": "https://tnaqua.org/live/penguins-rock/?gad_source=1&gad_campaignid=61745342&gclid=CjwKCAjwyb3DBhBlEiwAqZLe5Gp19iuVwIaZSh-ppauehz2rxidlkxl0Sdr4EVTVNFITejVPoQNPsRoCdQUQAvD_BwE"
+            }
+        ],
+        "receivedAt": "1970-01-01T00:01:02.000Z"
+    },
+    {
+        "name": "debug_giftest", 
+        "elementList": [
+            {
+                "type": "image",
+                "value": "https://media.tenor.com/Pebex3xfFiwAAAAi/duck-spinning.gif"
+            },
+            {
+                "type": "image",
+                "value": "https://media.tenor.com/Pebex3xfFiwAAAAi/duck-spinning.gif"
+            },
+            {
+                "type": "image",
+                "value": "https://media.tenor.com/Pebex3xfFiwAAAAi/duck-spinning.gif"
+            },
+            {
+                "type": "image",
+                "value": "https://media.tenor.com/Pebex3xfFiwAAAAi/duck-spinning.gif"
+            },
+            {
+                "type": "image",
+                "value": "https://media.tenor.com/Pebex3xfFiwAAAAi/duck-spinning.gif"
+            },
+            {
+                "type": "text",
+                "value": "DUCK GIF FROM THE YEAR 0!!!"
+            },
+            {
+                "type": "text",
+                "value": "Yes, the year is supposed to be that weird."
+            }
+        ],
+        "receivedAt": "0001-01-01T00:00:00.000Z"
+    }
+]

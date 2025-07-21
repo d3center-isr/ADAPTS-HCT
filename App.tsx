@@ -8,6 +8,8 @@ import { Image } from 'react-native';
 // TODO: Find a way to simplify this -- this is a lot of seperate line imports
 import HomeScreen from './components/screens/HomeScreen';
 import GameScreen from './components/screens/GameScreen';
+import MessageListScreen from './components/screens/MessageListScreen';
+import MessageViewScreen from './components/screens/MessageViewScreen';
 import DebugScreen from './components/screens/DebugScreen';
 import PlaceholderScreen from './components/screens/PlaceholderScreen';
 import CalendarTestScreen from './components/screens/CalendarTestScreen';
@@ -63,6 +65,10 @@ function MainStackNavigator() {
         component={MainTabNavigator} 
       />
       <Stack.Screen 
+        name="MessageView" 
+        component={MessageViewScreen} 
+      />
+      <Stack.Screen 
         name="CalendarDemo" 
         component={CalendarTestScreen} 
       />
@@ -90,7 +96,7 @@ function MainTabNavigator() {
       })}
     >
       <Tab.Screen name={ROUTE_NAMES.Home} component={HomeScreen} />
-      <Tab.Screen name={ROUTE_NAMES.Messages} component={PlaceholderScreen} />
+      <Tab.Screen name={ROUTE_NAMES.Messages} component={MessageListScreen} />
       <Tab.Screen name={ROUTE_NAMES.Insights} component={PlaceholderScreen} />
       <Tab.Screen name={ROUTE_NAMES.Game} component={GameScreen} />
       <Tab.Screen name={ROUTE_NAMES.Debug} component={DebugScreen} />

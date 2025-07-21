@@ -14,7 +14,6 @@ const GameScreen = ({ navigation}) => {
     ]
 
     const state: GameState = gameStates[4]; // change the number here to pick which puzzle to use.
-    console.log("AAAA" + state.puzzle);
 
     return (
         <View style={styles.container}>

@@ -4,8 +4,8 @@
 node_modules/
 
 # Expo
-.expo/
-# would contain an underscore, causing the custom dev client to get an android internal error
+.expo
+docs/
 dist/
 web-build/
 android/
