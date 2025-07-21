@@ -3,6 +3,10 @@
 # dependencies
 node_modules/
 
+# Sensitive Information
+adapts-hct-android-firebase-adminsdk.json
+google-services.json
+
 # Expo
 .expo
 docs/
