@@ -24,7 +24,7 @@ const WebviewScreen: React.FC<WebviewScreenProps> = ({ navigation, route }) => {
         navigation.setOptions({
         headerLeft: () => (
             <Pressable onPress={() => navigation.goBack()} style={[styles.navigationButton, {marginRight: 16}]}>
-            <Text style={styles.navigationText}>Close Webview</Text>
+            <Text style={styles.navigationText}>Done</Text>
             </Pressable>
         ),
         });
