@@ -2,7 +2,7 @@ import { Text, View, StyleSheet, FlatList, Linking, Pressable} from "react-nativ
 // TODO: replace image usage here with expo-image Image class (it has support for more types)
 import { Image } from "expo-image";
 import { ReactNode } from "react";
-import { Message, Element, ElementType, ELEMENT_TYPES } from "../../types/message.type";
+import {Element} from "../../types/message.type";
 
 /**
  * A screen designed to show the contents of a message JSON. 

@@ -3,8 +3,7 @@ import messagesJSON from '../../assets/placeholders/debug-message-data.json'
 import { FlatList, Pressable, Text, View } from 'react-native'
 import { StyleSheet } from 'react-native';
 import { Message, Element, ElementType, ELEMENT_TYPES } from '../../types/message.type';
-
-const { DateTime } = require("luxon");
+import {DateTime} from 'luxon';
 
 // configs:
 const MAX_PREVIEW_CHARS = 40;
