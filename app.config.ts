@@ -21,7 +21,7 @@ module.exports = {
         backgroundColor: "#ffffff"
       },
       package: "edu.umich.d3c.adaptshct",
-      googleServicesFile: "./google-services.json"
+      googleServicesFile: process.env.GOOGLE_SERVICES_JSON,
     },
     web: {
       favicon: "./assets/favicon.png"
