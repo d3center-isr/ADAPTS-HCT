@@ -20,7 +20,7 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "edu.umich.d3c.adaptshct"
+      "package": "edu.umich.d3c.adaptshct",
       "googleServicesFile": "./google-services.json"
     },
     "web": {
