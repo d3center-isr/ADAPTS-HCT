@@ -15,12 +15,7 @@ export default function TitleScreen({navigation}) {
 
   return (
       <View style={{ flex: 1, alignItems: 'center'}}>
-        <View style={{flexDirection: 'row', margin:5}}>
-          {/* Header -- images and text in the middle */}
-          <Image style={{flex: 0.25, aspectRatio: 1}}source={require("../../assets/placeholders/debug-penguin-helmet.png")}/>
-          <Text style={{flex: 0.5}}>Welcome to the Testing zone! This is a Developer Menu meant for feature testing.</Text>
-          <Image style={{flex: 0.25, aspectRatio: 1, transform: [{ scaleX: -1 }]}}source={require("../../assets/placeholders/debug-penguin-helmet.png")}/>
-        </View>
+        <DebugHeader/>
         <View>
           {/* Multiple Choice Demo Component */}
           <MultipleChoiceDemo/>
@@ -41,6 +36,23 @@ export default function TitleScreen({navigation}) {
           </GenericPopup>
         </View>
       </View>
+  );
+}
+
+/**
+ * A fun little header for the debug screen containing images sandwiching a text element.
+ * This element has no use other than to be a fun thing on the debug screen, and nothing should depend on this component. 
+ * 
+ * It'll probably be removed at some point -- enjoy it while it lasts.
+ */
+function DebugHeader() {
+  return (
+    <View style={{flexDirection: 'row', margin:5}}>
+      {/* Header -- images and text in the middle */}
+      <Image style={{flex: 0.25, aspectRatio: 1}}source={require("../../assets/placeholders/debug-penguin-helmet.png")}/>
+      <Text style={{flex: 0.5}}>Welcome to the Testing zone! This is a Developer Menu meant for feature testing.</Text>
+      <Image style={{flex: 0.25, aspectRatio: 1, transform: [{ scaleX: -1 }]}}source={require("../../assets/placeholders/debug-penguin-helmet.png")}/>
+    </View>
   );
 }
 
