@@ -46,7 +46,9 @@ export default function TitleScreen({navigation}) {
 
           
           <Pressable style={styles.navigationButton} onPress={()=> {
-              sendPushNotification(notificationToken, "This is a notification!", "This is notification body text!")
+              sendPushNotification(notificationToken, "This is an in-app notification!", 
+                "You can test push notifications by going to https://expo.dev/notifications. Enter "
+                 + notificationToken + " as the push token, give it a title and body, and press send! You can also find the push token in the console log.")
             }}>
             <Text style={styles.navigationText}>Send Notification</Text>
           </Pressable>

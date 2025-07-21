@@ -135,7 +135,7 @@ export default function App() {
     });
 
     const responseListener = Notifications.addNotificationResponseReceivedListener(response => {
-      console.log(response);
+      console.log("This bundle's Expo Push Token is: " + response);
     });
 
     return () => {
