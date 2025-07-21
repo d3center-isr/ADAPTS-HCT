@@ -1,24 +1,28 @@
-import { useState, useEffect, useRef } from 'react';
+import { createContext } from 'react';
 import { Text, View, Button, Platform } from 'react-native';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
 
-Notifications.setNotificationHandler({
-  handleNotification: async () => ({
-    shouldPlaySound: true,
-    shouldSetBadge: true,
-    shouldShowBanner: true,
-    shouldShowList: true,
-  }),
-});
 
-async function sendPushNotification(expoPushToken: string) {
+export const NotificationTokenContext = createContext('');
+/**
+ * A debug function made to send a push notification.
+ * @param expoPushToken {string} The expo token of the device to push to. 
+ * @param title {string} The title text for the notification
+ * @param body {string} The text to display in notification
+ * 
+ * For android, you may use HTML codes like \<b\>, \<i\> to add extra formatting. 
+ * Also for android, you may use \<font color="#FF0000"\>\<font/\> tags to add COLOR to text!
+ * 
+ * (with this, we can make notifications just as colorful as those of the green owl...)
+ */
+export async function sendPushNotification(expoPushToken: string, title?: string, body?: string) {
   const message = {
     to: expoPushToken,
     sound: 'default',
-    title: 'Original Title',
-    body: 'And here is the body!',
+    title: title ?? 'Default Title',
+    body: body ?? '',
     data: { someData: 'goes here' },
   };
 
@@ -38,7 +42,12 @@ function handleRegistrationError(errorMessage: string) {
   throw new Error(errorMessage);
 }
 
-async function registerForPushNotificationsAsync() {
+/**  
+ * This function was provided by Expo as part of a minimal working example on notifications. 
+ * Checks for valid permissions, attempts to fetch the notification push token. 
+ * @returns Promise for notification push token (Promise<string>)
+*/
+export async function registerForPushNotificationsAsync(): Promise<string> {
   if (Platform.OS === 'android') {
     Notifications.setNotificationChannelAsync('default', {
       name: 'default',
@@ -49,6 +58,7 @@ async function registerForPushNotificationsAsync() {
   }
 
   if (Device.isDevice) {
+    // check to make sure that we have notification sending permissions
     const { status: existingStatus } = await Notifications.getPermissionsAsync();
     let finalStatus = existingStatus;
     if (existingStatus !== 'granted') {
@@ -59,11 +69,13 @@ async function registerForPushNotificationsAsync() {
       handleRegistrationError('Permission not granted to get push token for push notification!');
       return;
     }
+    // get project ID
     const projectId =
       Constants?.expoConfig?.extra?.eas?.projectId ?? Constants?.easConfig?.projectId;
     if (!projectId) {
       handleRegistrationError('Project ID not found');
     }
+    // attempt to get expo push token -- this is unique to both device and projectID.
     try {
       const pushTokenString = (
         await Notifications.getExpoPushTokenAsync({

@@ -1,16 +1,22 @@
-import { ReactNode, useState } from "react";
+import { ReactNode, useState, useContext } from "react";
 import { Pressable, Text, View, Image } from "react-native";
 import { StyleSheet } from "react-native-web";
+// imported functions
+import { sendPushNotification } from "../../utils/NotificationHandler";
 // imported components
 import MultipleChoiceWidget from "../MultipleChoiceWidget";
 import { MultipleChoiceButtonData } from "../MultipleChoiceWidget";
 import GenericPopup from "../GenericPopup";
 import CountdownTimer from "../CountdownTimer";
 
+// context
+import { NotificationTokenContext } from "../../utils/NotificationHandler";
 
 // TODO: Add typedoc info on the type of "navigation" -- seriously what is it?
 export default function TitleScreen({navigation}) {
   const [showTestPopup, setShowTestPopup] = useState(false);
+
+  const notificationToken: string = useContext(NotificationTokenContext);
 
   return (
       <View style={{ flex: 1, alignItems: 'center'}}>
@@ -37,6 +43,13 @@ export default function TitleScreen({navigation}) {
           <CountdownTimer countdownTarget={new Date(2024, 6, 3)} countdownReference={new Date(2025, 6, 2)}/>
           <CountdownTimer countdownTarget={new Date(2025, 8, 2)} showTarget={true}/>
           <CountdownTimer countdownTarget={new Date(2026, 7, 31)}/>
+
+          
+          <Pressable style={styles.navigationButton} onPress={()=> {
+              sendPushNotification(notificationToken, "This is a notification!", "This is notification body text!")
+            }}>
+            <Text style={styles.navigationText}>Send Notification</Text>
+          </Pressable>
 
           <GenericPopup visible={showTestPopup} horizontalMargins={0.04}>
             <Text>Medication Reporting Widget</Text>
