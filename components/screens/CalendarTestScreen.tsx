@@ -1,7 +1,7 @@
 import { View } from "react-native";
 import { useState } from "react";
 import { Text } from "react-native";
-import CalendarContainer from "../CalendarContainer";
+import CalendarContainer from "../common/CalendarContainer";
 
 /**
  * This is a test object that simply changes color to 1 of 3 values depending on which 
