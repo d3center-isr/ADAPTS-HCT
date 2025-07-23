@@ -1,3 +1,7 @@
+/**
+ * A common way to display a pop-up message in the app. If you want to make a pop-up, use this object.
+ */
+
 import { ReactNode } from "react";
 import { Pressable, View } from "react-native";
 import { Text } from "react-native";

@@ -1,3 +1,8 @@
+/**
+ * Renders all aspects of the Game users play.
+ * Handles Keyboard Input processing, guess handling, game state updates, as well as rendering game components.
+ */
+
 import { StyleSheet, View } from 'react-native';
 import { useState } from 'react';
 import { useCallback } from 'react';
@@ -43,7 +48,10 @@ export function NewGameState(newName: string, newPuzzle: string, newPuzzleKey: s
   };
 }
 
-// TODO: Figure out what types are used for React Navigation and use those to create an interface here.
+/**
+ * Renders all aspects of the Game users play.
+ * Handles Keyboard Input processing, guess handling, game state updates, as well as rendering game components.
+ */
 export default function Game({gameState}: {gameState: GameState}) {
   
   // constants for keyboard input.

@@ -1,3 +1,8 @@
+/**
+ * A screen used solely to test components, as well as connect to additional testing screens. 
+ * This screen should not be visible to the average user.
+ */
+
 import { ReactNode, useState, useContext } from "react";
 import { Pressable, Text, View, Image } from "react-native";
 import { StyleSheet } from "react-native-web";

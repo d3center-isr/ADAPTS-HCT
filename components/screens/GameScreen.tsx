@@ -1,3 +1,7 @@
+/**
+ * Screen containing a Game compoenent, as well as some logic on how to set the game's initial state. 
+ */
+
 import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import Game from '../game_components/Game'; // Adjust the import path if needed

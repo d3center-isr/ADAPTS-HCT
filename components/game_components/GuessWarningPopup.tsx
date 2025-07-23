@@ -1,3 +1,7 @@
+/**
+ * A popup designed to appear if the user's input to the Word Game does not match the hints they are given. 
+ */
+
 import { Pressable, View } from "react-native";
 import { Text } from "react-native";
 import { StyleSheet } from "react-native";
@@ -15,6 +19,9 @@ interface GuessWarningPopupProps {
     input: string,
 }
 
+/**
+ * A popup designed to appear if the user's input to the Word Game does not match the hints they are given. 
+ */
 export default function GuessWarningPopup({visible, hintData, onYesPress, onNoPress, input}: GuessWarningPopupProps) {
     return (
         <GenericPopup visible = {visible} horizontalMargins={0.04}>

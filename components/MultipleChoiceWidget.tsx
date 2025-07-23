@@ -1,4 +1,9 @@
-import { Pressable, View, Text, StyleSheet, GestureResponderEvent, ActivityIndicatorBase } from "react-native";
+/**
+ * A common way to create multi-button toggles. Renders a series of buttons, handles logic for updating.
+ * Stores the ID of the currently active button (if there is one).
+ */
+
+import { Pressable, View, Text, StyleSheet, GestureResponderEvent } from "react-native";
 import { useState, ReactNode } from "react";
 
 /**

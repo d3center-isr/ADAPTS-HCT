@@ -1,5 +1,11 @@
+/**
+ * A Screen which displays the contents of a single Message object.
+ * Uses a FlatList which renders each Element of the message in a list entry. 
+ */
+
 import { Text, View, StyleSheet, FlatList, Linking, Pressable} from "react-native";
-// TODO: replace image usage here with expo-image Image class (it has support for more types)
+// Note that in this file we use expo-image instead of the react-native image.
+// This allows us to render GIFs.
 import { Image } from "expo-image";
 import { ReactNode } from "react";
 import {Element} from "../../types/message.type";
