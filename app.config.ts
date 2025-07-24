@@ -36,6 +36,12 @@ module.exports = {
         "expo-dev-client",
         {
           launchMode: "most-recent"
+        },
+        "expo-notifications",
+        {
+          icon: "./assets/notification-icon-android.png",
+          color: "#4dffea",
+          defaultChannel: "default"
         }
       ]
     ]
