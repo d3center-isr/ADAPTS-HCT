@@ -58,6 +58,12 @@ export default function TitleScreen({navigation}) {
             <Text style={styles.navigationText}>Send Notification</Text>
           </Pressable>
 
+          <Pressable style={styles.navigationButton} onPress={()=> {
+              sendPushNotification(notificationToken, "This is an Image Notification!","Me when coding:", "https://www.kaiyukan.com/assets/img/info/area/shop/img01-02.jpg")
+            }}>
+            <Text style={styles.navigationText}>Send Image Notification</Text>
+          </Pressable>
+
           <GenericPopup visible={showTestPopup} horizontalMargins={0.04}>
             <Text>Medication Reporting Widget</Text>
             <Pressable style={styles.navigationButton} onPress={()=>setShowTestPopup(false)}>

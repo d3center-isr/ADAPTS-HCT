@@ -17,12 +17,13 @@ export const NotificationTokenContext = createContext('');
  * 
  * (with this, we can make notifications just as colorful as those of the green owl...)
  */
-export async function sendPushNotification(expoPushToken: string, title?: string, body?: string) {
+export async function sendPushNotification(expoPushToken: string, title?: string, body?: string, imageURL?: string) {
   const message = {
     to: expoPushToken,
     sound: 'default',
     title: title ?? 'Default Title',
     body: body ?? '',
+    richContent: {image: imageURL ?? ""},
     data: { someData: 'goes here' },
   };
 
