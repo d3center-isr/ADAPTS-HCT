@@ -4,7 +4,7 @@
  */
 
 import { ReactNode, useState, useContext } from "react";
-import { Pressable, Text, View, Image } from "react-native";
+import { Pressable, Text, View, Image, Linking } from "react-native";
 import { StyleSheet } from "react-native-web";
 // imported functions
 import { sendPushNotification } from "../../utils/NotificationHandler";
@@ -61,6 +61,7 @@ export default function DebugScreen({navigation}) {
           </GenericPopup>
           {/* Webview Screen Testing */}
           <TextButton onPress={()=> navigation.navigate("WebView", {url: DEBUG_WEBVIEW_URL})} text="Test Webview Screen"/>
+          <TextButton onPress={() => Linking.openURL("adaptshct://")} text="Open Deep link to app entry"/>
         </View>
       </View>
   );
