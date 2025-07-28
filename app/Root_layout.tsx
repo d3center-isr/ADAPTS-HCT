@@ -7,19 +7,19 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image } from 'react-native';
 import * as Notifications from 'expo-notifications';
 // Function imports
-import { sendPushNotification, registerForPushNotificationsAsync } from './utils/NotificationHandler';
+import { sendPushNotification, registerForPushNotificationsAsync } from '../utils/NotificationHandler';
 // component imports
 // TODO: Find a way to simplify this -- this is a lot of seperate line imports
-import HomeScreen from './components/screens/HomeScreen';
-import GameScreen from './components/screens/GameScreen';
-import MessageListScreen from './components/screens/MessageListScreen';
-import MessageViewScreen from './components/screens/MessageViewScreen';
-import DebugScreen from './components/screens/DebugScreen';
-import PlaceholderScreen from './components/screens/PlaceholderScreen';
-import CalendarTestScreen from './components/screens/CalendarTestScreen';
-import WebviewScreen from './components/screens/WebViewScreen';
+import HomeScreen from '../components/screens/HomeScreen';
+import GameScreen from '../components/screens/GameScreen';
+import MessageListScreen from '../components/screens/MessageListScreen';
+import MessageViewScreen from '../components/screens/MessageViewScreen';
+import DebugScreen from '../components/screens/DebugScreen';
+import PlaceholderScreen from '../components/screens/PlaceholderScreen';
+import CalendarTestScreen from '../components/screens/CalendarTestScreen';
+import WebviewScreen from '../components/screens/WebViewScreen';
 
-import { NotificationTokenContext } from './utils/NotificationHandler';
+import { NotificationTokenContext } from '../utils/NotificationHandler';
 
 Notifications.setNotificationHandler({
   handleNotification: async () => ({

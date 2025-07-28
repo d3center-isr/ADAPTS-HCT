@@ -15,10 +15,3 @@ export default function PlaceholderScreen() {
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center', 
-    justifyContent: 'center'
-  }
-});
