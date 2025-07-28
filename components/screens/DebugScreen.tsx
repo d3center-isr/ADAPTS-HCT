@@ -33,9 +33,7 @@ export default function DebugScreen({navigation}) {
           <CountdownTimer countdownTarget={new Date(2025, 8, 2)} showTarget={true}/>
           <CountdownTimer countdownTarget={new Date(2026, 7, 31)}/>
           {/* Webview Screen Testing */}
-          <Pressable style={styles.navigationButton} onPress={()=> navigation.navigate("WebView", {url: DEBUG_WEBVIEW_URL})}>
-            <Text style={styles.navigationText}>Test Webview Screen</Text>
-          </Pressable>
+          <TextButton onPress={()=> navigation.navigate("WebView", {url: DEBUG_WEBVIEW_URL})} text="Test Webview Screen"/>
         </View>
       </View>
   );
