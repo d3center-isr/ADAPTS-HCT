@@ -45,6 +45,9 @@ module.exports = {
           color: "#4dffea",
           defaultChannel: "default"
         }
+      ],
+      [
+        "expo-router"
       ]
     ]
   }
