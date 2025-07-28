@@ -1,3 +1,7 @@
+/**
+ * Keyboard component used in the Game. Reads input from KeyButton inputs and feeds into a provided output variable. 
+ */
+
 import {View} from 'react-native';
 import { StyleSheet } from 'react-native';
 import KeyButton from './KeyButton';
@@ -9,15 +13,16 @@ interface KeyboardProps {
     onSubmit: () => void
 }
 
+
 // Parameters:
 // - output is a string-type React State. It is the keyboard's current output.
 // DO NOT change output outside of this function.
 // - setOutput: output setter function
 // - maxOutputLength. Not modified by this component. Maximum size for the keyboard output.
 /**
- * 
+ * Keyboard component used in the Game. Reads input from KeyButton inputs and feeds into a provided output variable. 
  * @param {string} output - keyboard output (this is a state)
- * @param {CallableFunction} setOutput - output "setter" function
+ * @param {CallableFunction} setOutput - output state "setter" function
  * @param {string} maxOutputLength - Maximum length of the keyboard output.
  * @param {CallableFunction} onSubmit - function to call once the ENTER button is pressed.
  * @returns keyboard object composed of 3 keyboard rows.

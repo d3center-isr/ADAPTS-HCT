@@ -1,9 +1,13 @@
-import { ImageSourcePropType, StyleSheet, Text, View } from 'react-native';
+import { ImageSourcePropType} from 'react-native';
+import { useState, useEffect } from 'react';
 // React Navigation Imports
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Image } from 'react-native';
+import * as Notifications from 'expo-notifications';
+// Function imports
+import { sendPushNotification, registerForPushNotificationsAsync } from './utils/NotificationHandler';
 // component imports
 // TODO: Find a way to simplify this -- this is a lot of seperate line imports
 import HomeScreen from './components/screens/HomeScreen';
@@ -15,6 +19,16 @@ import PlaceholderScreen from './components/screens/PlaceholderScreen';
 import CalendarTestScreen from './components/screens/CalendarTestScreen';
 import WebviewScreen from './components/screens/WebViewScreen';
 
+import { NotificationTokenContext } from './utils/NotificationHandler';
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+    shouldShowBanner: true,
+    shouldShowList: true,
+  }),
+});
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -110,9 +124,36 @@ function MainTabNavigator() {
 }
 
 export default function App() {
+  
+  const [expoPushToken, setExpoPushToken] = useState('');
+  const [notification, setNotification] = useState<Notifications.Notification | undefined>(
+    undefined
+  );
+
+  useEffect(() => {
+    registerForPushNotificationsAsync()
+      .then(token => setExpoPushToken(token ?? ''))
+      .catch((error: any) => setExpoPushToken(`${error}`));
+
+    const notificationListener = Notifications.addNotificationReceivedListener(notification => {
+      setNotification(notification);
+    });
+
+    const responseListener = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log("This bundle's Expo Push Token is: " + response);
+    });
+
+    return () => {
+      notificationListener.remove();
+      responseListener.remove();
+    };
+  }, []);
+
   return (
-    <NavigationContainer>
-      <MainStackNavigator/>
-    </NavigationContainer>
+    <NotificationTokenContext value = {expoPushToken}>
+      <NavigationContainer>
+        <MainStackNavigator/>
+      </NavigationContainer>
+    </NotificationTokenContext>
   );
 }

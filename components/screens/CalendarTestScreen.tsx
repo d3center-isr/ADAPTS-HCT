@@ -1,3 +1,8 @@
+/**
+ * A Debugging screen made solely to test aspects of the CalendarContainer compoenent.
+ * This screen should not be visible to the average user.
+ */
+
 import { View } from "react-native";
 import { useState } from "react";
 import { Text } from "react-native";

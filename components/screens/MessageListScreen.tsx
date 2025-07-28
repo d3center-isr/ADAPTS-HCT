@@ -1,3 +1,8 @@
+/**
+ * A Screen which displays a list of Message objects according to a provided JSON file.
+ * Contains logic for message preview display and list displays
+ */
+
 import { useNavigation } from '@react-navigation/native';
 import messagesJSON from '../../assets/placeholders/debug-message-data.json'
 import { FlatList, Pressable, Text, View } from 'react-native'

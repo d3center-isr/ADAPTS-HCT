@@ -1,6 +1,13 @@
-import { ReactNode, useState } from "react";
+/**
+ * A screen used solely to test components, as well as connect to additional testing screens. 
+ * This screen should not be visible to the average user.
+ */
+
+import { ReactNode, useState, useContext } from "react";
 import { Pressable, Text, View, Image } from "react-native";
 import { StyleSheet } from "react-native-web";
+// imported functions
+import { sendPushNotification } from "../../utils/NotificationHandler";
 // imported components
 import MultipleChoiceWidget from "../common/MultipleChoiceWidget";
 import { MultipleChoiceButtonData } from "../common/MultipleChoiceWidget";
@@ -10,10 +17,14 @@ import CountdownTimer from "../CountdownTimer";
 
 
 const DEBUG_WEBVIEW_URL = "https://tnaqua.org/live/penguins-rock/";
+// context
+import { NotificationTokenContext } from "../../utils/NotificationHandler";
 
 // TODO: Add typedoc info on the type of "navigation" -- seriously what is it?
 export default function DebugScreen({navigation}) {
   const [showTestPopup, setShowTestPopup] = useState(false);
+
+  const notificationToken: string = useContext(NotificationTokenContext);
 
   return (
       <View style={{ flex: 1, alignItems: 'center'}}>
@@ -32,6 +43,22 @@ export default function DebugScreen({navigation}) {
           <CountdownTimer countdownTarget={new Date(2024, 6, 3)} countdownReference={new Date(2025, 6, 2)}/>
           <CountdownTimer countdownTarget={new Date(2025, 8, 2)} showTarget={true}/>
           <CountdownTimer countdownTarget={new Date(2026, 7, 31)}/>
+
+          <TextButton text={"Send Notification"} onPress={()=> {
+              sendPushNotification(notificationToken, "This is an in-app notification!", 
+                "You can test push notifications by going to https://expo.dev/notifications. Enter "
+                + notificationToken + " as the push token, give it a title and body, and press send!"
+                + "You can also find the push token in the console log.")
+          }}/>
+          <TextButton text={"Send Image Notification"} onPress={()=> {
+              sendPushNotification(notificationToken, "This is an Image Notification!","Me when coding:",
+                 "https://www.kaiyukan.com/assets/img/info/area/shop/img01-02.jpg")
+          }}/>
+
+          <GenericPopup visible={showTestPopup} horizontalMargins={0.04}>
+            <Text>Medication Reporting Widget</Text>
+            <TextButton onPress={()=>setShowTestPopup(false)} text="Close Widget"/>
+          </GenericPopup>
           {/* Webview Screen Testing */}
           <TextButton onPress={()=> navigation.navigate("WebView", {url: DEBUG_WEBVIEW_URL})} text="Test Webview Screen"/>
         </View>

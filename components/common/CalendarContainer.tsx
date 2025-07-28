@@ -1,3 +1,7 @@
+/**
+ * A container that can display content in a calendar format.
+ */
+
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 

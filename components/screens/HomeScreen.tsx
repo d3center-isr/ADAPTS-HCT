@@ -1,3 +1,7 @@
+/** 
+ * Main landing screen of the app.
+ */
+
 import { StyleSheet } from "react-native"
 import { Text, View, Image } from "react-native"
 import CalendarContainer from "../common/CalendarContainer";

@@ -1,3 +1,7 @@
+/**
+ * Compoenent which 'counts down' from a given date to a target date and shows the days remaining in a text display.
+ */
+
 import React, { ReactNode, useEffect, useState } from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 /**

@@ -1,3 +1,8 @@
+/**
+ * Renders the "puzzle" part of the game (the content visible above the keyboard).
+ * Takes in a game state (puzzle, key, player input) and renders puzzle words accordingly. 
+ */
+
 import { View,StyleSheet, Text } from "react-native";
 import Word from "./Word";
 import { WordState } from "./Word";
