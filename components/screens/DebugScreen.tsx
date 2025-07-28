@@ -2,9 +2,10 @@ import { ReactNode, useState } from "react";
 import { Pressable, Text, View, Image } from "react-native";
 import { StyleSheet } from "react-native-web";
 // imported components
-import MultipleChoiceWidget from "../MultipleChoiceWidget";
-import { MultipleChoiceButtonData } from "../MultipleChoiceWidget";
-import GenericPopup from "../GenericPopup";
+import MultipleChoiceWidget from "../common/MultipleChoiceWidget";
+import { MultipleChoiceButtonData } from "../common/MultipleChoiceWidget";
+import GenericPopup from "../common/GenericPopup";
+import TextButton from "../common/TextButton";
 import CountdownTimer from "../CountdownTimer";
 
 
@@ -14,24 +15,15 @@ export default function TitleScreen({navigation}) {
 
   return (
       <View style={{ flex: 1, alignItems: 'center'}}>
-        <View style={{flexDirection: 'row', margin:5}}>
-          {/* Header -- images and text in the middle */}
-          <Image style={{flex: 0.25, aspectRatio: 1}}source={require("../../assets/placeholders/debug-penguin-helmet.png")}/>
-          <Text style={{flex: 0.5}}>Welcome to the Testing zone! This is a Developer Menu meant for feature testing.</Text>
-          <Image style={{flex: 0.25, aspectRatio: 1, transform: [{ scaleX: -1 }]}}source={require("../../assets/placeholders/debug-penguin-helmet.png")}/>
-        </View>
+        <DebugHeader/>
         <View>
           {/* Multiple Choice Demo Component */}
           <MultipleChoiceDemo/>
           <View style={{flex: 0.1}}/>
           {/* GenericPopup Testing */}
-          <Pressable style={styles.navigationButton} onPress={()=>setShowTestPopup(true)}>
-            <Text style={styles.navigationText}>Debug: Press to show Med Log Popup</Text>
-          </Pressable>
+          <TextButton onPress={()=>setShowTestPopup(true)} text={"Debug: Press to show Med Log Popup"}/>
           {/* Calendar Testing */}
-          <Pressable style={styles.navigationButton} onPress={()=> navigation.navigate('CalendarDemo')}>
-            <Text style={styles.navigationText}>Navigate to Calendar Test Screen</Text>
-          </Pressable>
+          <TextButton onPress={()=>navigation.navigate('CalendarDemo')} text={"Navigate to Calendar Test Screen"}/>
           {/* Countdown Timer Testing */}
           <CountdownTimer countdownTarget={new Date(2025, 6, 3)} countdownReference={new Date(2024, 6, 2)}/>
           <CountdownTimer countdownTarget={new Date(2024, 6, 3)} countdownReference={new Date(2025, 6, 2)}/>
@@ -40,12 +32,27 @@ export default function TitleScreen({navigation}) {
 
           <GenericPopup visible={showTestPopup} horizontalMargins={0.04}>
             <Text>Medication Reporting Widget</Text>
-            <Pressable style={styles.navigationButton} onPress={()=>setShowTestPopup(false)}>
-              <Text style={styles.navigationText}>Close Widget</Text>
-            </Pressable>
+            <TextButton onPress={()=>setShowTestPopup(false)} text={"Close Widget"}/>
           </GenericPopup>
         </View>
       </View>
+  );
+}
+
+/**
+ * A fun little header for the debug screen containing images sandwiching a text element.
+ * This element has no use other than to be a fun thing on the debug screen, and nothing should depend on this component. 
+ * 
+ * It'll probably be removed at some point -- enjoy it while it lasts.
+ */
+function DebugHeader() {
+  return (
+    <View style={{flexDirection: 'row', margin:5}}>
+      {/* Header -- images and text in the middle */}
+      <Image style={{flex: 0.25, aspectRatio: 1}}source={require("../../assets/placeholders/debug-penguin-helmet.png")}/>
+      <Text style={{flex: 0.5}}>Welcome to the Testing zone! This is a Developer Menu meant for feature testing.</Text>
+      <Image style={{flex: 0.25, aspectRatio: 1, transform: [{ scaleX: -1 }]}}source={require("../../assets/placeholders/debug-penguin-helmet.png")}/>
+    </View>
   );
 }
 
@@ -78,26 +85,4 @@ function MultipleChoiceDemo() {
   const [mcActive, setMCActive] = useState(-1);
   return <MultipleChoiceWidget buttonData={buttonData} activeButtonId={mcActive} setActiveButtonId={setMCActive}/>
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection:'col',
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    navigationButton: {
-        backgroundColor: "#3a4466",
-        borderColor: "#262b44",
-        borderRadius: 3,
-        borderWidth:3,
-        justifyContent:'center',
-        margin:1,
-        padding: 4,
-    },
-    navigationText: {
-        color: '#dde',
-    }
-});
   

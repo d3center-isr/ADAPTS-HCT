@@ -1,5 +1,6 @@
 import { Pressable, View, Text, StyleSheet, GestureResponderEvent, ActivityIndicatorBase } from "react-native";
 import { useState, ReactNode } from "react";
+import TextButton from "./TextButton";
 
 /**
  * A basic type to store information on how an MC button should look like.
@@ -36,12 +37,12 @@ interface MultipleChoiceButtonProps {
  */
 function MultipleChoiceButton({data, isActive, buttonId, onPress}: MultipleChoiceButtonProps) {
     return (
-        <Pressable
-            style={[styles.button, {borderColor: isActive ? "#fff": "#000", backgroundColor: data.color}]} 
-            onPress={()=>{onPress(buttonId)}}
-        >
-            <Text>{data.textToDisplay}</Text>
-        </Pressable>
+        <TextButton 
+            text = {data.textToDisplay}
+            buttonStyle={[{borderColor: isActive ? "#fff": "#000", backgroundColor: data.color}]} 
+            textStyle={{color: "#000"}}
+            onPress={()=>onPress(buttonId)}
+        />
     );
 }
 
@@ -78,16 +79,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         marginTop: 0,
-    },
-    button: {
-        paddingTop: 5,
-        paddingBottom: 5,
-        paddingLeft: 10,
-        paddingRight: 10,
-        borderWidth: 2,
-        borderRadius: 10,
-        marginLeft:5,
-        marginRight:5,
     },
     buttonView: {
         flexDirection: "row",
