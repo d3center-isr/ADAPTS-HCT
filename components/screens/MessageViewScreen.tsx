@@ -10,17 +10,26 @@ import { Image } from "expo-image";
 import { ReactNode } from "react";
 import {Element} from "../../types/message.type";
 
-export default function MessageViewScreen({route}) {
+/**
+ * A screen designed to show the contents of a message JSON. 
+ * @param message {Message} -- a JSON message object to display
+ */
+export default function MessageViewScreen({navigation, route}) {
     return (
         <View style={{margin: 10}}>
             <FlatList data={route.params.message.elementList} renderItem={({item}) => {
-                return (<MessageElement elt={item}/>);
+                return (<MessageElement elt={item} navigation={navigation}/>);
             }}/>
         </View>
     );
 }
     
-function MessageElement({elt}: {elt: Element}): ReactNode {
+/**
+ * The displayed content of a single elemnet of a message. Can either be text, a link, or an image.
+ * @param elt {Element} the element whose content to display
+ * @param navigation -- Unknown type, this is a navigator we call in order to show links in a webview
+ */
+function MessageElement({elt, navigation}: {elt: Element, navigation: any}): ReactNode {
     switch(elt.type) {
         case "text":
             return (<Text style={styles.messageText}>{elt.value}</Text>);
@@ -33,7 +42,7 @@ function MessageElement({elt}: {elt: Element}): ReactNode {
             );
         case "link":
             return (
-                <Pressable onPress={()=>Linking.openURL(elt.value)}>
+                <Pressable onPress={()=>navigation.navigate('WebView', {url: elt.value})}>
                     <Text style={[styles.messageText, styles.linkText]}>
                         {elt.value}
                     </Text>

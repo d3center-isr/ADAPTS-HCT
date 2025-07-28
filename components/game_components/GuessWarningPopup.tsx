@@ -8,7 +8,7 @@ import { StyleSheet } from "react-native";
 import { Modal } from "react-native";
 import Word from "./Word";
 import { WordState } from "./Word";
-import GenericPopup from "../GenericPopup";
+import GenericPopup from "../common/GenericPopup";
 
 
 interface GuessWarningPopupProps {
