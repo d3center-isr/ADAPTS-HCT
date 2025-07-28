@@ -3,6 +3,7 @@
  */
 import { Pressable, View, Text } from "react-native";
 import { StyleSheet } from "react-native";
+import TextButton from "../common/TextButton";
 
 interface KeyButtonProps {
     keyText: string,
@@ -11,15 +12,15 @@ interface KeyButtonProps {
 
 export default function KeyButton({keyText, onPress}: KeyButtonProps) {
     return (
-        <Pressable 
-        onPressIn={()=>{onPress(keyText)}} 
-        style={[styles.keyButton, {
+        <TextButton
+            text={keyText}
+            onPress={()=>{onPress(keyText)}}
+            buttonStyle={[styles.keyButton, {
                 // we want the button to be larger in the case of longer key strings
                 flex: keyText.length > 1 ? 0.2: 0.1,
             }]}
-        >
-            <Text style={[styles.keyButtontext, {fontSize:keyText.length>1?12:20}]}>{keyText}</Text>
-        </Pressable>
+            textStyle={[styles.keyButtontext, {fontSize:keyText.length>1?12:20}]}
+        />
     );
 
     
@@ -27,10 +28,6 @@ export default function KeyButton({keyText, onPress}: KeyButtonProps) {
 
 const styles = StyleSheet.create({
     keyButton: {
-        backgroundColor: "#3a4466",
-        borderColor: "#262b44",
-        borderRadius: 4,
-        borderWidth:4,
         flex: 100,
         justifyContent:'center',
         margin:1,
