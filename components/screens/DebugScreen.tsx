@@ -9,8 +9,10 @@ import TextButton from "../common/TextButton";
 import CountdownTimer from "../CountdownTimer";
 
 
+const DEBUG_WEBVIEW_URL = "https://tnaqua.org/live/penguins-rock/";
+
 // TODO: Add typedoc info on the type of "navigation" -- seriously what is it?
-export default function TitleScreen({navigation}) {
+export default function DebugScreen({navigation}) {
   const [showTestPopup, setShowTestPopup] = useState(false);
 
   return (
@@ -22,6 +24,7 @@ export default function TitleScreen({navigation}) {
           <View style={{flex: 0.1}}/>
           {/* GenericPopup Testing */}
           <TextButton onPress={()=>setShowTestPopup(true)} text={"Debug: Press to show Med Log Popup"}/>
+
           {/* Calendar Testing */}
           <TextButton onPress={()=>navigation.navigate('CalendarDemo')} text={"Navigate to Calendar Test Screen"}/>
           {/* Countdown Timer Testing */}
@@ -29,17 +32,15 @@ export default function TitleScreen({navigation}) {
           <CountdownTimer countdownTarget={new Date(2024, 6, 3)} countdownReference={new Date(2025, 6, 2)}/>
           <CountdownTimer countdownTarget={new Date(2025, 8, 2)} showTarget={true}/>
           <CountdownTimer countdownTarget={new Date(2026, 7, 31)}/>
-
-          <GenericPopup visible={showTestPopup} horizontalMargins={0.04}>
-            <Text>Medication Reporting Widget</Text>
-            <TextButton onPress={()=>setShowTestPopup(false)} text={"Close Widget"}/>
-          </GenericPopup>
+          {/* Webview Screen Testing */}
+          <TextButton onPress={()=> navigation.navigate("WebView", {url: DEBUG_WEBVIEW_URL})} text="Test Webview Screen"/>
         </View>
       </View>
   );
 }
 
 /**
+
  * A fun little header for the debug screen containing images sandwiching a text element.
  * This element has no use other than to be a fun thing on the debug screen, and nothing should depend on this component. 
  * 
