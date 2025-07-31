@@ -67,11 +67,11 @@ export default function MainTabLayout() {
         tabBarInactiveTintColor: 'black',
       })}
     >
-        {/* <Tabs.Screen name={"index"}/>
+        <Tabs.Screen name={"index"}/>
         <Tabs.Screen name={"messages"}/>
         <Tabs.Screen name={"insights"}/>
         <Tabs.Screen name={"game"}/>
-        <Tabs.Screen name={"debug"}/> */}
+        <Tabs.Screen name={"debug"}/>
     </Tabs>
   );
 }

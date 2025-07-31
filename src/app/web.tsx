@@ -1,11 +1,11 @@
+import WebViewer from "components/WebViewer";
 import { useLocalSearchParams } from "expo-router";
-import WebviewScreen from "screens/WebViewScreen";
 
 
 export default function WebViewerPage() {
     const {url} = useLocalSearchParams();
 
     return (
-        <WebviewScreen url={url.toString()}/>
+        <WebViewer url={url.toString()}/>
     );
 }

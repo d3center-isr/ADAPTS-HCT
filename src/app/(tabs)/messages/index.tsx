@@ -1,9 +1,9 @@
 import { View, Text, StyleSheet } from 'react-native';
-import MessageListScreen from 'screens/MessageListScreen';
+import MessageListViewer from 'components/MessageListViewer';
 
 
 export default function Index() {
     return (
-        <MessageListScreen/>
+        <MessageListViewer/>
     );
 }

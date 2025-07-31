@@ -2,6 +2,9 @@
 // be imported by the message viewer screen, too.
 export const ELEMENT_TYPES = ["text", "image", "link"];
 export type ElementType = typeof ELEMENT_TYPES[number];
+import messagesJSON from 'assets/placeholders/debug-message-data.json'
+
+export const messageData = messagesJSON as Message[];
 
 export interface Message {
   name: string;

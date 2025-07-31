@@ -3,22 +3,25 @@
  * Uses a FlatList which renders each Element of the message in a list entry. 
  */
 
-import { Text, View, StyleSheet, FlatList, Linking, Pressable} from "react-native";
+import { Text, View, StyleSheet, FlatList} from "react-native";
+import { Link } from "expo-router";
 // Note that in this file we use expo-image instead of the react-native image.
 // This allows us to render GIFs.
 import { Image } from "expo-image";
 import { ReactNode } from "react";
-import {Element} from "types/message.type";
+import {Element, Message} from "types/message.type";
 
 /**
  * A screen designed to show the contents of a message JSON. 
  * @param message {Message} -- a JSON message object to display
  */
-export default function MessageViewer({message, navigation}) {
+export default function MessageViewer({message}: {message: Message}) {
+
+    
     return (
         <View style={{margin: 10}}>
             <FlatList data={message.elementList} renderItem={({item}) => {
-                return (<MessageElement elt={item} navigation={navigation}/>);
+                return (<MessageElement elt={item}/>);
             }}/>
         </View>
     );
@@ -29,7 +32,7 @@ export default function MessageViewer({message, navigation}) {
  * @param elt {Element} the element whose content to display
  * @param navigation -- Unknown type, this is a navigator we call in order to show links in a webview
  */
-function MessageElement({elt, navigation}: {elt: Element, navigation: any}): ReactNode {
+function MessageElement({elt}: {elt: Element}): ReactNode {
     switch(elt.type) {
         case "text":
             return (<Text style={styles.messageText}>{elt.value}</Text>);
@@ -42,11 +45,11 @@ function MessageElement({elt, navigation}: {elt: Element, navigation: any}): Rea
             );
         case "link":
             return (
-                <Pressable onPress={()=>navigation.navigate('WebView', {url: elt.value})}>
+                <Link href={{pathname: "web/", params: {url: elt.value}}}>
                     <Text style={[styles.messageText, styles.linkText]}>
                         {elt.value}
                     </Text>
-                </Pressable>
+                </Link>
             );
         default: 
             console.error("Unidentified ElementType: " + elt.type);

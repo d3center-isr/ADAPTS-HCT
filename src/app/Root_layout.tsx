@@ -23,7 +23,7 @@ Notifications.setNotificationHandler({
 
 function MainStackNavigator() {
   return (
-    <Stack id={undefined} initialRouteName='MainTabs'>
+    <Stack id={undefined}>
       <Stack.Screen 
         name="(tabs)"
       />
