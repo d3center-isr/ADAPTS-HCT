@@ -78,9 +78,9 @@ function DebugHeader() {
   return (
     <View style={{flexDirection: 'row', margin:5}}>
       {/* Header -- images and text in the middle */}
-      <Image style={{flex: 0.25, aspectRatio: 1}}source={require("../../assets/placeholders/debug-penguin-helmet.png")}/>
+      <Image style={{flex: 0.25, aspectRatio: 1}}source={require("assets/placeholders/debug-penguin-helmet.png")}/>
       <Text style={{flex: 0.5}}>Welcome to the Testing zone! This is a Developer Menu meant for feature testing.</Text>
-      <Image style={{flex: 0.25, aspectRatio: 1, transform: [{ scaleX: -1 }]}}source={require("../../assets/placeholders/debug-penguin-helmet.png")}/>
+      <Image style={{flex: 0.25, aspectRatio: 1, transform: [{ scaleX: -1 }]}}source={require("assets/placeholders/debug-penguin-helmet.png")}/>
     </View>
   );
 }

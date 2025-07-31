@@ -2,7 +2,7 @@
  * A Screen which displays the contents of a single Message object.
  * Uses a FlatList which renders each Element of the message in a list entry. 
  */
-import MessageViewer from "../components/MessageViewer";
+import MessageViewer from "components/MessageViewer";
 
 /**
  * A screen designed to show the contents of a message JSON. 

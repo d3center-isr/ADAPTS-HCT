@@ -2,7 +2,7 @@ import React, { ReactNode, useLayoutEffect } from 'react';
 import { useCallback, useEffect, useState, useRef } from 'react';
 import { BackHandler, NativeEventSubscription, Platform, Pressable } from 'react-native';
 import { Text, View, StyleSheet } from 'react-native';
-import TextButton from './common/TextButton';
+import TextButton from 'components/common/TextButton';
 import WebView from 'react-native-webview';
 
 export default function WebViewer({url, navigation}: {url: string, navigation}): ReactNode {

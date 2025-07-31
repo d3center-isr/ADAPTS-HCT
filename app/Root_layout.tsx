@@ -10,7 +10,7 @@ import * as Notifications from 'expo-notifications';
 import { sendPushNotification, registerForPushNotificationsAsync } from '../src/utils/NotificationHandler';
 // component imports
 // TODO: Find a way to simplify this -- this is a lot of seperate line imports
-import HomeScreen from '../src/screens/HomeScreen';
+import HomeScreen from 'screens/HomeScreen';
 import GameScreen from '../src/screens/GameScreen';
 import MessageListScreen from '../src/screens/MessageListScreen';
 import MessageViewScreen from '../src/screens/MessageViewScreen';
@@ -58,17 +58,17 @@ const ROUTE_NAMES = {
 const getIcon = (routeName: string): ImageSourcePropType => {
   switch (routeName) {
     case ROUTE_NAMES.Home:
-      return require("../assets/navigation-tab-icons/menu-icon-home.png");
+      return require("assets/navigation-tab-icons/menu-icon-home.png");
     case ROUTE_NAMES.Messages:
-      return require("../assets/navigation-tab-icons/menu-icon-messages.png");
+      return require("assets/navigation-tab-icons/menu-icon-messages.png");
     case ROUTE_NAMES.Insights:
-      return require("../assets/navigation-tab-icons/menu-icon-insights.png");
+      return require("assets/navigation-tab-icons/menu-icon-insights.png");
     case ROUTE_NAMES.Game:
-      return require("../assets/navigation-tab-icons/menu-icon-game.png");
+      return require("assets/navigation-tab-icons/menu-icon-game.png");
     case ROUTE_NAMES.Debug:
-      return require("../assets/navigation-tab-icons/menu-icon-debug.png");
+      return require("assets/navigation-tab-icons/menu-icon-debug.png");
     default:
-      return require("../assets/navigation-tab-icons/menu-icon-error.png");
+      return require("assets/navigation-tab-icons/menu-icon-error.png");
   }
 }
 

@@ -4,8 +4,8 @@
 
 import { StyleSheet } from "react-native"
 import { Text, View, Image } from "react-native"
-import CalendarContainer from "../components/common/CalendarContainer";
-import CountdownTimer from "../components/CountdownTimer";
+import CalendarContainer from "components/common/CalendarContainer";
+import CountdownTimer from "components/CountdownTimer";
 
 export default function HomeScreen() {
   

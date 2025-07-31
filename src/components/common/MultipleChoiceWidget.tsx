@@ -5,7 +5,7 @@
 
 import { Pressable, View, Text, StyleSheet, GestureResponderEvent } from "react-native";
 import { useState, ReactNode } from "react";
-import TextButton from "./TextButton";
+import TextButton from "components/common/TextButton";
 
 /**
  * A basic type to store information on how an MC button should look like.

@@ -8,7 +8,7 @@ import { Text, View, StyleSheet, FlatList, Linking, Pressable} from "react-nativ
 // This allows us to render GIFs.
 import { Image } from "expo-image";
 import { ReactNode } from "react";
-import {Element} from "../types/message.type";
+import {Element} from "types/message.type";
 
 /**
  * A screen designed to show the contents of a message JSON. 
