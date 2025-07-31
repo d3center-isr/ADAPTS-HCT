@@ -1,8 +1,9 @@
 import { View, Text, StyleSheet } from 'react-native';
-import DebugScreen from 'screens/DebugScreen';
+import MessageListScreen from 'screens/MessageListScreen';
+
 
 export default function Index() {
     return (
-        <DebugScreen/>
+        <MessageListScreen/>
     );
 }

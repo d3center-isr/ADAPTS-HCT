@@ -29,7 +29,7 @@ function CalendarCell({state}: {state: number}) {
     );    
 }
 
-export default function CalendarTestScreen({navigation}) {
+export default function CalendarTestScreen() {
     // This screen is for testing the CalendarContainer component.
     // It will display a calendar for the current month and year.
     const today = new Date();

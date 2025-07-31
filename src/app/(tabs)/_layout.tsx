@@ -43,6 +43,8 @@ const getIcon = (routeName: string): ImageSourcePropType => {
   }
 }
 
+
+
 /**
  * Tab Navigator structure. Creates the "bottom tabs" system at the bottom of the screen.
  * Used to navigate between the "main tabs"
@@ -52,16 +54,24 @@ export default function MainTabLayout() {
     <Tabs
       id={undefined}
       screenOptions={({ route }) => ({
-        title: route.name == "index" ? "Home" : capitalize(route.name),
+        // TODO: this line absolutely sucks. We have to deal with both replacing "index" with "Home" AND cut off any subroute stuff...
+        // is there a better way?
+        title: (route.name == "index" ? "Home" : capitalize(route.name)).split("/")[0], // capitalize the first letter of the route, and cut off any subroute text
         tabBarIcon: ({color, size}) => {
           return <Image 
             style={{tintColor: color, width: size, height: size}} 
-            source={getIcon(route.name)} 
+            source={getIcon(route.name.split("/")[0])} 
           />;
         },
         tabBarActiveTintColor: 'blue',
         tabBarInactiveTintColor: 'black',
       })}
-    />
+    >
+        {/* <Tabs.Screen name={"index"}/>
+        <Tabs.Screen name={"messages"}/>
+        <Tabs.Screen name={"insights"}/>
+        <Tabs.Screen name={"game"}/>
+        <Tabs.Screen name={"debug"}/> */}
+    </Tabs>
   );
 }

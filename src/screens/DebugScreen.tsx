@@ -19,9 +19,10 @@ import CountdownTimer from "../components/CountdownTimer";
 const DEBUG_WEBVIEW_URL = "https://tnaqua.org/live/penguins-rock/";
 // context
 import { NotificationTokenContext } from "../utils/NotificationHandler";
+import LinkButton from "components/common/LinkButton";
 
 // TODO: Add typedoc info on the type of "navigation" -- seriously what is it?
-export default function DebugScreen({navigation}) {
+export default function DebugScreen() {
   const [showTestPopup, setShowTestPopup] = useState(false);
 
   const notificationToken: string = useContext(NotificationTokenContext);
@@ -37,7 +38,7 @@ export default function DebugScreen({navigation}) {
           <TextButton onPress={()=>setShowTestPopup(true)} text={"Debug: Press to show Med Log Popup"}/>
 
           {/* Calendar Testing */}
-          <TextButton onPress={()=>navigation.navigate('CalendarDemo')} text={"Navigate to Calendar Test Screen"}/>
+          <LinkButton url="./debug/calendar-test" text={"Navigate to Calendar Test Screen"}/>
           {/* Countdown Timer Testing */}
           <CountdownTimer countdownTarget={new Date(2025, 6, 3)} countdownReference={new Date(2024, 6, 2)}/>
           <CountdownTimer countdownTarget={new Date(2024, 6, 3)} countdownReference={new Date(2025, 6, 2)}/>
@@ -60,8 +61,7 @@ export default function DebugScreen({navigation}) {
             <TextButton onPress={()=>setShowTestPopup(false)} text="Close Widget"/>
           </GenericPopup>
           {/* Webview Screen Testing */}
-          <TextButton onPress={()=> navigation.navigate("WebView", {url: DEBUG_WEBVIEW_URL})} text="Test Webview Screen"/>
-          <TextButton onPress={() => Linking.openURL("adaptshct://")} text="Open Deep link to app entry"/>
+          <LinkButton url={"/web?url=" + DEBUG_WEBVIEW_URL} text="Test Webview Screen"/>
         </View>
       </View>
   );

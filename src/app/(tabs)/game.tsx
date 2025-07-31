@@ -1,10 +1,8 @@
-import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import GameScreen from 'screens/GameScreen';
 
-const GamePage: React.FC = () => {
+export default function GamePage() {
     return (
         <GameScreen/>
     );
-};
-
-export default GamePage;
+}
