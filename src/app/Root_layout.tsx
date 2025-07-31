@@ -1,9 +1,9 @@
 import { ImageSourcePropType} from 'react-native';
 import { useState, useEffect } from 'react';
 // Expo Router Imports
-import { Stack } from 'expo-router';
-
-import { Image } from 'react-native';
+import { Link, router, Stack } from 'expo-router';
+import { Router } from 'expo-router';
+import TextButton from 'components/common/TextButton';
 import * as Notifications from 'expo-notifications';
 // Function imports
 import { sendPushNotification, registerForPushNotificationsAsync } from 'utils/NotificationHandler';
@@ -27,6 +27,8 @@ function MainStackNavigator() {
       <Stack.Screen 
         name="(tabs)"
       />
+      <Stack.Screen options={{
+      }}/>
     </Stack>
   );
 }

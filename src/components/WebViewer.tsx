@@ -4,15 +4,9 @@ import { BackHandler, NativeEventSubscription, Platform, Pressable } from 'react
 import { Text, View, StyleSheet } from 'react-native';
 import TextButton from 'components/common/TextButton';
 import WebView from 'react-native-webview';
+import { Router, useRouter } from 'expo-router';
 
-export default function WebViewer({url, navigation}: {url: string, navigation}): ReactNode {
-    useLayoutEffect(() => {
-        navigation.setOptions({
-            headerLeft: () => (
-                <TextButton onPress={() => navigation.goBack()} text={"Done"} buttonStyle={{marginRight: 16}}/>
-            ),
-        });
-    }, [navigation]);
+export default function WebViewer({url}: {url: string}): ReactNode {
 
     /**
      * In-web navigation handling
@@ -48,6 +42,7 @@ export default function WebViewer({url, navigation}: {url: string, navigation}):
 
     return (
         <View style={styles.container}>
+            <TextButton onPress={()=> useRouter().back()} text={"Done"} buttonStyle={{marginRight: 16}}/>
             <WebView 
                 source={{ uri: url }} style={styles.webview}
                 // the below prop enables back forward web navigation for iOS only. 

@@ -1,13 +1,8 @@
 import React, { ReactNode, useLayoutEffect } from 'react';
 import WebViewer from 'components/WebViewer';
 
-type WebviewScreenProps = {
-    navigation: any, // TODO: make this a navigation type
-    route: {
-        params: {
-            url: string;
-        };
-    };
+type WebViewScreenProps = {
+    url: string
 };
 
 /** 
@@ -16,7 +11,7 @@ type WebviewScreenProps = {
  * ( note that the user may deviate from this page by clicking on links within the url's content)
  * @param url {string}: the starting URL to display content from. 
  */
-const WebviewScreen: React.FC<WebviewScreenProps> = ({ navigation, route }) => {
-   return <WebViewer navigation = {navigation} url={route.params.url}/>
+const WebViewScreen: React.FC<WebViewScreenProps> = ({url}: {url: string}) => {
+   return <WebViewer url={url}/>
 };
-export default WebviewScreen;
+export default WebViewScreen;
