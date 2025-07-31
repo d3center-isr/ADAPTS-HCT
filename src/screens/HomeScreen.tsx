@@ -31,6 +31,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center', 
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#fff'
   }
 });
