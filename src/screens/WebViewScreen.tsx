@@ -1,5 +1,5 @@
 import React, { ReactNode, useLayoutEffect } from 'react';
-import WebViewer from '../WebViewer';
+import WebViewer from '../components/WebViewer';
 
 type WebviewScreenProps = {
     navigation: any, // TODO: make this a navigation type

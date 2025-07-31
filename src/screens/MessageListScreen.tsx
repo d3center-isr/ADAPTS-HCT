@@ -3,7 +3,7 @@
  * Contains logic for message preview display and list displays
  */
 
-import MessageListViewer from "../MessageListViewer";
+import MessageListViewer from "../components/MessageListViewer";
 
 export default function MessageListScreen() {
     return (<MessageListViewer/>);

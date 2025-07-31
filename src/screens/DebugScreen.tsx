@@ -7,18 +7,18 @@ import { ReactNode, useState, useContext } from "react";
 import { Pressable, Text, View, Image, Linking } from "react-native";
 import { StyleSheet } from "react-native-web";
 // imported functions
-import { sendPushNotification } from "../../utils/NotificationHandler";
+import { sendPushNotification } from "../utils/NotificationHandler";
 // imported components
-import MultipleChoiceWidget from "../common/MultipleChoiceWidget";
-import { MultipleChoiceButtonData } from "../common/MultipleChoiceWidget";
-import GenericPopup from "../common/GenericPopup";
-import TextButton from "../common/TextButton";
-import CountdownTimer from "../CountdownTimer";
+import MultipleChoiceWidget from "../components/common/MultipleChoiceWidget";
+import { MultipleChoiceButtonData } from "../components/common/MultipleChoiceWidget";
+import GenericPopup from "../components/common/GenericPopup";
+import TextButton from "../components/common/TextButton";
+import CountdownTimer from "../components/CountdownTimer";
 
 
 const DEBUG_WEBVIEW_URL = "https://tnaqua.org/live/penguins-rock/";
 // context
-import { NotificationTokenContext } from "../../utils/NotificationHandler";
+import { NotificationTokenContext } from "../utils/NotificationHandler";
 
 // TODO: Add typedoc info on the type of "navigation" -- seriously what is it?
 export default function DebugScreen({navigation}) {

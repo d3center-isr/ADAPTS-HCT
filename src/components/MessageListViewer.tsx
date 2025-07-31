@@ -4,7 +4,7 @@
  */
 
 import { useNavigation } from '@react-navigation/native';
-import messagesJSON from '../assets/placeholders/debug-message-data.json'
+import messagesJSON from '../../assets/placeholders/debug-message-data.json'
 import { FlatList, Pressable, Text, View } from 'react-native'
 import { StyleSheet } from 'react-native';
 import { Message, Element, ElementType, ELEMENT_TYPES } from '../types/message.type';
