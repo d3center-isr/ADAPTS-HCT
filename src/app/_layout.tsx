@@ -20,21 +20,6 @@ Notifications.setNotificationHandler({
   }),
 });
 
-
-function MainStackNavigator() {
-  return (
-    <Stack id={undefined}>
-      <Stack.Screen 
-        name="(tabs)"
-      />
-      <Stack.Screen options={{
-      }}/>
-    </Stack>
-  );
-}
-
-
-
 export default function RootLayout() {
   
   const [expoPushToken, setExpoPushToken] = useState('');
@@ -43,6 +28,7 @@ export default function RootLayout() {
   );
 
   useEffect(() => {
+    console.log("trying to register for push notifs...");
     registerForPushNotificationsAsync()
       .then(token => setExpoPushToken(token ?? ''))
       .catch((error: any) => setExpoPushToken(`${error}`));
@@ -63,7 +49,11 @@ export default function RootLayout() {
 
   return (
     <NotificationTokenContext value = {expoPushToken}>
-      <MainStackNavigator/>
+      <Stack screenOptions={{headerShown: false}}>
+        <Stack.Screen 
+          name="(tabs)"
+        />
+      </Stack>
     </NotificationTokenContext>
   );
 }
