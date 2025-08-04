@@ -1,9 +1,6 @@
-import { ImageSourcePropType} from 'react-native';
 import { useState, useEffect } from 'react';
 // Expo Router Imports
-import { Link, router, Stack } from 'expo-router';
-import { Router } from 'expo-router';
-import TextButton from 'components/common/TextButton';
+import { Stack } from 'expo-router';
 import * as Notifications from 'expo-notifications';
 // Function imports
 import { sendPushNotification, registerForPushNotificationsAsync } from 'utils/NotificationHandler';
@@ -50,9 +47,6 @@ export default function RootLayout() {
   return (
     <NotificationTokenContext value = {expoPushToken}>
       <Stack screenOptions={{headerShown: false}}>
-        <Stack.Screen 
-          name="(tabs)"
-        />
       </Stack>
     </NotificationTokenContext>
   );

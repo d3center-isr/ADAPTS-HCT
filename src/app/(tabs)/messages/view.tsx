@@ -8,7 +8,7 @@ import { messageData } from "types/message.type";
 
 /**
  * A screen designed to show the contents of a message JSON. 
- * @param messageName {Message} -- the name of the message object to display
+ * @param name {Message} -- Provided through deep link URL. the name of the message object to display
  */
 export default function MessageViewScreen() {
     const messageName: string = useLocalSearchParams().messageName.toString();
