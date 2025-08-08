@@ -55,6 +55,10 @@ export default function DebugScreen() {
               sendPushNotification(notificationToken, "This is an Image Notification!","Me when coding:",
                  "https://www.kaiyukan.com/assets/img/info/area/shop/img01-02.jpg")
           }}/>
+          <TextButton text={"Send Link Notification"} onPress={()=> {
+              sendPushNotification(notificationToken, "This is a Link Notification!","Click this notification to see a cool message.",
+                 "", "adaptshct://messages/view?messageName=debug_giftest")
+          }}/>
 
           <GenericPopup visible={showTestPopup} horizontalMargins={0.04}>
             <Text>Medication Reporting Widget</Text>

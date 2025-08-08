@@ -1,9 +1,11 @@
+// THIS IS THE ROOT LAYOUT FILE!
+
 import { useState, useEffect } from 'react';
 // Expo Router Imports
 import { Stack } from 'expo-router';
 import * as Notifications from 'expo-notifications';
 // Function imports
-import { sendPushNotification, registerForPushNotificationsAsync } from 'utils/NotificationHandler';
+import { sendPushNotification, registerForPushNotificationsAsync, useNotificationObserver } from 'utils/NotificationHandler';
 // component imports
 
 import { NotificationTokenContext } from 'utils/NotificationHandler';
@@ -23,6 +25,8 @@ export default function RootLayout() {
   const [notification, setNotification] = useState<Notifications.Notification | undefined>(
     undefined
   );
+
+  useNotificationObserver()
 
   useEffect(() => {
     console.log("trying to register for push notifs...");
