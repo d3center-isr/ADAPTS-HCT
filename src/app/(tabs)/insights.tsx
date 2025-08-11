@@ -1,8 +1,6 @@
 import React from 'react';
 import PlaceholderScreen from 'screens/PlaceholderScreen';
 
-const Insights: React.FC = () => {
+export default function InsightsScreen() {
     return <PlaceholderScreen />;
 };
-
-export default Insights;

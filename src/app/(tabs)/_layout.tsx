@@ -1,6 +1,5 @@
 import { Tabs } from 'expo-router'
-import { ImageSourcePropType } from 'react-native';
-import { Image } from 'react-native';
+import { ImageSourcePropType, Image } from 'react-native';
 import { capitalize } from 'utils/CapitalizeString';
 
 /**
@@ -18,6 +17,14 @@ const ROUTE_NAMES = {
   Game: "game",
   Debug: "debug"
 }
+
+const DISPLAY_NAMES: { [id: string]: string; } = {
+   [ROUTE_NAMES.Home]: "Home",
+   [ROUTE_NAMES.Messages]: "Messages",
+   [ROUTE_NAMES.Insights]: "Insights",
+   [ROUTE_NAMES.Game]: "Game",
+   [ROUTE_NAMES.Debug]: "Debug",
+};
 
 /**
  * A map between route name and the navigation icon used to represent that route. 
@@ -54,9 +61,7 @@ export default function MainTabLayout() {
     <Tabs
       id={undefined}
       screenOptions={({ route }) => ({
-        // TODO: this line absolutely sucks. We have to deal with both replacing "index" with "Home" AND cut off any subroute stuff...
-        // is there a better way?
-        title: (route.name == "index" ? "Home" : capitalize(route.name)).split("/")[0], // capitalize the first letter of the route, and cut off any subroute text
+        title: (DISPLAY_NAMES[route.name]), 
         tabBarIcon: ({color, size}) => {
           return <Image 
             style={{tintColor: color, width: size, height: size}} 

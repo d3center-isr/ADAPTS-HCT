@@ -6,7 +6,7 @@ import { Link, router } from 'expo-router';
 import React from 'react';
 import { GestureResponderEvent } from 'react-native';
 import { ViewStyle, TextStyle, StyleProp } from 'react-native';
-import TextButton from './TextButton';
+import TextButton from 'components/common/TextButton';
 
 type LinkButtonProps = {
     text: string;
@@ -16,7 +16,10 @@ type LinkButtonProps = {
 };
 /**
  * A common interface for navigation buttons -- It's a TextButton under the hood. 
- * @param test {string} The text to display on the button.
+ * 
+ * Note that to use this component you need to put params directly in the url string
+ * 
+ * @param text {string} The text to display on the button.
  * @param url {string} The expo router link to navigate to.
  * @param buttonStyle {StyleProp<ViewStyle>} A set of style overrides for the button
  * @param textStyle {StyleProp<TextStyle>} A set of style overrides for the text
