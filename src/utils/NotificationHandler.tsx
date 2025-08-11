@@ -3,7 +3,8 @@ import { Text, View, Button, Platform } from 'react-native';
 import * as Device from 'expo-device';
 import * as Notifications from 'expo-notifications';
 import Constants from 'expo-constants';
-
+import { useEffect } from 'react';
+import { router } from 'expo-router';
 
 export const NotificationTokenContext = createContext('');
 /**
@@ -17,14 +18,14 @@ export const NotificationTokenContext = createContext('');
  * 
  * (with this, we can make notifications just as colorful as those of the green owl...)
  */
-export async function sendPushNotification(expoPushToken: string, title?: string, body?: string, imageURL?: string) {
+export async function sendPushNotification(expoPushToken: string, title?: string, body?: string, imageURL?: string, link?: string) {
   const message = {
     to: expoPushToken,
     sound: 'default',
     title: title ?? 'Default Title',
     body: body ?? '',
     richContent: {image: imageURL ?? ""},
-    data: { someData: 'goes here' },
+    data: { url: link ?? ""},
   };
 
   await fetch('https://exp.host/--/api/v2/push/send', {
@@ -37,10 +38,51 @@ export async function sendPushNotification(expoPushToken: string, title?: string
     body: JSON.stringify(message),
   });
 }
-
+/**
+ * Error logging function provided by Expo.
+ */
 function handleRegistrationError(errorMessage: string) {
   alert(errorMessage);
   throw new Error(errorMessage);
+}
+
+/**
+ * Expo-provided custom "hook" to handle notifications.
+ */
+export function useNotificationObserver() {
+  // triggers once on app load. 
+  useEffect(() => {
+    let isMounted = true;
+    
+    /**
+     * Attempts to extract a URL from the provided function.
+     * If one exists, and it meets the format for deep links, attempt to navigate to it.
+     */
+    function redirect(notification: Notifications.Notification) {
+      const url: string = notification.request.content.data?.url;
+      if (url) {
+        if(url.startsWith("adaptshct")) router.push(url);
+        else console.log("The provided url (" + url + ") does not meet the Deep Link format.")
+      }
+    }
+
+    Notifications.getLastNotificationResponseAsync()
+      .then(response => {
+        if (!isMounted || !response?.notification) {
+          return;
+        }
+        redirect(response?.notification);
+      });
+
+    const subscription = Notifications.addNotificationResponseReceivedListener(response => {
+      redirect(response.notification);
+    });
+
+    return () => {
+      isMounted = false;
+      subscription.remove();
+    };
+  }, []);
 }
 
 /**  
@@ -83,7 +125,7 @@ export async function registerForPushNotificationsAsync(): Promise<string> {
           projectId,
         })
       ).data;
-      console.log(pushTokenString);
+      console.log("This session's Push Token is: " + pushTokenString);
       return pushTokenString;
     } catch (e: unknown) {
       handleRegistrationError(`${e}`);

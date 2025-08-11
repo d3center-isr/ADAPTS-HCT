@@ -6,6 +6,7 @@ module.exports = {
     orientation: "portrait",
     icon: "./assets/icon.png",
     userInterfaceStyle: "light",
+    scheme: "adaptshct", // determines prefix used for deep link urls (ie, all deep links have 'adaptshct://')
     splash: {
       image: "./assets/splash.png",
       resizeMode: "contain",
@@ -45,6 +46,9 @@ module.exports = {
           color: "#4dffea",
           defaultChannel: "default"
         }
+      ],
+      [
+        "expo-router"
       ]
     ]
   }

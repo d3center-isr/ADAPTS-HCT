@@ -2,35 +2,12 @@ import React, { ReactNode, useLayoutEffect } from 'react';
 import { useCallback, useEffect, useState, useRef } from 'react';
 import { BackHandler, NativeEventSubscription, Platform, Pressable } from 'react-native';
 import { Text, View, StyleSheet } from 'react-native';
-import { WebView } from 'react-native-webview';
+import TextButton from 'components/common/TextButton';
+import WebView from 'react-native-webview';
+import { Router, useRouter } from 'expo-router';
 
-type WebviewScreenProps = {
-    navigation: any, // TODO: make this a navigation type
-    route: {
-        params: {
-            url: string;
-        };
-    };
-};
+export default function WebViewer({url}: {url: string}): ReactNode {
 
-/** 
- * A Viewer for web content. Contains a react native web viewer, as well as navigation buttons in a footer.
- * Can also capture "back" gestures as needed to navigate.
- * ( note that the user may deviate from this page by clicking on links within the url's content)
- * @param url {string}: the starting URL to display content from. 
- */
-const WebviewScreen: React.FC<WebviewScreenProps> = ({ navigation, route }) => {
-    useLayoutEffect(() => {
-        navigation.setOptions({
-        headerLeft: () => (
-            <Pressable onPress={() => navigation.goBack()} style={[styles.navigationButton, {marginRight: 16}]}>
-            <Text style={styles.navigationText}>Done</Text>
-            </Pressable>
-        ),
-        });
-    }, [navigation]);
-
-    const { url } = route.params;
     /**
      * In-web navigation handling
      * we need to intercept the existing "back" gesture handling and replace it with 
@@ -65,6 +42,7 @@ const WebviewScreen: React.FC<WebviewScreenProps> = ({ navigation, route }) => {
 
     return (
         <View style={styles.container}>
+            <TextButton onPress={()=> useRouter().back()} text={"Done"} buttonStyle={{marginRight: 16}}/>
             <WebView 
                 source={{ uri: url }} style={styles.webview}
                 // the below prop enables back forward web navigation for iOS only. 
@@ -79,8 +57,7 @@ const WebviewScreen: React.FC<WebviewScreenProps> = ({ navigation, route }) => {
             <WebNavigationFooter canGoBack={canGoBack} canGoForward={canGoForward} webNavigationRef={webViewRef}/>
         </View>
     );
-};
-export default WebviewScreen;
+}
 
 /**
  * footer for webviews that contains buttons to go back or forward in history, or refresh page. 
@@ -94,19 +71,13 @@ function WebNavigationFooter({webNavigationRef, canGoForward, canGoBack}:
     // My soul hurts with this code duplication. Definitely need to create a common button with text class
     // that can be called from places -- this is getting annoying. 
     const backButton: ReactNode = canGoBack ? (
-        <Pressable style={styles.navigationButton} onPress={() => webNavigationRef.current?.goBack()}>
-            <Text style={styles.navigationText}>Back</Text>
-        </Pressable>
+        <TextButton text="Back" onPress = {() => webNavigationRef.current?.goBack()}/>
     ): null;
     const refreshButton: ReactNode = (
-        <Pressable style={styles.navigationButton} onPress={() => webNavigationRef.current?.reload()}>
-            <Text style={styles.navigationText}>Refresh</Text>
-        </Pressable>
+        <TextButton text="Reload" onPress = {() => webNavigationRef.current?.reload()}/>
     );
     const forwardButton: ReactNode = canGoForward ? (
-        <Pressable style={styles.navigationButton} onPress={() => webNavigationRef.current?.goForward()}>
-            <Text style={styles.navigationText}>Forward</Text>
-        </Pressable>
+        <TextButton text="Forward" onPress = {() => webNavigationRef.current?.goForward()}/>
     ): null;
     return (
         <View style={styles.footer}>
@@ -129,16 +100,4 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
     },
-    navigationButton: {
-        backgroundColor: "#3a4466",
-        borderColor: "#262b44",
-        borderRadius: 3,
-        borderWidth:3,
-        justifyContent:'center',
-        margin:5,
-        padding: 4,
-    },
-    navigationText: {
-        color: '#dde',
-    }
 });

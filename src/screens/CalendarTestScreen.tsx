@@ -6,7 +6,7 @@
 import { View } from "react-native";
 import { useState } from "react";
 import { Text } from "react-native";
-import CalendarContainer from "../common/CalendarContainer";
+import CalendarContainer from "components/common/CalendarContainer";
 
 /**
  * This is a test object that simply changes color to 1 of 3 values depending on which 
@@ -29,7 +29,7 @@ function CalendarCell({state}: {state: number}) {
     );    
 }
 
-export default function CalendarTestScreen({navigation}) {
+export default function CalendarTestScreen() {
     // This screen is for testing the CalendarContainer component.
     // It will display a calendar for the current month and year.
     const today = new Date();

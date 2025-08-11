@@ -3,31 +3,28 @@
  * Contains logic for message preview display and list displays
  */
 
-import { useNavigation } from '@react-navigation/native';
-import messagesJSON from '../../assets/placeholders/debug-message-data.json'
+import { Link } from 'expo-router';
 import { FlatList, Pressable, Text, View } from 'react-native'
 import { StyleSheet } from 'react-native';
-import { Message, Element, ElementType, ELEMENT_TYPES } from '../../types/message.type';
+import { Message, Element, ElementType, ELEMENT_TYPES } from 'types/message.type';
 import {DateTime} from 'luxon';
 
 // configs:
 const MAX_PREVIEW_CHARS = 40;
-const USE_12_HOUR_TIME = true;
 const SORT_MESSAGES_BY_TIME = true;
 
 
 // debug tool -- takes in the debug messages JSON and converts them to the Message format
-const messageData = messagesJSON as Message[];
+import { messageData } from 'types/message.type';
 
-export default function MessageListScreen() {
-    const navigation = useNavigation();
+export default function MessageListViewer() {
     if(SORT_MESSAGES_BY_TIME) messageData.sort(
         // sort dates in DESCENDING order (b-a instead of a-b). 
         (a,b) => {return new Date(b.receivedAt).getTime() - new Date(a.receivedAt).getTime()}
     );
     return (
         <FlatList data={messageData} renderItem={({item}) => {
-            return <MessageListItem message={item} navigation={navigation}/>
+            return <MessageListItem message={item}/>
         }}/>
     );
 }
@@ -56,7 +53,7 @@ function getFirstInstanceOfTypes(message: Message): Map<string, number> {
  * Tile list item containing a "preview" of the given message
  * @param message: {Message} - the message to preview
  */
-function MessageListItem({message, navigation}) {
+function MessageListItem({message}) {
     let content: string = "Empty Message";
     // we need to determine what to put in the preview text.
     // first, get a way to access the first instance of each element type in the message.
@@ -80,7 +77,10 @@ function MessageListItem({message, navigation}) {
 
     return (
         <View style={styles.messageTile}>
-            <Pressable onPressOut={()=>{navigation.navigate('MessageView', {message: message})}}>
+            <Link href={{
+                pathname: "./messages/view",
+                params: {messageName: message.name}    
+            }}>
                 {/* Debug Information */}
                 <View style={{flexDirection: 'row'}}>
                     <Text style={[styles.metaText, {flex: 0.4}]}>{message.name}</Text>
@@ -96,7 +96,7 @@ function MessageListItem({message, navigation}) {
                 </View>
                 {/* Actual content */}
                 <Text>{content}</Text>
-            </Pressable>
+            </Link>
         </View>
     );
 }

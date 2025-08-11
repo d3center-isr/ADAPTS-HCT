@@ -4,8 +4,8 @@
 
 import { StyleSheet } from "react-native"
 import { Text, View, Image } from "react-native"
-import CalendarContainer from "../common/CalendarContainer";
-import CountdownTimer from "../CountdownTimer";
+import CalendarContainer from "components/common/CalendarContainer";
+import CountdownTimer from "components/CountdownTimer";
 
 export default function HomeScreen() {
   
@@ -31,6 +31,7 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   container: {
     alignItems: 'center', 
-    justifyContent: 'center'
+    justifyContent: 'center',
+    backgroundColor: '#fff'
   }
 });

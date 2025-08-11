@@ -9,6 +9,13 @@ Then, open the dev client app on your phone and scan the QR code that your termi
 
 If your app is getting an android internal error, check `./expo/settings.json`, and ensure that the `URLRandomness` field does not contain any underscores ('_' characters). If any exist, delete them or replace them with another character.
 
+# Generating Docs
+
+Run the `generate_docs.sh` shell command using `./generate_docs.sh` in your terminal.
+
+This will create a new folder in the root of your repo called `Docs`, in which the html files 
+for the documentation will be located.
+
 # Creating a Custom Development Client
 
 ## 1: Getting firebase sdk and google-services.json

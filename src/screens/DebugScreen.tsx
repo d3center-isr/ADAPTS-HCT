@@ -4,24 +4,25 @@
  */
 
 import { ReactNode, useState, useContext } from "react";
-import { Pressable, Text, View, Image } from "react-native";
+import { Pressable, Text, View, Image, Linking } from "react-native";
 import { StyleSheet } from "react-native-web";
 // imported functions
-import { sendPushNotification } from "../../utils/NotificationHandler";
+import { sendPushNotification } from "../utils/NotificationHandler";
 // imported components
-import MultipleChoiceWidget from "../common/MultipleChoiceWidget";
-import { MultipleChoiceButtonData } from "../common/MultipleChoiceWidget";
-import GenericPopup from "../common/GenericPopup";
-import TextButton from "../common/TextButton";
-import CountdownTimer from "../CountdownTimer";
+import MultipleChoiceWidget from "../components/common/MultipleChoiceWidget";
+import { MultipleChoiceButtonData } from "../components/common/MultipleChoiceWidget";
+import GenericPopup from "../components/common/GenericPopup";
+import TextButton from "../components/common/TextButton";
+import CountdownTimer from "../components/CountdownTimer";
 
 
 const DEBUG_WEBVIEW_URL = "https://tnaqua.org/live/penguins-rock/";
 // context
-import { NotificationTokenContext } from "../../utils/NotificationHandler";
+import { NotificationTokenContext } from "../utils/NotificationHandler";
+import LinkButton from "components/common/LinkButton";
 
 // TODO: Add typedoc info on the type of "navigation" -- seriously what is it?
-export default function DebugScreen({navigation}) {
+export default function DebugScreen() {
   const [showTestPopup, setShowTestPopup] = useState(false);
 
   const notificationToken: string = useContext(NotificationTokenContext);
@@ -37,7 +38,7 @@ export default function DebugScreen({navigation}) {
           <TextButton onPress={()=>setShowTestPopup(true)} text={"Debug: Press to show Med Log Popup"}/>
 
           {/* Calendar Testing */}
-          <TextButton onPress={()=>navigation.navigate('CalendarDemo')} text={"Navigate to Calendar Test Screen"}/>
+          <LinkButton url="./debug/calendar-test" text={"Navigate to Calendar Test Screen"}/>
           {/* Countdown Timer Testing */}
           <CountdownTimer countdownTarget={new Date(2025, 6, 3)} countdownReference={new Date(2024, 6, 2)}/>
           <CountdownTimer countdownTarget={new Date(2024, 6, 3)} countdownReference={new Date(2025, 6, 2)}/>
@@ -54,13 +55,17 @@ export default function DebugScreen({navigation}) {
               sendPushNotification(notificationToken, "This is an Image Notification!","Me when coding:",
                  "https://www.kaiyukan.com/assets/img/info/area/shop/img01-02.jpg")
           }}/>
+          <TextButton text={"Send Link Notification"} onPress={()=> {
+              sendPushNotification(notificationToken, "This is a Link Notification!","Click this notification to see a cool message.",
+                 "", "adaptshct://messages/view?messageName=debug_giftest")
+          }}/>
 
           <GenericPopup visible={showTestPopup} horizontalMargins={0.04}>
             <Text>Medication Reporting Widget</Text>
             <TextButton onPress={()=>setShowTestPopup(false)} text="Close Widget"/>
           </GenericPopup>
           {/* Webview Screen Testing */}
-          <TextButton onPress={()=> navigation.navigate("WebView", {url: DEBUG_WEBVIEW_URL})} text="Test Webview Screen"/>
+          <LinkButton url={"/web?url=" + DEBUG_WEBVIEW_URL} text="Test Webview Screen"/>
         </View>
       </View>
   );
@@ -77,9 +82,9 @@ function DebugHeader() {
   return (
     <View style={{flexDirection: 'row', margin:5}}>
       {/* Header -- images and text in the middle */}
-      <Image style={{flex: 0.25, aspectRatio: 1}}source={require("../../assets/placeholders/debug-penguin-helmet.png")}/>
+      <Image style={{flex: 0.25, aspectRatio: 1}}source={require("assets/placeholders/debug-penguin-helmet.png")}/>
       <Text style={{flex: 0.5}}>Welcome to the Testing zone! This is a Developer Menu meant for feature testing.</Text>
-      <Image style={{flex: 0.25, aspectRatio: 1, transform: [{ scaleX: -1 }]}}source={require("../../assets/placeholders/debug-penguin-helmet.png")}/>
+      <Image style={{flex: 0.25, aspectRatio: 1, transform: [{ scaleX: -1 }]}}source={require("assets/placeholders/debug-penguin-helmet.png")}/>
     </View>
   );
 }
@@ -109,7 +114,7 @@ function MultipleChoiceDemo() {
       color: "#bbb",
     },
   ];
-  console.log("Num options: " + buttonData.length);
+  // console.log("Num options: " + buttonData.length);
   const [mcActive, setMCActive] = useState(-1);
   return <MultipleChoiceWidget buttonData={buttonData} activeButtonId={mcActive} setActiveButtonId={setMCActive}/>
 }

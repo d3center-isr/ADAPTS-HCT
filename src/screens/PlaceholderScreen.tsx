@@ -10,15 +10,8 @@ export default function PlaceholderScreen() {
     return (
         <View style={{alignItems: 'center'}}>
             <Text>This is a placeholder screen! If you're not a developer, you probably shouldn't be here.</Text>
-            <Image style={{width: 300, height: 300}}source={require("../../assets/placeholders/placeholder-penguins.png")}/>
+            <Image style={{width: 300, height: 300}}source={require("assets/placeholders/placeholder-penguins.png")}/>
             <Text>Have some Placeholder Penguins.</Text>
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center', 
-    justifyContent: 'center'
-  }
-});
