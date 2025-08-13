@@ -49,6 +49,9 @@ module.exports = {
       ],
       [
         "expo-router"
+      ],
+      [
+        "expo-localization"
       ]
     ]
   }
