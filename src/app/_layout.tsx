@@ -22,7 +22,7 @@ Notifications.setNotificationHandler({
 
 export default function RootLayout() {
   
-  Logger.LogDeviceInformation()
+  
 
   const [expoPushToken, setExpoPushToken] = useState('');
   const [notification, setNotification] = useState<Notifications.Notification | undefined>(
@@ -32,6 +32,8 @@ export default function RootLayout() {
   useNotificationObserver()
 
   useEffect(() => {
+    Logger.LogDeviceInformation()
+    
     console.log("trying to register for push notifs...");
     registerForPushNotificationsAsync()
       .then(token => setExpoPushToken(token ?? ''))
