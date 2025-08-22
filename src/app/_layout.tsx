@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 // Expo Router Imports
 import { Stack } from 'expo-router';
 import * as Notifications from 'expo-notifications';
+import *  as Logger from 'utils/Logger'
 // Function imports
 import { sendPushNotification, registerForPushNotificationsAsync, useNotificationObserver } from 'utils/NotificationHandler';
 // component imports
@@ -21,6 +22,8 @@ Notifications.setNotificationHandler({
 
 export default function RootLayout() {
   
+  
+
   const [expoPushToken, setExpoPushToken] = useState('');
   const [notification, setNotification] = useState<Notifications.Notification | undefined>(
     undefined
@@ -29,6 +32,8 @@ export default function RootLayout() {
   useNotificationObserver()
 
   useEffect(() => {
+    Logger.LogDeviceInformation()
+    
     console.log("trying to register for push notifs...");
     registerForPushNotificationsAsync()
       .then(token => setExpoPushToken(token ?? ''))
