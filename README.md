@@ -1,4 +1,4 @@
-Repo for the ADAPTS-HCT app (using the justin framework).
+Repo for the ADAPTS-HCT app.
 
 # How to test the app
 This app does **not** run on Expo Go. To test this app you will need to use a custom dev client.
